@@ -1,0 +1,153 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="#FF0000"
+    tools:context="com.thekarlbrown.changetheworld.AddTab">
+
+    <ImageView
+        android:src="@drawable/ic_logo_addidea"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="5dip">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="@string/add_title"
+            android:textSize="20sp"
+            android:paddingBottom="5dip"
+            android:layout_marginRight="5dip"
+            android:layout_marginEnd="5dip"/>
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/add_edit_title"
+            android:layout_weight="1"
+            android:hint="@string/add_edit_title"
+            android:gravity="center_horizontal"
+            android:layout_marginRight="5dip"
+            android:layout_marginEnd="5dip"/>
+
+        <ImageView
+            android:id="@+id/add_ok_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_clear_arrow"
+            android:clickable="true"
+            />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:text="@string/add_category_subcategory"
+            android:textSize="20sp"
+            android:paddingBottom="5dip"
+            android:layout_marginRight="5dip"
+            android:layout_marginEnd="5dip"/>
+        <Spinner
+            android:id="@+id/add_spin_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dip"
+            android:layout_marginEnd="5dip"
+            android:layout_weight=".5"
+            />
+        <Spinner
+            android:id="@+id/add_spin_subcategory"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="5dip"
+            android:layout_marginEnd="5dip"
+            android:layout_weight=".5"
+            />
+        <ImageView
+            android:id="@+id/add_ok_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_red_x"
+            android:layout_gravity="end"
+            />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dip"
+        android:layout_marginBottom="5dip"
+        android:layout_weight="1"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="@string/add_description"
+            android:textSize="20sp"
+            android:paddingBottom="5dip"
+            android:layout_marginRight="5dip"
+            android:layout_marginEnd="5dip"/>
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="fill_parent"
+            android:id="@+id/add_edit_description"
+            android:hint="@string/add_edit_description"
+            android:background="#FFFFFF"
+            android:layout_marginRight="5dip"
+            android:layout_marginEnd="5dip"
+            android:textColor="#000000"
+            android:layout_weight="1"
+            />
+        <ImageView
+            android:id="@+id/add_ok_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_clear_arrow"
+            android:clickable="true"
+            android:layout_gravity="center_vertical" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+
+       >
+        <Button
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:id="@+id/add_draft"
+            android:text="@string/add_draft"
+            android:layout_marginRight="15dip"
+            android:layout_marginEnd="15dip"/>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:id="@+id/add_submit"
+            android:text="@string/add_submit"
+            />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/add_submission_status"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:layout_gravity="center_horizontal"
+        />
+
+
+
+</LinearLayout>

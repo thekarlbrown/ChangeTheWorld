@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">ChangeTheWorld</string>
+    <string name="action_settings">Settings</string>
+    <string name="menu_search">Search</string>
+    <string name="menu_nearby">Nearby</string>
+    <string name="menu_hundred">100 Miles</string>
+    <string name="menu_state">State</string>
+    <string name="menu_country">Country</string>
+    <string name="menu_globally">Globally</string>
+    <string name="menu_friends">Friends</string>
+    <string name="menu_today">Today</string>
+    <string name="menu_week">This Week</string>
+    <string name="menu_month">This Month</string>
+    <string name="menu_year">This Year</string>
+    <string name="menu_ever">All Time</string>
+    <string name="menu_ratio">Minimum Ratio</string>
+    <string name="menu_thumbs">Minimum Thumbs</string>
+    <string name="menu_recent">Most Recent</string>
+    <string name="menu_top_rated">Top Rated</string>
+    <string name="menu_trending">Trending</string>
+    <string name="menu_category">Category</string>
+    <string name="menu_person">Person</string>
+    <string name="menu_add">Add Idea</string>
+    <string name="menu_top_users">Top Users</string>
+    <string name="menu_accurate">Accurate Thumbs</string>
+    <string name="menu_added">Most Quality Ideas</string>
+    <string name="menu_quality">Highest Rated Idea</string>
+    <string name="menu_comments">Best Suggestions</string>
+    <string name="menu_minimum_thumbs">Enter a minimum number of ratings (0-X)</string>
+    <string name="menu_minimum_ratio">Enter a minimum ratio to filter for (1 to 99%)</string>
+    <string name="preference_file_key">com.thekarlbrown.ChangeTheWorld.preference_file_key</string>
+    <string name="preference_setup">com.thekarlbrown.ChangeTheWorld.preference_setup</string>
+    <string name="preference_userid">com.thekarlbrown.ChangeTheWorld.preference_userid</string>
+    <string name="preference_ideas_seen">com.thekarlbrown.ChangeTheWorld.preference_ideas_seen</string>
+    <string name="preference_bar_ratio">com.thekarlbrown.ChangeTheWorld.preference_bar_ratio</string>
+    <string name="preference_bar_minimum">com.thekarlbrown.ChangeTheWorld.preference_bar_minimum</string>
+    <string name="preference_username">com.thekarlbrown.ChangeTheWorld.preference_username</string>
+    <string name="preference_fav_list">com.thekarlbrown.ChangeTheWorld.preference_fav_list</string>
+    <string name="preference_friend_list">com.thekarlbrown.ChangeTheWorld.preference_friend_list</string>
+    <string name="initial_nameprompt">Please enter your desired or existing username</string>
+    <string name="initial_learn">I want to learn</string>
+    <string name="initial_ready">I am ready for change</string>
+    <string name="search_dialogue">Find a specific idea by searching</string>
+    <string name="search_cancel">Cancel Search</string>
+    <string name="search_accept">Search Description</string>
+    <string name="search_neutral">Search By User</string>
+    <string name="category_selection">Please select a category</string>
+    <string name="add_title">Idea Title: </string>
+    <string name="add_edit_title">What will you call your idea?</string>
+    <string name="add_description">Description: </string>
+    <string name="add_edit_description">Describe what you are thinking as best you can. Please take your time. Remember to search before you add, make it obvious to a layman (if possible), look up if it has been done, and try to figure out huge issues before submitting.</string>
+    <string name="add_draft">Save as Draft</string>
+    <string name="add_submit">Submit your Idea</string>
+    <string name="add_category_subcategory">Category: </string>
+    <string name="add_select_category">Select a Category</string>
+    <string name="add_select_subcategory">Select a Subcategory</string>
+    <string name="add_draft_success">Your draft was saved successfully</string>
+    <string name="add_draft_fail">Your draft failed to save</string>
+    <string name="add_submit_success">Your idea was successfully submitted</string>
+    <string name="add_submit_fail">Your idea failed to submit</string>
+    <string name="add_fields_bad">Please correctly fill out all fields</string>
+    <string name="add_external_unavail">External storage is currently unavailable</string>
+    <string name="leaderboard_welcome">Please select an Award Category from above!</string>
+    <string name="ratio_dialogue_cancel">No Ratio Filter</string>
+    <string name="ratio_dialogue_change">Set Ratio Filter</string>
+    <string name="thumb_dialogue_change">Set Minimum Thumbs</string>
+    <string name="thumb_dialogue_cancel">No Thumb Requirement</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="profile_your_ideas">Your Ideas</string>
+    <string name="profile_favorite_ideas">Favorite Ideas</string>
+    <string name="profile_friends">Your Friends Ideas</string>
+    <string name="profile_drafts">Your Drafts</string>
+    <string name="profile_prof_im">Import Profile</string>
+    <string name="profile_prof_ex">Export Profile</string>
+    <string name="profile_error_unknown">Something went wrong with your file</string>
+    <string name="profile_error_access">We cannot read/write the SD/External</string>
+    <string name="profile_error_missing">Backup missing! Is it in downloads? Did you spell your username correctly?</string>
+    <string name="profile_import_success">Import was a success!</string>
+    <string name="profile_export_success">Export was a success!</string>
+    <string name="profile_no_drafts">You have not saved any drafts yet</string>
+    <string name="page_idea_other">More Ideas By Author</string>
+    <string name="page_idea_comment">Add Improvement</string>
+    
+
+
+
+</resources>

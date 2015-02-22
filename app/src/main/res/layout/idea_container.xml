@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+   android:background="#000000"
+    >
+    <TextView
+        android:paddingLeft="5dip"
+        android:paddingRight="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/container_idea_text"
+        android:textColor="#FFFFFF"
+        android:layout_weight="1"
+        android:gravity="start"
+        android:layout_gravity="fill_horizontal"/>
+    <ImageView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_thumbsup"
+        android:gravity="end"
+        android:layout_weight="0"/>
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/container_up_count"
+        android:textColor="#FFFFFF"
+        android:gravity="end"
+        android:layout_weight="0"
+        android:textSize="40sp"/>
+    <ImageView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_thumbsdown"
+        android:gravity="end"
+        android:layout_weight="0"/>
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/container_down_count"
+        android:textColor="#FFFFFF"
+        android:gravity="end"
+        android:textSize="40sp"
+        android:layout_weight="0"/>
+</LinearLayout>

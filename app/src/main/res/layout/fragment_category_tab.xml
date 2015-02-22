@@ -1,0 +1,58 @@
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drawer_category"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+   >
+    <!-- The main content view -->
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:background="#FF0000"
+        android:orientation="vertical"
+        tools:context="com.thekarlbrown.changetheworld.CategoryTab"
+        android:weightSum="1"
+        android:paddingBottom="5dip">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:src="@drawable/ic_logo_category" />
+        <TextView
+            android:id="@+id/category_query"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/category_selection"
+            android:textSize="20sp"
+            android:paddingBottom="5dip"
+            android:gravity="center_horizontal"
+            />
+        <ListView
+            android:id="@+id/category_list"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="5dip"
+            android:background="#FFFFFF"
+            android:padding="5dip"
+            android:layout_weight="1">
+
+        </ListView>
+
+        <include layout="@layout/bar_filter" />
+
+        <include layout="@layout/bar_bytime"/>
+
+
+    </LinearLayout>
+    <!-- The navigation drawer -->
+    <ListView
+        android:id="@+id/left_drawer"
+        android:layout_width="240dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:background="#111"
+        android:choiceMode="singleChoice"
+        android:divider="@android:color/transparent"
+        android:dividerHeight="0dp" />
+</android.support.v4.widget.DrawerLayout>

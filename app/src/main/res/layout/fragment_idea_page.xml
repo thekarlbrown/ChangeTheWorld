@@ -1,0 +1,162 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="#FF0000"
+    tools:context="com.thekarlbrown.changetheworld.IdeaPage">
+
+    <ImageView
+        android:src="@drawable/ic_logo_idea"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="5dip"
+        >
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:id="@+id/page_idea_title"
+            android:textSize="20sp"
+            android:layout_weight="1"
+            android:layout_marginLeft="5dip"
+            android:layout_marginStart="5dip"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:id="@+id/page_idea_author"
+            android:textSize="20sp"
+            android:layout_marginRight="5dip"
+            android:layout_marginEnd="5dip"/>
+
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="5dip">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/page_idea_category"
+            android:textSize="20sp"
+
+            android:layout_marginRight="5dip"
+            android:layout_marginEnd="5dip"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:id="@+id/page_idea_subcategory"
+            android:textSize="20sp"
+
+            android:layout_marginRight="5dip"
+            android:layout_marginEnd="5dip"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:orientation="horizontal"
+        android:layout_marginTop="5dip"
+        android:layout_marginBottom="5dip"
+        android:layout_weight="3"
+        >
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent"
+            android:id="@+id/page_idea_description"
+            android:maxLines = "30"
+            android:scrollbars = "vertical"
+            android:background="#FFFFFF"
+            android:layout_marginRight="5dip"
+            android:layout_marginEnd="5dip"
+            android:textColor="#000000"
+            />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="24dp"
+        android:orientation="horizontal"
+
+
+        android:layout_weight="0.10">
+        <ImageView
+            android:clickable="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_thumbsup"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0"
+            android:id="@+id/page_idea_upselect"/>
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/page_idea_tup"
+            android:textColor="#000000"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0"
+            android:textSize="12sp"/>
+        <ImageView
+            android:clickable="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_thumbsdown"
+            android:id="@+id/page_idea_downselect"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0"/>
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/page_idea_tdown"
+            android:textColor="#000000"
+            android:layout_gravity="center_vertical"
+            android:textSize="12sp"
+            android:layout_weight="0"/>
+        <ImageView
+            android:clickable="true"
+            android:layout_width="43dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_top_bar"
+            android:id="@+id/page_idea_favorite"
+            android:layout_gravity="center_vertical"
+            android:focusable="false" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:id="@+id/page_idea_other"
+            android:text="@string/page_idea_other"
+
+            android:layout_gravity="center_vertical"
+            android:textSize="8sp" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:id="@+id/page_idea_comment"
+            android:layout_gravity="center_vertical"
+            android:text="@string/page_idea_comment"
+            android:textSize="8sp" />
+    </LinearLayout>
+
+
+
+
+<include layout="@layout/fragment_comments_page"
+    android:layout_weight="4"
+    android:layout_width="fill_parent"
+    android:layout_height="0dip"></include>
+
+</LinearLayout>

@@ -1,0 +1,45 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:background="#FF0000"
+    tools:context="com.thekarlbrown.changetheworld.LeaderboardTab"
+    android:weightSum="1"
+    android:paddingBottom="5dip">
+
+    <ImageView
+        android:src="@drawable/ic_logo_leaderboard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"/>
+    <include layout="@layout/bar_leaderboard"
+        />
+    <TextView
+        android:id="@+id/leaderboard_selection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/leaderboard_welcome"
+        android:textSize="25sp"
+        android:paddingBottom="5dip"
+        android:gravity="center_horizontal"
+        />
+    <ListView
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:id="@+id/leaderboard_list"
+        android:layout_marginBottom="5dip"
+        android:background="#FFFFFF"
+        android:padding="5dip"
+        android:layout_weight="1">
+
+    </ListView>
+    <include layout="@layout/bar_byarea"
+
+        />
+    <include layout="@layout/bar_bytime"
+
+        />
+
+
+
+</LinearLayout>
