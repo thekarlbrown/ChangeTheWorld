@@ -111,3 +111,10 @@ implement recently viewed ideas
 attempt to move code towards more modular design
 
 fix drawer expansion style to make it more smooth
+
+
+--- special thanks to ---
+
+ Napalm, g00s, groxx,TacticalJoke, lasserix at #android-dev
+
+cmalekpour on github  
