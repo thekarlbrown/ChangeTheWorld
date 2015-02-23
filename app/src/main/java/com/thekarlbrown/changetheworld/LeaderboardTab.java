@@ -54,9 +54,9 @@ public class LeaderboardTab extends Fragment {
         rv = inflater.inflate(R.layout.fragment_leaderboard_tab, container, false);
         curcontext=rv.getContext();
         leaderBlock=mainActivity.leaderBlock;
-        barArea.barAreaClick(rv,selecteda);
+        barArea.barAreaClick(rv,selecteda,getTag(),mainActivity);
         barRankClick(rv);
-        barTime.barTimeClick(rv,selectedt);
+        barTime.barTimeClick(rv,selectedt,getTag(),mainActivity);
         ladpt=new LeaderAdapter(leaderBlock,mainActivity,-1);
         l=(ListView)rv.findViewById(R.id.leaderboard_list);
         l.setAdapter(ladpt);
@@ -96,6 +96,7 @@ public class LeaderboardTab extends Fragment {
                                 {
                                     leaderselect[y]=false;
                                     complete[y].setBackgroundColor(0xffffffff);
+                                    y=leaderselect.length;
                                 }
                             }
                         }

@@ -15,8 +15,22 @@ will be improved to not select color on negative click
  */
 
 public class RatioDialogue extends DialogFragment {
+    String tag;
+    public static RatioDialogue newInstance() {
+        RatioDialogue fragment = new RatioDialogue();
+        Bundle args = new Bundle();
+        fragment.setArguments(args);
+        return fragment;
+    }
 
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (getArguments() != null) {
+            tag=getArguments().getString("tag");
+        }
+    }
 
     /** The system calls this only when creating the layout in a dialog. */
     @Override
@@ -32,7 +46,7 @@ public class RatioDialogue extends DialogFragment {
                         try {
                             int i=Integer.parseInt(((EditText) view.findViewById(R.id.ratio_dialogue_entry)).getText().toString());
                             if ((i<100)&&(i>0)) {
-                                mListener.onRatioDialogPositiveClick(i);
+                                mListener.onRatioDialogPositiveClick(i,tag);
                             }else{
                                 mListener.onRatioDialogNegativeClick();
                             }
@@ -52,7 +66,7 @@ public class RatioDialogue extends DialogFragment {
     }
 
     public interface NoticeRatioDialogListener {
-        public void onRatioDialogPositiveClick(int i);
+        public void onRatioDialogPositiveClick(int i, String tag);
         public void onRatioDialogNegativeClick();
     }
 

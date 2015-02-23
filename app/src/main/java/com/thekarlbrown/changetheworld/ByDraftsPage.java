@@ -67,4 +67,5 @@ public class ByDraftsPage extends Fragment {
         return rv;
     }
 
+
 }

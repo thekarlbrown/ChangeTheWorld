@@ -32,7 +32,7 @@ public class SearchDialog extends DialogFragment {
                             if (!Pattern.matches("(?i)^([^\"\\[:\\]\\|=\\+\\*\\?<>\\\\\\/\\r\\n]+)$", temp)) {
 
                             } else {
-                                mListener.onDialogPositiveClick(temp);
+                                mListener.onSearchDialogPositiveClick(temp);
                             }
                         } catch (Exception e) {
 
@@ -49,17 +49,17 @@ public class SearchDialog extends DialogFragment {
         return builder.create();
     }
 
-        public interface NoticeDialogListener {
-            public void onDialogPositiveClick(String r);
+        public interface SearchDialogListener {
+            public void onSearchDialogPositiveClick(String r);
         }
 
-    NoticeDialogListener mListener;
+    SearchDialogListener mListener;
     @Override
     public void onAttach(Activity activity)
     {
         super.onAttach(activity);
         try {
-            mListener = (NoticeDialogListener) activity;
+            mListener = (SearchDialogListener) activity;
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString()
                     + " must implement NoticeDialogListener");

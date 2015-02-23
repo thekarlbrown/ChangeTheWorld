@@ -49,7 +49,12 @@ public class TrendingTab extends Fragment {
             selectedf=getArguments().getBooleanArray("selectedf");
             selecteda=getArguments().getInt("selecteda");
         }
-
+    }
+    public void filterSelected(int i)
+    {
+        selectedf[i]=true;
+        barFilter.setSelected(i);
+        dapt.notifyDataSetChanged();
     }
 
     @Override
@@ -62,8 +67,8 @@ public class TrendingTab extends Fragment {
         l = (ListView) rv.findViewById(R.id.trending_list);
         l.setAdapter(dapt);
         fm=getFragmentManager();
-        barFilter.barFilterClick(rv, fm,selectedf);
-        barArea.barAreaClick(rv,selecteda);
+        barFilter.barFilterClick(rv, fm,selectedf,getTag(),mainActivity);
+        barArea.barAreaClick(rv,selecteda,getTag(),mainActivity);
         return rv;
     }
  }

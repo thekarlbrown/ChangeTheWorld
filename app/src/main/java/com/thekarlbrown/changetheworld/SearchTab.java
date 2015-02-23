@@ -66,10 +66,15 @@ public class SearchTab extends Fragment{
         t=(TextView)rv.findViewById(R.id.search_query);
         t.setText("Current Search: " + searchQuery);
         fm=getFragmentManager();
-        barFilter.barFilterClick(rv, fm,selectedf);
+        barFilter.barFilterClick(rv, fm,selectedf,getTag(),mainActivity);
         return rv;
     }
-
+    public void filterSelected(int i)
+    {
+        selectedf[i]=true;
+        barFilter.setSelected(i);
+        dapt.notifyDataSetChanged();
+    }
 
 
 

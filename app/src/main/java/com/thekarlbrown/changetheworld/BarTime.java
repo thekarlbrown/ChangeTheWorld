@@ -8,11 +8,11 @@ import android.widget.TextView;
  * class for the time selection bar
  */
 public class BarTime extends Fragment {
-
+    TextView[] complete;
     //how we do by time
     boolean[]times={false,false,false,false,false};
-    public void barTimeClick(View in, int selected) {
-        final TextView[] complete={(TextView) in.findViewById(R.id.time_day),
+    public void barTimeClick(View in, int selected, final String tag, final MainActivity mainActivity) {
+        complete=new TextView[]{(TextView) in.findViewById(R.id.time_day),
                 (TextView) in.findViewById(R.id.time_week),
                 (TextView) in.findViewById(R.id.time_month),
                 (TextView) in.findViewById(R.id.time_year),
@@ -36,14 +36,21 @@ public class BarTime extends Fragment {
                                 {
                                     times[y]=false;
                                     complete[y].setBackgroundColor(0xffffffff);
+                                    y=times.length;
                                 }
                             }
                         }
+                        mainActivity.pullTimeBar(x,tag);
                     }
                 }
             });
         }
-        times[selected]=true;
-        complete[selected].setBackgroundColor(0xffff0000);
+        setSelected(selected);
     }
+    public void setSelected (int i)
+    {
+        times[i]=true;
+        complete[i].setBackgroundColor(0xffff0000);
+    }
+
 }

@@ -60,11 +60,16 @@ public class ByFavoritePage extends Fragment {
         l = (ListView) rv.findViewById(R.id.by_favorite_list);
         l.setAdapter(dapt);
         fm=getFragmentManager();
-        barFilter.barFilterClick(rv,fm,selectedf);
+        barFilter.barFilterClick(rv,fm,selectedf,getTag(),mainActivity);
         t=(TextView)rv.findViewById(R.id.by_favorite_username);
         t.setText(username + "'s favorite ideas: ");
         return rv;
     }
-
+    public void filterSelected(int i)
+    {
+        selectedf[i]=true;
+        barFilter.setSelected(i);
+        dapt.notifyDataSetChanged();
+    }
 
 }

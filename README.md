@@ -12,20 +12,26 @@ This is my ChangeTheWorld android app. I am currently in the earlier beta, in fa
 
 4. There are a ton of placeholders for features to be added later or backend that is not yet implemented
 
-5. There is currently an emulator for the app here: https://appetize.io/app/rtkyh4gvg02x56uzeffx1349k4
-
-Please use 100%, Nexus 7, as I have not moved development to any other platforms as of yet
+5. There is currently an emulator for the app here : https://appetize.io/app/rtkyh4gvg02x56uzeffx1349k4 Please use 100%, Nexus 7, as I have not moved development to any other platforms as of yet
 
 --TO-DO/Tactics for Implementation --
 
+better implement text in initial screen
+
+should we optimize the boolean array that is being bundled to set the bar filter? will it be necessary once dust settles?
+
 how do I better handle resource allocation? when are objects destroyed? can I automate linking of data with frameworks?
+
 fix serialization of drafts
+
+determine if all bar methods necessary, determine if I should make leaderboard filter/access separate object
 
 use better directory for saving files
 
 pushing/pulling favorites upvote/downvote from server
 
 update selected on start based on IdeaPage so tags are selected and values are passed and leaderboard doesn't start on null
+
 for filters, have it so highlighting only occurs when you hit ok (not cancel)
 
 optimize sort algorithms change dataadapter containers new for minimum size and quickest content
@@ -64,9 +70,7 @@ sync favs with database
 
 add leaderboard onclicks to user profiles
 
-
 -- coming after initial setup --
-
 
 prompt for deletion of old drafts
 
@@ -112,9 +116,8 @@ attempt to move code towards more modular design
 
 fix drawer expansion style to make it more smooth
 
-
 --- special thanks to ---
 
- Napalm, g00s, groxx,TacticalJoke, lasserix,cbeust at #android-dev
+Napalm, g00s, groxx,TacticalJoke, lasserix,cbeust at #android-dev
 
-cmalekpour on github  
+cmalekpour on github

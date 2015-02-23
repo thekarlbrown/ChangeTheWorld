@@ -79,9 +79,15 @@ public class CategoryTab extends Fragment {
         l = (ListView) rv.findViewById(R.id.category_list);
         l.setAdapter(dapt);
         fm=getFragmentManager();
-        barFilter.barFilterClick(rv,fm,selectedf);
-        barTime.barTimeClick(rv,selectedt);
+        barFilter.barFilterClick(rv,fm,selectedf,getTag(),mainActivity);
+        barTime.barTimeClick(rv,selectedt,getTag(),mainActivity);
         return rv;
+    }
+    public void filterSelected(int i)
+    {
+        selectedf[i]=true;
+        barFilter.setSelected(i);
+        dapt.notifyDataSetChanged();
     }
 
     // The click listener for ListView in the navigation drawer

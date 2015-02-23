@@ -22,6 +22,7 @@ import java.util.regex.Pattern;
  */
 public class InitialScreen extends Fragment {
 Activity activity;
+    MainActivity mainActivity;
     String[] categorytitles;
     View rv;
     TextView t;
@@ -37,34 +38,22 @@ Activity activity;
     String welcomemsgerror="Welcome to the app that enables the sharing, evaluation, " + "\nand tweaking of new ideas and innovation!" +"\nNavigate with the bars at the top! Sort what you see with" +"\noptions at the bottom! All you have to do to start is set your username."+"\nSo who are YOU, my friend?\nSorry: Your username must be letters at numbers, 25 characters max...\nOr this bugged";
     public void toLearn(View v)
     {
-        pref = ((MainActivity)getActivity()).getPref();
         epref=pref.edit();
         epref.putString(getString(R.string.preference_username), ((EditText) v.getRootView().findViewById(R.id.initial_username)).getText().toString());
         epref.putBoolean(getString(R.string.preference_setup), true);
         epref.putInt(getString(R.string.preference_ideas_seen),totalideas);
         epref.apply();
-        fm=getFragmentManager();
-        ft=fm.beginTransaction();
-        ft.replace(R.id.current_tab,new OpeningScreen(),"opening");
-        ft.commit();
+        mainActivity.openTrending();
     }
     public void toChange(View v)
     {
-        pref = ((MainActivity)getActivity()).getPref();
         epref=pref.edit();
         epref.putString(getString(R.string.preference_username), ((EditText) v.getRootView().findViewById(R.id.initial_username)).getText().toString());
         epref.putBoolean(getString(R.string.preference_setup),true);
         epref.putInt(getString(R.string.preference_ideas_seen),totalideas);
         epref.putInt(getString(R.string.preference_userid),9189);
         epref.apply();
-        fm=getFragmentManager();
-        ft=fm.beginTransaction();
-        AddTab addT=new AddTab();
-        b=new Bundle();
-        b.putStringArray("category",categorytitles);
-        addT.setArguments(b);
-        ft.replace(R.id.current_tab,addT,"add");
-        ft.commit();
+        mainActivity.openAdd();
     }
     public static InitialScreen newInstance() {
         InitialScreen fragment = new InitialScreen();
@@ -87,6 +76,8 @@ Activity activity;
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         rv = inflater.inflate(R.layout.fragment_initial_screen, container, false);
+        mainActivity=((MainActivity)getActivity());
+        pref = mainActivity.getPref();
         t = (TextView) rv.findViewById(R.id.welcometext);
         t.setText(welcomemsg);
         but = (Button)rv.findViewById(R.id.initial_noidea);

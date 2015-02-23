@@ -9,9 +9,10 @@ import android.widget.TextView;
  */
 public class BarArea extends Fragment {
     //how we do by area
+    TextView[] complete;
     boolean[]areas={false,false,false,false,false,false};
-    public void barAreaClick(View in, int selected) {
-        final TextView[] complete={(TextView) in.findViewById(R.id.bot_area_local),
+    public void barAreaClick(View in, int selected,final String tag, final MainActivity mainActivity) {
+        complete=new TextView[]{(TextView) in.findViewById(R.id.bot_area_local),
                 (TextView) in.findViewById(R.id.bot_area_hun),
                 (TextView) in.findViewById(R.id.bot_area_state),
                 (TextView) in.findViewById(R.id.bot_area_country),
@@ -35,14 +36,21 @@ public class BarArea extends Fragment {
                                 {
                                     areas[y]=false;
                                     complete[y].setBackgroundColor(0xffffffff);
+                                    y=areas.length;
                                 }
                             }
                         }
+                        mainActivity.pullAreaBar(x,tag);
+
                     }
                 }
             });
         }
-        complete[selected].setBackgroundColor(0xffff0000);
-        areas[selected]=true;
+        setSelected(selected);
+    }
+    public void setSelected(int i)
+    {
+        complete[i].setBackgroundColor(0xffff0000);
+        areas[i]=true;
     }
 }

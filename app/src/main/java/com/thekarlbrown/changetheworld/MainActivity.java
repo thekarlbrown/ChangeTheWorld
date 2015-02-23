@@ -14,10 +14,10 @@ import android.view.MenuItem;
        potentially will be creating separate activity for algorithms applied to data containers, but may just use java class
  */
 
-public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAdapterListener, ProfileTab.ProfileTabListener, IdeaPage.IdeaPageListener, DraftDataAdapter.DraftDataAdapterListener, SearchDialog.NoticeDialogListener, RatioDialogue.NoticeRatioDialogListener, ThumbDialogue.NoticeThumbDialogListener {
+public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAdapterListener, ProfileTab.ProfileTabListener, IdeaPage.IdeaPageListener, DraftDataAdapter.DraftDataAdapterListener, SearchDialog.SearchDialogListener, RatioDialogue.NoticeRatioDialogListener, ThumbDialogue.NoticeThumbDialogListener {
 
-    String[][]categories={{"LolTitle","Lol1","Lol2","Lol3","Lol4","Lol5","Lol6"},
-            {"WutTitle","Wut1","Wut2","Wut3","Wut4","Wut5","Wut6"},{"BroTitle","Bro1","Bro2","Bro3","Bro4","Bro5","Bro6"}};
+    String[][] categories = {{"LolTitle", "Lol1", "Lol2", "Lol3", "Lol4", "Lol5", "Lol6"},
+            {"WutTitle", "Wut1", "Wut2", "Wut3", "Wut4", "Wut5", "Wut6"}, {"BroTitle", "Bro1", "Bro2", "Bro3", "Bro4", "Bro5", "Bro6"}};
     String[] categorytitles;
     FragmentManager fm;
     FragmentTransaction ft;
@@ -25,112 +25,119 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
     SplitToolbar st;
     Bundle b;
     OpeningScreen os;
-    IdeaBlock ib,bytemp,drafts, byfavorite;
+    IdeaBlock ib, bytemp, drafts, byfavorite;
     LeaderBlock leaderBlock;
     String searchQuery;
     SearchDialog searchDialog;
-    boolean[] filter_default={false,false,true,false};
-    boolean[] filter_current;
     int minratio;
     int minthumbs;
-    public SharedPreferences getPref()
-    {
+    TrendingTab trendingTab;
+    CategoryTab categoryTab;
+    AddTab addTab;
+    LeaderboardTab leaderboardTab;
+    SearchTab searchTab;
+    ByUserPage userPage;
+    ByFriendsPage friendsPage;
+    ByFavoritePage favoritePage;
+    boolean[] bar_filter_status = {false, false};
+
+    public SharedPreferences getPref() {
         return sharedPref;
     }
 
-   public void openTrending()
-    {
-        if( fm.findFragmentByTag("trending") == null )
-        {
-            fm=getFragmentManager();
-            ft=fm.beginTransaction();
-            b=new Bundle();
-            b.putBooleanArray("selectedf",filter_default);
-            b.putInt("selecteda",0);
-            TrendingTab trendingTab=new TrendingTab();
+    public void openTrending() {
+        if (fm.findFragmentByTag("trending") == null) {
+            fm = getFragmentManager();
+            ft = fm.beginTransaction();
+            b = new Bundle();
+            b.putBooleanArray("selectedf", new boolean[]{false, false, true, false});
+            bar_filter_status=new boolean[]{false,false};
+            b.putInt("selecteda", 0);
+            trendingTab = new TrendingTab();
             trendingTab.setArguments(b);
-            ft.replace(R.id.current_tab,trendingTab,"trending");
+            ft.replace(R.id.current_tab, trendingTab, "trending");
 
             ft.commit();
         }
     }
-    public void openCategory()
-    {
-        if( fm.findFragmentByTag("category") == null )
-        {
-            fm=getFragmentManager();
-            ft=fm.beginTransaction();
-            b=new Bundle();
-            CategoryTab cat=new CategoryTab();
-            b.putStringArray("titles",categorytitles);
-            b.putBooleanArray("selectedf",filter_default);
-            b.putInt("selectedt",4);
-            cat.setArguments(b);
-            ft.replace(R.id.current_tab,cat,"category");
+
+    public void openCategory() {
+        if (fm.findFragmentByTag("category") == null) {
+            fm = getFragmentManager();
+            ft = fm.beginTransaction();
+            b = new Bundle();
+            categoryTab = new CategoryTab();
+            b.putStringArray("titles", categorytitles);
+            b.putBooleanArray("selectedf", new boolean[]{false, false, true, false});
+            bar_filter_status=new boolean[]{false,false};
+            b.putInt("selectedt", 4);
+            categoryTab.setArguments(b);
+            ft.replace(R.id.current_tab, categoryTab, "category");
             ft.commit();
         }
     }
-    public void openSearch()
-    {
-        searchDialog=new SearchDialog();
-        searchDialog.show(getFragmentManager(),"search");
+
+    public void openSearch() {
+        searchDialog = new SearchDialog();
+        searchDialog.show(getFragmentManager(), "search");
     }
-    public void openAdd()
-    {
-        if( fm.findFragmentByTag("add") == null )
-        {
-            fm=getFragmentManager();
-            ft=fm.beginTransaction();
-            b=new Bundle();
-            AddTab addT=new AddTab();
-            b.putStringArray("category",createAddTitles());
-            b.putBoolean("draftscoming",false);
-            addT.setArguments(b);
-            ft.replace(R.id.current_tab,addT,"add");
+
+    public void openAdd() {
+        if (fm.findFragmentByTag("add") == null) {
+            fm = getFragmentManager();
+            ft = fm.beginTransaction();
+            b = new Bundle();
+            addTab = new AddTab();
+            b.putStringArray("category", createAddTitles());
+            b.putBoolean("draftscoming", false);
+            addTab.setArguments(b);
+            ft.replace(R.id.current_tab, addTab, "add");
             ft.commit();
         }
     }
-    public void openTop()
-    {
-        if( fm.findFragmentByTag("top") == null )
-        {
-            fm=getFragmentManager();
-            ft=fm.beginTransaction();
-            b=new Bundle();
-            LeaderboardTab leaderboardTab=new LeaderboardTab();
-            b.putInt("selecteda",0);
-            b.putInt("selectedt",4);
+
+    public void openTop() {
+        if (fm.findFragmentByTag("top") == null) {
+            fm = getFragmentManager();
+            ft = fm.beginTransaction();
+            b = new Bundle();
+            leaderboardTab = new LeaderboardTab();
+            b.putInt("selecteda", 0);
+            b.putInt("selectedt", 4);
             leaderboardTab.setArguments(b);
-            ft.replace(R.id.current_tab,leaderboardTab,"top");
+            ft.replace(R.id.current_tab, leaderboardTab, "top");
             ft.commit();
         }
     }
-    public void openProfile()
-    {
-        if( fm.findFragmentByTag("profile") == null )
-        {
-            fm=getFragmentManager();
-            ft=fm.beginTransaction();
-            ft.replace(R.id.current_tab,new ProfileTab(),"profile");
+
+    public void openProfile() {
+        if (fm.findFragmentByTag("profile") == null) {
+            fm = getFragmentManager();
+            ft = fm.beginTransaction();
+            ft.replace(R.id.current_tab, new ProfileTab(), "profile");
             ft.commit();
         }
     }
+
     //how I do the dialog
     @Override
-    public void onDialogPositiveClick(String r) {
-        if(r!=null) {
-            searchQuery=r;
-            fm=getFragmentManager();
-            ft=fm.beginTransaction();
-            SearchTab st =new SearchTab();
-            b=new Bundle();
-            b.putString("query",searchQuery);
-            b.putBooleanArray("selectedf",filter_default);
-            st.setArguments(b);
-            ft.replace(R.id.current_tab,st,"search");
+    public void onSearchDialogPositiveClick(String r) {
+        if (r != null) {
+            searchQuery = r;
+            //do the IB change based on search here
+            //should I process filters?
+            fm = getFragmentManager();
+            ft = fm.beginTransaction();
+            searchTab = new SearchTab();
+            b = new Bundle();
+            b.putString("query", searchQuery);
+            b.putBooleanArray("selectedf", new boolean[]{false, false, true, false});
+            bar_filter_status=new boolean[]{false,false};
+            searchTab.setArguments(b);
+            ft.replace(R.id.current_tab, searchTab, "search");
             ft.commit();
-        }else{
-            searchDialog.show(getFragmentManager(),"SearchDialog");
+        } else {
+            searchDialog.show(getFragmentManager(), "SearchDialog");
         }
     }
 
@@ -146,14 +153,14 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
 
         //test blocks of data due to lack of mysql implementation
         //ideablock
-        ib=new IdeaBlock("Placeholder","Heres a lllama theres a llama and another little llama fuzzy llama funny llama llamma llamma duck Heres a lllama theres a llama and another little llama fuzzy llama funny llama llamma llamma duck Heres a lllama theres a llama and another little llama fuzzy llama funny llama llamma llamma duck","Karl Brown",999,1,70,2,3);
-        ib.add("heres the plan","add ideas like crazy","wutang clan",100,0,63,0,1);
-        ib.add(new String[]{"I have a suggestion","However please remember"},new String[]{"Try to break the app and tell me what messed up","There is test data available. Please also have the latest release, and check what I know is broken, will be changed, and will be implemented later"},new String[]{"Richard Stallman","George Soros"},new int[]{2,3},new int[]{2,3},new int[]{2,3},new int[]{1,1},new int[]{3,4});
-        ib.add(ib.titles,ib.ideas,ib.authors,ib.tups,ib.tdowns,ib.numbers,ib.categorys,ib.subcategorys);
-        ib.add(ib.titles,ib.ideas,ib.authors,ib.tups,ib.tdowns,ib.numbers,ib.categorys,ib.subcategorys);
+        ib = new IdeaBlock("Placeholder", "Heres a lllama theres a llama and another little llama fuzzy llama funny llama llamma llamma duck Heres a lllama theres a llama and another little llama fuzzy llama funny llama llamma llamma duck Heres a lllama theres a llama and another little llama fuzzy llama funny llama llamma llamma duck", "Karl Brown", 999, 1, 70, 2, 3);
+        ib.add("heres the plan", "add ideas like crazy", "wutang clan", 100, 0, 63, 0, 1);
+        ib.add(new String[]{"I have a suggestion", "However please remember"}, new String[]{"Try to break the app and tell me what messed up", "There is test data available. Please also have the latest release, and check what I know is broken, will be changed, and will be implemented later"}, new String[]{"Richard Stallman", "George Soros"}, new int[]{2, 3}, new int[]{2, 3}, new int[]{2, 3}, new int[]{1, 1}, new int[]{3, 4});
+        ib.add(ib.titles, ib.ideas, ib.authors, ib.tups, ib.tdowns, ib.numbers, ib.categorys, ib.subcategorys);
+        ib.add(ib.titles, ib.ideas, ib.authors, ib.tups, ib.tdowns, ib.numbers, ib.categorys, ib.subcategorys);
         //leaderblock
-        leaderBlock=new LeaderBlock(new String[]{"putin","obama","farage","assad","kadyrov"},new String[]{"putin","obama","farage","assad","kadyrov"},new String[]{"putin","obama","farage","assad","kadyrov"},new String[]{"putin","obama","farage","assad","kadyrov"},
-                                    new double[]{59.523,42.70,9.11,3.041,99.99},new int[]{999,70,911,101,1337},new double[]{59.523,42.69,9.11,3.041,99.99},new double[]{59.523,42.70,9.11,3.041,99.99});
+        leaderBlock = new LeaderBlock(new String[]{"putin", "obama", "farage", "assad", "kadyrov"}, new String[]{"putin", "obama", "farage", "assad", "kadyrov"}, new String[]{"putin", "obama", "farage", "assad", "kadyrov"}, new String[]{"putin", "obama", "farage", "assad", "kadyrov"},
+                new double[]{59.523, 42.70, 9.11, 3.041, 99.99}, new int[]{999, 70, 911, 101, 1337}, new double[]{59.523, 42.69, 9.11, 3.041, 99.99}, new double[]{59.523, 42.70, 9.11, 3.041, 99.99});
 
 
         //this deletes your user every time. comment it out to save username and be more persistent
@@ -189,130 +196,383 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
             }
         });
 
-        if(fm==null)
-        {
-            fm=getFragmentManager();
-            ft=fm.beginTransaction();
-            if(sharedPref.getBoolean(getString(R.string.preference_setup), false)) {
+        if (fm == null) {
+            fm = getFragmentManager();
+            ft = fm.beginTransaction();
+            if (sharedPref.getBoolean(getString(R.string.preference_setup), false)) {
                 os = new OpeningScreen();
                 ft.add(R.id.current_tab, os, "opening");
-            }else{
+            } else {
                 InitialScreen init = new InitialScreen();
-                b=new Bundle();
-                b.putStringArray("categorytitles",createAddTitles());
+                b = new Bundle();
+                b.putStringArray("categorytitles", createAddTitles());
                 init.setArguments(b);
-                ft.add(R.id.current_tab,init,"initial");
+                ft.add(R.id.current_tab, init, "initial");
             }
             ft.commit();
         }
 
     }
-    public void createTitles()
-    {
-        int length=categories.length;
-        categorytitles=new String[length];
-        for(int x=0;x<length;x++)
-        {
-            categorytitles[x]=categories[x][0];
+
+    public void createTitles() {
+        int length = categories.length;
+        categorytitles = new String[length];
+        for (int x = 0; x < length; x++) {
+            categorytitles[x] = categories[x][0];
         }
     }
-    public String[] createAddTitles()
-    {
-        int temp=categorytitles.length;
-        String[] addTitles=new String[temp+1];
-        addTitles[0]= "Select a Category";
-        System.arraycopy(categorytitles,0,addTitles,1,temp);
+
+    public String[] createAddTitles() {
+        int temp = categorytitles.length;
+        String[] addTitles = new String[temp + 1];
+        addTitles[0] = "Select a Category";
+        System.arraycopy(categorytitles, 0, addTitles, 1, temp);
         return addTitles;
     }
 
     @Override
-    public void onRatioDialogPositiveClick(int i) {
-        minratio=i;
-        fm=getFragmentManager();
+    public void onRatioDialogPositiveClick(int i, String tag) {
+        minratio = i;
+        //do sorting algo here
+        bar_filter_status[0] = true;
+        switch (tag) {
+            case "byfriends":
+                friendsPage.filterSelected(0);
+                break;
+            case "byfavorite":
+                favoritePage.filterSelected(0);
+                break;
+            case "byuser":
+                userPage.filterSelected(0);
+                break;
+            case "trending":
+                trendingTab.filterSelected(0);
+                break;
+            case "category":
+                categoryTab.filterSelected(0);
+                break;
+            case "search":
+                searchTab.filterSelected(0);
+                break;
+            default:
+                tag = "leave b4 admin bans u";
+                break;
+        }
+        fm = getFragmentManager();
         fm.popBackStack();
-
     }
+
     @Override
     public void onRatioDialogNegativeClick() {
-          minratio=0;
+
+    }
+
+    public void revertBarFilter(String tag, boolean which_filter) {
+        if (which_filter) {
+            minratio = 0;
+            bar_filter_status[0] = false;
+            //insert algorithm to revert data based on what is easiest
+            switch (tag) {
+                case "byfriends":
+                    friendsPage.dapt.notifyDataSetChanged();
+                    break;
+                case "byfavorite":
+                    favoritePage.dapt.notifyDataSetChanged();
+                    break;
+                case "byuser":
+                    userPage.dapt.notifyDataSetChanged();
+                    break;
+                case "trending":
+                    trendingTab.dapt.notifyDataSetChanged();
+                    break;
+                case "category":
+                    categoryTab.dapt.notifyDataSetChanged();
+                    break;
+                case "search":
+                    searchTab.dapt.notifyDataSetChanged();
+                    break;
+                default:
+                    tag = "leave b4 admin bans u";
+                    break;
+            }
+        } else {
+            minthumbs = 0;
+            bar_filter_status[1] = false;
+            //insert algorithm to revert data based on what is easiest
+            switch (tag) {
+                case "byfriends":
+                    friendsPage.dapt.notifyDataSetChanged();
+                    break;
+                case "byfavorite":
+                    favoritePage.dapt.notifyDataSetChanged();
+                    break;
+                case "byuser":
+                    userPage.dapt.notifyDataSetChanged();
+                    break;
+                case "trending":
+                    trendingTab.dapt.notifyDataSetChanged();
+                    break;
+                case "category":
+                    categoryTab.dapt.notifyDataSetChanged();
+                    break;
+                case "search":
+                    searchTab.dapt.notifyDataSetChanged();
+                    break;
+                default:
+                    tag = "leave b4 admin bans u";
+                    break;
+            }
+        }
+    }
+    public void switchBarFilter(boolean which, String tag)
+    {
+        if(which)
+        {
+            //insert algorithm to sort by recent
+            switch (tag) {
+                case "byfriends":
+                    friendsPage.dapt.notifyDataSetChanged();
+                    break;
+                case "byfavorite":
+                    favoritePage.dapt.notifyDataSetChanged();
+                    break;
+                case "byuser":
+                    userPage.dapt.notifyDataSetChanged();
+                    break;
+                case "trending":
+                    trendingTab.dapt.notifyDataSetChanged();
+                    break;
+                case "category":
+                    categoryTab.dapt.notifyDataSetChanged();
+                    break;
+                case "search":
+                    searchTab.dapt.notifyDataSetChanged();
+                    break;
+                default:
+                    tag = "leave b4 admin bans u";
+                    break;
+            }
+        }else{
+            //insert algorithm to sort by top rated
+            switch (tag) {
+                case "byfriends":
+                    friendsPage.dapt.notifyDataSetChanged();
+                    break;
+                case "byfavorite":
+                    favoritePage.dapt.notifyDataSetChanged();
+                    break;
+                case "byuser":
+                    userPage.dapt.notifyDataSetChanged();
+                    break;
+                case "trending":
+                    trendingTab.dapt.notifyDataSetChanged();
+                    break;
+                case "category":
+                    categoryTab.dapt.notifyDataSetChanged();
+                    break;
+                case "search":
+                    searchTab.dapt.notifyDataSetChanged();
+                    break;
+                default:
+                    tag = "leave b4 admin bans u";
+                    break;
+            }
+        }
+    }
+    public void pullAreaBar(int area,String tag)
+    {
+        //set area of choice to be pulled here
+        //method with int area
+        switch (tag) {
+            case "byfriends":
+                friendsPage.dapt.notifyDataSetChanged();
+                break;
+            case "byfavorite":
+                favoritePage.dapt.notifyDataSetChanged();
+                break;
+            case "byuser":
+                userPage.dapt.notifyDataSetChanged();
+                break;
+            case "trending":
+                trendingTab.dapt.notifyDataSetChanged();
+                break;
+            case "category":
+                categoryTab.dapt.notifyDataSetChanged();
+                break;
+            case "search":
+                searchTab.dapt.notifyDataSetChanged();
+                break;
+            default:
+                tag = "leave b4 admin bans u";
+                break;
+        }
+    }
+    public void pullTimeBar(int time,String tag)
+    {
+        //set time of choice to be pulled here
+        //method with int time
+        switch (tag) {
+            case "byfriends":
+                friendsPage.dapt.notifyDataSetChanged();
+                break;
+            case "byfavorite":
+                favoritePage.dapt.notifyDataSetChanged();
+                break;
+            case "byuser":
+                userPage.dapt.notifyDataSetChanged();
+                break;
+            case "trending":
+                trendingTab.dapt.notifyDataSetChanged();
+                break;
+            case "category":
+                categoryTab.dapt.notifyDataSetChanged();
+                break;
+            case "search":
+                searchTab.dapt.notifyDataSetChanged();
+                break;
+            default:
+                tag = "leave b4 admin bans u";
+                break;
+        }
     }
     @Override
-    public void onThumbDialogPositiveClick(int i) {
-        minratio=i;
-        fm=getFragmentManager();
+    public void onThumbDialogPositiveClick(int i, String tag) {
+        minthumbs = i;
+        bar_filter_status[1] = true;
+        //do sorting algo here
+        switch (tag) {
+            case "byfriends":
+                friendsPage.filterSelected(1);
+                break;
+            case "byfavorite":
+                favoritePage.filterSelected(1);
+                break;
+            case "byuser":
+                userPage.filterSelected(1);
+                break;
+            case "trending":
+                trendingTab.filterSelected(1);
+                break;
+            case "category":
+                categoryTab.filterSelected(1);
+                break;
+            case "search":
+                searchTab.filterSelected(1);
+                break;
+            default:
+                tag = "leave b4 admin bans u";
+                break;
+        }
+        fm = getFragmentManager();
         fm.popBackStack();
     }
+
     @Override
     public void onThumbDialogNegativeClick() {
-        minratio=0;
     }
+
     @Override
     public void onDraftListClick(int position) {
-        fm=getFragmentManager();
-        ft=fm.beginTransaction();
-        b=new Bundle();
-        AddTab addT=new AddTab();
-        b.putStringArray("category",createAddTitles());
-        b.putBoolean("draftscoming",true);
-        b.putString("drafttitle",drafts.getTitle(position));
-        b.putString("draftdescription",drafts.getIdea(position));
-        b.putInt("draftcategory",drafts.getCategory(position));
-        b.putInt("draftsubcategory",drafts.getSubcategory(position));
+        fm = getFragmentManager();
+        ft = fm.beginTransaction();
+        b = new Bundle();
+        AddTab addT = new AddTab();
+        b.putStringArray("category", createAddTitles());
+        b.putBoolean("draftscoming", true);
+        b.putString("drafttitle", drafts.getTitle(position));
+        b.putString("draftdescription", drafts.getIdea(position));
+        b.putInt("draftcategory", drafts.getCategory(position));
+        b.putInt("draftsubcategory", drafts.getSubcategory(position));
         addT.setArguments(b);
-        ft.replace(R.id.current_tab,addT,"add");
+        ft.replace(R.id.current_tab, addT, "add");
         ft.commit();
     }
+
     @Override
     public void onIdeaListClick(int position) {
-        fm=getFragmentManager();
-        ft=fm.beginTransaction();
-        b=new Bundle();
-        IdeaPage ideaPage=new IdeaPage();
-        b.putInt("position",position);
+        fm = getFragmentManager();
+        ft = fm.beginTransaction();
+        b = new Bundle();
+        IdeaPage ideaPage = new IdeaPage();
+        b.putInt("position", position);
         ideaPage.setArguments(b);
-        ft.replace(R.id.current_tab,ideaPage,"ideapage");
+        ft.replace(R.id.current_tab, ideaPage, "ideapage");
         ft.commit();
     }
 
     @Override
     public void toUserIdeaPage(String username) {
         //call the necessary requirements for byuser here
-        bytemp=ib;
-        fm=getFragmentManager();
-        ft=fm.beginTransaction();
-        ByUserPage userPage=new ByUserPage();
-        b.putString("username",username);
-        b.putBooleanArray("selectedf",filter_default);
+        bytemp = ib;
+        fm = getFragmentManager();
+        ft = fm.beginTransaction();
+        userPage = new ByUserPage();
+        b.putString("username", username);
+        b.putBooleanArray("selectedf", new boolean[]{false, false, true, false});
+        bar_filter_status=new boolean[]{false,false};
         userPage.setArguments(b);
-        ft.replace(R.id.current_tab,userPage,"byuser");
+        ft.replace(R.id.current_tab, userPage, "byuser");
         ft.commit();
     }
+
     @Override
-    public void toFavoriteIdeaPage(String username)
-    {
+    public void toFriendsIdeaPage(String username) {
         //call the necessary requirements for favoriteideas here
-        bytemp=ib;
-        fm=getFragmentManager();
-        ft=fm.beginTransaction();
-        ByFriendsPage friendsPage=new ByFriendsPage();
-        b.putString("username",username);
-        b.putBooleanArray("selectedf",filter_default);
+        bytemp = ib;
+        fm = getFragmentManager();
+        ft = fm.beginTransaction();
+        friendsPage = new ByFriendsPage();
+        b.putString("username", username);
+        b.putBooleanArray("selectedf", new boolean[]{false, false, true, false});
+        bar_filter_status=new boolean[]{false,false};
         friendsPage.setArguments(b);
-        ft.replace(R.id.current_tab,friendsPage,"byfriends");
+        ft.replace(R.id.current_tab, friendsPage, "byfriends");
         ft.commit();
     }
+
     @Override
-    public void toFriendsIdeaPage(String username)
-    {
+    public void toFavoriteIdeaPage(String username) {
         //call the necessary requirements for favoriteideas here
-        bytemp=ib;
-        fm=getFragmentManager();
-        ft=fm.beginTransaction();
-        ByFavoritePage favoritePage=new ByFavoritePage();
-        b.putString("username",username);
-        b.putBooleanArray("selectedf",filter_default);
+        bytemp = ib;
+        fm = getFragmentManager();
+        ft = fm.beginTransaction();
+        favoritePage = new ByFavoritePage();
+        b.putString("username", username);
+        b.putBooleanArray("selectedf", new boolean[]{false, false, true, false});
+        bar_filter_status=new boolean[]{false,false};
         favoritePage.setArguments(b);
-        ft.replace(R.id.current_tab,favoritePage,"byfavorite");
+        ft.replace(R.id.current_tab, favoritePage, "byfavorite");
         ft.commit();
     }
+    //communicate to those silly filtering fragments
+    /*right now, I am saving object references as fields
+    public interface ByFavoritePageListener {
+
+    }
+    public interface ByFriendsPageListener {
+
+    }
+    public interface ByUserPageListener {
+
+    }
+    public interface CategoryTabListener {
+
+    }
+    public interface LeaderboardTabListener {
+
+    }
+    public interface SearchTabListener {
+
+    }
+    public interface TrendingTabListener {
+
+    }
+    CategoryTabListener ctListener;
+    LeaderboardTabListener ltListener;
+    TrendingTabListener ttListener;
+    SearchTabListener stListener;
+    ByFavoritePageListener bfavpListener;
+    ByFriendsPageListener bfripListener;
+    ByUserPageListener bupListener;
+    */
 }

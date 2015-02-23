@@ -32,7 +32,7 @@ profile page
 public class ProfileTab extends Fragment {
 
     View rv;
-    TextView t, temp;
+    TextView t;
     ListView l;
     SharedPreferences pref;
     DataAdapter dapt;

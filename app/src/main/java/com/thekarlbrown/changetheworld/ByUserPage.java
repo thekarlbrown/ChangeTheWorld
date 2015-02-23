@@ -63,10 +63,16 @@ public class ByUserPage extends Fragment {
         l = (ListView) rv.findViewById(R.id.by_user_list);
         l.setAdapter(dapt);
         fm=getFragmentManager();
-        barFilter.barFilterClick(rv,fm,selectedf);
+        barFilter.barFilterClick(rv,fm,selectedf,getTag(),mainActivity);
         t=(TextView)rv.findViewById(R.id.by_user_username);
         t.setText(username + "'s ideas:");
         return rv;
+    }
+    public void filterSelected(int i)
+    {
+        selectedf[i]=true;
+        barFilter.setSelected(i);
+        dapt.notifyDataSetChanged();
     }
 
 }
