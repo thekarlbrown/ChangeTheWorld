@@ -115,6 +115,6 @@ fix drawer expansion style to make it more smooth
 
 --- special thanks to ---
 
- Napalm, g00s, groxx,TacticalJoke, lasserix at #android-dev
+ Napalm, g00s, groxx,TacticalJoke, lasserix,cbeust at #android-dev
 
 cmalekpour on github  
