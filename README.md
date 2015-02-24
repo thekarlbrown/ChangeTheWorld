@@ -138,4 +138,6 @@ fix drawer expansion style to make it more smooth
 
 Napalm, g00s, groxx,TacticalJoke, lasserix,cbeust at #android-dev
 
+danblack at #mysql
+
 cmalekpour on github
