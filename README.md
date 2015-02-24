@@ -4,6 +4,24 @@ As part of my Senior project, I am developing an Android app that utilizes a MyS
 
 This is my ChangeTheWorld android app. I am currently in the earlier beta, in fact if you are reading this it is likely that this is the first Github push ever. What does this mean?
 
+It will allow people with good concepts to get them to individuals who will be able to implement them who might never do anything with them otherwise
+
+It will also allow group evaluation and improvement of said ideas plus casual areas for funny/humorous stuff (and to cut down on riff raff from the serious sections without moderation on my side)
+
+Its for anyone and everyone who thinks of something brilliant, or sees a problem in the world they want fixed, or is bored and wants to toss something out there and see what people think
+
+--- current state of the app ----
+
+bars navigate at the top
+
+ideally click them  once account is made
+
+you can click on the ideas
+
+sorting, filters, and internet connectivity with the crowd-sourced categorys are on the way
+
+----------------------------------
+
 1. The app is in the earliest of alpha. Its performance is not optimized. In fact, I have a list of things I intend on doing, bugs that need to be fixed, and what I intend to do further on in a huge list
 
 2. I would love your feedback, and much later on in the process will need android devices to test on (in addition to whatever I will be testing)
