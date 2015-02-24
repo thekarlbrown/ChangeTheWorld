@@ -4,13 +4,13 @@ As part of my Senior project, I am developing an Android app that utilizes a MyS
 
 This is my ChangeTheWorld android app. I am currently in the earlier beta, in fact if you are reading this it is likely that this is the first Github push ever. What does this mean?
 
-It will allow people with good concepts to get them to individuals who will be able to implement them who might never do anything with them otherwise
+It will allow people with good concepts to get them to individuals who will be able to implement them who may never do anything with them otherwise
 
 It will also allow group evaluation and improvement of said ideas plus casual areas for funny/humorous stuff (and to cut down on riff raff from the serious sections without moderation on my side)
 
-Its for anyone and everyone who thinks of something brilliant, or sees a problem in the world they want fixed, or is bored and wants to toss something out there and see what people think
+It is best for anyone who thinks of something brilliant, sees a problem in the world they want fixed, or is bored and wants to toss something out there and see what people think
 
---- current state of the app ----
+--- current state of the App ----
 
 bars navigate at the top
 
@@ -18,7 +18,7 @@ ideally click them  once account is made
 
 you can click on the ideas
 
-sorting, filters, and internet connectivity with the crowd-sourced categorys are on the way
+sorting, filters, and internet connectivity with the crowd-sourced category's are on the way
 
 ----------------------------------
 
@@ -26,9 +26,9 @@ sorting, filters, and internet connectivity with the crowd-sourced categorys are
 
 2. I would love your feedback, and much later on in the process will need android devices to test on (in addition to whatever I will be testing)
 
-3. If you are interested in helping me setting up the categorys and subcategorys/check out docs.google.com/document/d/1GVSz_fBI7GjAc4JJta39_EX0B0SVpZ5PUdZyDpbF0Jw/edit
+3. If you are interested in helping me setting up the category's and subcategory's/check out docs.google.com/document/d/1GVSz_fBI7GjAc4JJta39_EX0B0SVpZ5PUdZyDpbF0Jw/edit
 
-4. There are a ton of placeholders for features to be added later or backend that is not yet implemented
+4. There are a ton of place-holders for features to be added later or backend that is not yet implemented
 
 5. There is currently an emulator for the app here : https://appetize.io/app/rtkyh4gvg02x56uzeffx1349k4 Please use 100%, Nexus 7, as I have not moved development to any other platforms as of yet
 
@@ -46,7 +46,7 @@ determine if all bar methods necessary, determine if I should make leaderboard f
 
 use better directory for saving files
 
-pushing/pulling favorites upvote/downvote from server
+pushing/pulling favourites upvote/downvote from server
 
 update selected on start based on IdeaPage so tags are selected and values are passed and leaderboard doesn't start on null
 
@@ -80,7 +80,7 @@ crowd-source the category creation
 
 see what prof thinks of leaderboard pushing
 
-figure out how im layering fragments improperly
+figure out how I am layering fragments improperly
 
 figure out why I cannot copy-paste
 
