@@ -41,7 +41,7 @@ Entity Relationship Diagram I designed for the app
 
 --TO-DO/Tactics for Implementation --
 
-retrieve categorys from server instead of setting them manually
+retrieve categories from server instead of setting them manually
 
 better implement text in initial screen
 
@@ -73,11 +73,11 @@ for initial screen: not seen friends ideas that are positive  then most thumbs o
 
 categories has no minimum, queries category and subcategory first, most recent selected, this month
 
-search queries optimal search algo, starting at beginning until end, saving when minimum obtained to continue where it left off when user goes down
+search queries optimal search algorithm, starting at beginning until end, saving when minimum obtained to continue where it left off when user goes down
 
 need advisor help on leaderboard, maybe set rule for if active within. 30 days
 
-friends and idea lists are all optimized algo searches, decide how to determine if user has liked idea or not (will server return truth value, where will who has liked what be stored and how)
+friends and idea lists are all optimized algorithm searches, decide how to determine if user has liked idea or not (will server return truth value, where will who has liked what be stored and how)
 
 decide if its optimal to display subselections by references to positions of ideablocks or create ideablock reference OR BOTH
 
@@ -93,7 +93,7 @@ figure out how I am layering fragments improperly
 
 figure out why I cannot copy-paste
 
-sync favs with database
+sync favorites with database
 
 add leaderboard onclicks to user profiles
 
@@ -111,7 +111,7 @@ add images for profiles to various displays, save profile picture to server
 
 groxxx directed spacing
 
-make icons out of everything possible for prettyness, sexy fonts, and round edges
+make icons out of everything possible for aesthetics, sexy fonts, and round edges
 
 improve category spacing
 
@@ -123,7 +123,7 @@ implement comments
 
 scaling based on content, device, and orientation
 
-optimizing mysql transmission
+optimizing MySQL transmission
 
 import image for profile picture/make it social/all that jazz
 
