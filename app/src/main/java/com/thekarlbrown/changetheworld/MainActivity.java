@@ -185,33 +185,7 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
             if (sharedPref.getBoolean(getString(R.string.preference_setup), false)) {
                 os = new OpeningScreen();
                 ft.add(R.id.current_tab, os, "opening");
-                st.setOnMenuItemClickListener(new SplitToolbar.OnMenuItemClickListener() {
-                    @Override
-                    public boolean onMenuItemClick(MenuItem menuItem) {
-                        switch (menuItem.getItemId()) {
-                            case R.id.tab_trending:
-                                openTrending();
-                                return true;
-                            case R.id.tab_category:
-                                openCategory();
-                                return true;
-                            case R.id.tab_search:
-                                openSearch();
-                                return true;
-                            case R.id.tab_add:
-                                openAdd();
-                                return true;
-                            case R.id.tab_top:
-                                openTop();
-                                return true;
-                            case R.id.tab_profile:
-                                openProfile();
-                                return true;
-                            default:
-                                return false;
-                        }
-                    }
-                });
+                searchTabClick();
             } else {
                 InitialScreen init = new InitialScreen();
                 b = new Bundle();
@@ -553,6 +527,36 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
         favoritePage.setArguments(b);
         ft.replace(R.id.current_tab, favoritePage, "byfavorite");
         ft.commit();
+    }
+    public void searchTabClick()
+    {
+        st.setOnMenuItemClickListener(new SplitToolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                switch (menuItem.getItemId()) {
+                    case R.id.tab_trending:
+                        openTrending();
+                        return true;
+                    case R.id.tab_category:
+                        openCategory();
+                        return true;
+                    case R.id.tab_search:
+                        openSearch();
+                        return true;
+                    case R.id.tab_add:
+                        openAdd();
+                        return true;
+                    case R.id.tab_top:
+                        openTop();
+                        return true;
+                    case R.id.tab_profile:
+                        openProfile();
+                        return true;
+                    default:
+                        return false;
+                }
+            }
+        });
     }
     //communicate to those silly filtering fragments
     /*right now, I am saving object references as fields
