@@ -162,9 +162,9 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
 
         //test blocks of data due to lack of mysql implementation
         //ideablock
-        ib = new IdeaBlock("Placeholder", "Heres a lllama theres a llama and another little llama fuzzy llama funny llama llamma llamma duck Heres a lllama theres a llama and another little llama fuzzy llama funny llama llamma llamma duck Heres a lllama theres a llama and another little llama fuzzy llama funny llama llamma llamma duck", "Karl Brown", 999, 1, 70, 2, 3);
-        ib.add("heres the plan", "add ideas like crazy", "wutang clan", 100, 0, 63, 0, 1);
-        ib.add(new String[]{"I have a suggestion", "However please remember"}, new String[]{"Try to break the app and tell me what messed up", "There is test data available. Please also have the latest release, and check what I know is broken, will be changed, and will be implemented later"}, new String[]{"Richard Stallman", "George Soros"}, new int[]{2, 3}, new int[]{2, 3}, new int[]{2, 3}, new int[]{1, 1}, new int[]{3, 4});
+        ib = new IdeaBlock("Placeholder", "Heres a lllama theres a llama and another little llama fuzzy llama funny llama llamma llamma duck Heres a lllama theres a llama and another little llama fuzzy llama funny llama llamma llamma duck Heres a lllama theres a llama and another little llama fuzzy llama funny llama llamma llamma duck", "Karl Brown", 999, 1, 70, 2, 11);
+        ib.add("heres the plan", "add yo ideas like crazy till da brain feels lazy", "k breezy", 100, 0, 63, 4, 4);
+        ib.add(new String[]{"I have a suggestion", "However please remember"}, new String[]{"Try to break the app and tell me what messed up", "There is test data available. Please also have the latest release, and check what I know is broken, will be changed, and will be implemented later"}, new String[]{"Richard Stallman", "George Soros"}, new int[]{2, 3}, new int[]{2, 3}, new int[]{2, 3}, new int[]{7, 3}, new int[]{3, 4});
         ib.add(ib.titles, ib.ideas, ib.authors, ib.tups, ib.tdowns, ib.numbers, ib.categorys, ib.subcategorys);
         ib.add(ib.titles, ib.ideas, ib.authors, ib.tups, ib.tdowns, ib.numbers, ib.categorys, ib.subcategorys);
         //leaderblock
