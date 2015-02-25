@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
@@ -38,6 +39,7 @@ Activity activity;
     String welcomemsgerror="Welcome to the app that enables the sharing, evaluation, " + "\nand tweaking of new ideas and innovation!" +"\nNavigate with the bars at the top! Sort what you see with" +"\noptions at the bottom! All you have to do to start is set your username."+"\nSo who are YOU, my friend?\nSorry: Your username must be letters at numbers, 25 characters max...\nOr this bugged";
     public void toLearn(View v)
     {
+        setOnClick(mainActivity);
         epref=pref.edit();
         epref.putString(getString(R.string.preference_username), ((EditText) v.getRootView().findViewById(R.id.initial_username)).getText().toString());
         epref.putBoolean(getString(R.string.preference_setup), true);
@@ -47,6 +49,7 @@ Activity activity;
     }
     public void toChange(View v)
     {
+        setOnClick(mainActivity);
         epref=pref.edit();
         epref.putString(getString(R.string.preference_username), ((EditText) v.getRootView().findViewById(R.id.initial_username)).getText().toString());
         epref.putBoolean(getString(R.string.preference_setup),true);
@@ -131,7 +134,36 @@ Activity activity;
             e.printStackTrace();
         }
     }
-
+    public void setOnClick (MainActivity main)
+    {
+        main.st.setOnMenuItemClickListener(new SplitToolbar.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                switch (menuItem.getItemId()) {
+                    case R.id.tab_trending:
+                        mainActivity.openTrending();
+                        return true;
+                    case R.id.tab_category:
+                        mainActivity.openCategory();
+                        return true;
+                    case R.id.tab_search:
+                        mainActivity.openSearch();
+                        return true;
+                    case R.id.tab_add:
+                        mainActivity.openAdd();
+                        return true;
+                    case R.id.tab_top:
+                        mainActivity.openTop();
+                        return true;
+                    case R.id.tab_profile:
+                        mainActivity.openProfile();
+                        return true;
+                    default:
+                        return false;
+                }
+            }
+        });
+    }
 
 
 }

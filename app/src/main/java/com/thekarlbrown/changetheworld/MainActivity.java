@@ -16,8 +16,17 @@ import android.view.MenuItem;
 
 public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAdapterListener, ProfileTab.ProfileTabListener, IdeaPage.IdeaPageListener, DraftDataAdapter.DraftDataAdapterListener, SearchDialog.SearchDialogListener, RatioDialogue.NoticeRatioDialogListener, ThumbDialogue.NoticeThumbDialogListener {
 
-    String[][] categories = {{"LolTitle", "Lol1", "Lol2", "Lol3", "Lol4", "Lol5", "Lol6"},
-            {"WutTitle", "Wut1", "Wut2", "Wut3", "Wut4", "Wut5", "Wut6"}, {"BroTitle", "Bro1", "Bro2", "Bro3", "Bro4", "Bro5", "Bro6"}};
+    String[][] categories = {{"Inventions","Electronic","Medical","Environmental","Tools","Machines","Industrial","Chemical","Agricultural","Instruments","Build It Yourself","Other"},
+            {"Innovations","Recipes","College Hacks","Thrifty Living","Manufacturing Techniques","Going Green","Home Decor","Pet Hacks","Parenting Hacks",
+                    "Costume/Cosplay Inspiration","Common Mistake/Solutions","Fixing Everyday Issues","Other"},
+            {"Abstract/Concepts/Processes","Algorithms","Computer Programs/Mobile Apps","Economic/Governmental/Social Systems","Philosophical","Real World Services",
+                    "Internet Services","Cultural","Events/Conventions/Meetups","Party Concepts","Processes","Dance Moves","Other"},
+            {"The Suggestion Box","Government","Public School","College","Economics","Rules,Regulations, and Laws","Life Tips","Other"},
+            {"Written/Visual Compositions","TV Shows","Movie Plots","Book Ideas","Theatre","Fine Art","Fashion","Other"},
+            {"NSFW","Sexual Maneuvers","Combat Techniques","Stealth","Immoral","Got It For \"Free\"","Politically Incorrect","Other"},
+            {"Joke Ideas","Bad","Funny","Inherently Flawed","Sarcastic","Absolutely Ridiculous","What-Ifs","Other"},
+            {"Other","Doesn't Fit Anywhere","Suggestions for App","New Category's/Subcategory","Bugs Discovered","Messages to the Creator","Other"}
+    };
     String[] categorytitles;
     FragmentManager fm;
     FragmentTransaction ft;
@@ -168,33 +177,7 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
 
         //create category titles
         createTitles();
-        st.setOnMenuItemClickListener(new SplitToolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-                switch (menuItem.getItemId()) {
-                    case R.id.tab_trending:
-                        openTrending();
-                        return true;
-                    case R.id.tab_category:
-                        openCategory();
-                        return true;
-                    case R.id.tab_search:
-                        openSearch();
-                        return true;
-                    case R.id.tab_add:
-                        openAdd();
-                        return true;
-                    case R.id.tab_top:
-                        openTop();
-                        return true;
-                    case R.id.tab_profile:
-                        openProfile();
-                        return true;
-                    default:
-                        return false;
-                }
-            }
-        });
+
 
         if (fm == null) {
             fm = getFragmentManager();
@@ -202,6 +185,33 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
             if (sharedPref.getBoolean(getString(R.string.preference_setup), false)) {
                 os = new OpeningScreen();
                 ft.add(R.id.current_tab, os, "opening");
+                st.setOnMenuItemClickListener(new SplitToolbar.OnMenuItemClickListener() {
+                    @Override
+                    public boolean onMenuItemClick(MenuItem menuItem) {
+                        switch (menuItem.getItemId()) {
+                            case R.id.tab_trending:
+                                openTrending();
+                                return true;
+                            case R.id.tab_category:
+                                openCategory();
+                                return true;
+                            case R.id.tab_search:
+                                openSearch();
+                                return true;
+                            case R.id.tab_add:
+                                openAdd();
+                                return true;
+                            case R.id.tab_top:
+                                openTop();
+                                return true;
+                            case R.id.tab_profile:
+                                openProfile();
+                                return true;
+                            default:
+                                return false;
+                        }
+                    }
+                });
             } else {
                 InitialScreen init = new InitialScreen();
                 b = new Bundle();

@@ -26,13 +26,22 @@ sorting, filters, and internet connectivity with the crowd-sourced category's ar
 
 2. I would love your feedback, and much later on in the process will need android devices to test on (in addition to whatever I will be testing)
 
-3. If you are interested in helping me setting up the category's and subcategory's/check out docs.google.com/document/d/1GVSz_fBI7GjAc4JJta39_EX0B0SVpZ5PUdZyDpbF0Jw/edit
+3. If you are interested in helping me setting up the category's and subcategory's/check out https://docs.google.com/a/cnu.edu/document/d/1GVSz_fBI7GjAc4JJta39_EX0B0SVpZ5PUdZyDpbF0Jw/edit
 
 4. There are a ton of place-holders for features to be added later or backend that is not yet implemented
 
 5. There is currently an emulator for the app here : https://appetize.io/app/rtkyh4gvg02x56uzeffx1349k4 Please use 100%, Nexus 7, as I have not moved development to any other platforms as of yet
 
+-- MySQL Abstract (Done in MySQL Workbench) --
+
+http://thekarlbrown.com/mysqleerd.png 
+
+Entity Relationship Diagram I designed for the app
+
+
 --TO-DO/Tactics for Implementation --
+
+retrieve categorys from server instead of setting them manually
 
 better implement text in initial screen
 
@@ -138,6 +147,6 @@ fix drawer expansion style to make it more smooth
 
 Napalm, g00s, groxx,TacticalJoke, lasserix,cbeust at #android-dev
 
-danblack at #mysql
+danblack, seekwill at #mysql
 
 cmalekpour on github

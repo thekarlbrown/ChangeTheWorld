@@ -111,7 +111,7 @@
                         et.setText(null);
                     }
                     try{
-                        if(add_title.length()>25)
+                        if(add_title.length()>35)
                         {
                             iv.setImageResource(R.drawable.ic_red_x);
                         }
@@ -315,7 +315,7 @@
                 wegood= false;
             }
             try{
-                if((add_title.length()>25))
+                if((add_title.length()>35))
                 {
                     iv.setImageResource(R.drawable.ic_red_x);
                     wegood= false;
