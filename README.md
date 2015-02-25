@@ -2,13 +2,15 @@
 
 As part of my Senior project, I am developing an Android app that utilizes a MySQL database on this server to enable the sharing, group evaluation, improvement and implementation of new ideas and innovation.
 
-This is my ChangeTheWorld android app. I am currently in the earlier beta, in fact if you are reading this it is likely that this is the first Github push ever. What does this mean?
+This app will allow people with good concepts to get them to individuals who will be able to implement them who may never do anything with them otherwise
 
-It will allow people with good concepts to get them to individuals who will be able to implement them who may never do anything with them otherwise
+This app will also allow group evaluation and improvement of said ideas plus casual areas for funny/humorous stuff (and to cut down on riff raff from the serious sections without moderation on my side)
 
-It will also allow group evaluation and improvement of said ideas plus casual areas for funny/humorous stuff (and to cut down on riff raff from the serious sections without moderation on my side)
+This app is best for anyone who thinks of something brilliant, sees a problem in the world they want fixed, or is bored and wants to toss something out there and see what people think
 
-It is best for anyone who thinks of something brilliant, sees a problem in the world they want fixed, or is bored and wants to toss something out there and see what people think
+I am currently in the alpha stages of development. What does this entail?
+
+--------------------------------------------
 
 --- current state of the App ----
 
@@ -19,6 +21,8 @@ ideally click them  once account is made
 you can click on the ideas
 
 sorting, filters, and internet connectivity with the crowd-sourced category's are on the way
+
+I am currently working on the MySQL/PHP situation
 
 ----------------------------------
 
@@ -32,12 +36,15 @@ sorting, filters, and internet connectivity with the crowd-sourced category's ar
 
 5. There is currently an emulator for the app here : https://appetize.io/app/rtkyh4gvg02x56uzeffx1349k4 Please use 100%, Nexus 7, as I have not moved development to any other platforms as of yet
 
+--------------------------------------------
+
 -- MySQL Abstract (Done in MySQL Workbench) --
 
 http://thekarlbrown.com/mysqleerd.png 
 
 Entity Relationship Diagram I designed for the app
 
+--------------------------------------------
 
 --TO-DO/Tactics for Implementation --
 
@@ -97,6 +104,8 @@ sync favorites with database
 
 add leaderboard onclicks to user profiles
 
+--------------------------------------------
+
 -- coming after initial setup --
 
 prompt for deletion of old drafts
@@ -142,6 +151,8 @@ implement recently viewed ideas
 attempt to move code towards more modular design
 
 fix drawer expansion style to make it more smooth
+
+--------------------------------------------
 
 --- special thanks to ---
 
