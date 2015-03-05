@@ -44,9 +44,20 @@ http://thekarlbrown.com/mysqleerd.png
 
 Entity Relationship Diagram I designed for the app
 
+EDIT: added unique key to author in user
+
 --------------------------------------------
 
+--- PHP --- 
+
+added user_add.php (needs revisions but functions to test database and app)
+
+--------------------------------------------
+
+
 --TO-DO/Tactics for Implementation --
+
+change user_add.php to PDO for mysql injection, from get to post, and improve autoindex (currently updates every time for testing)
 
 retrieve categories from server instead of setting them manually
 
