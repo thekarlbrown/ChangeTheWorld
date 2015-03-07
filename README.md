@@ -171,4 +171,6 @@ Napalm, g00s, groxx,TacticalJoke, lasserix,cbeust at #android-dev
 
 danblack, seekwill at #mysql
 
+alphos at #php
+
 cmalekpour on github
