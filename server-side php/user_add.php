@@ -7,14 +7,14 @@ $username=$_GET["username"];
 $phone=$_GET["phone"];
 $username = stripslashes($username);
 $phone = stripslashes($phone);
-echo "test";
+echo "Connected Successfully";
 $stmt=$conn->prepare("INSERT IGNORE INTO user (author, phone) VALUES ('$username','$phone')");
 if($stmt->execute())
 {
 	echo "<br>values have been INSERT IGNORE INTO successfully";
 }else
 {
-echo "<br>spaghetti";
+echo "<br>user insertion fails";
 }
 } catch(PDOException $e) {
     echo 'ERROR: ' . $e->getMessage();

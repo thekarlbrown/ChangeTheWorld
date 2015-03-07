@@ -1,39 +1,50 @@
+<?php error_reporting(-1); ini_set('display_errors', 1); ?>
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "CENSORED";
-$db = "mydb";
-// Create connection
-$conn = new mysqli($servername, $username, $password,$db);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-} 
-echo "Connected successfully";
+try{
+	$conn = new PDO('mysql:host=localhost;dbname=mydb','root','CENSORED');
+$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $title=$_GET["title"];
 $username=$_GET["username"];
 $descrip=$_GET["descrip"];
-$userid=$_GET["userid"];
+//$userid=$_GET["userid"];
 $cat=$_GET["cat"];
-$subcat=$_GET["subcat"];
+$sub=$_GET["sub"];
+$lat=$_GET["lat"];
+$long=$_GET["long"];
+$state=$_GET["state"];
+$country=$_GET["country"];
 $title= stripslashes($title);
 $username= stripslashes($username);
-$descrip= stripslashes($title);
-$userid= stripslashes($userid);
+$descrip= stripslashes($descrip);
 $cat= stripslashes($cat);
-$subcat= stripslashes($subcat);
-$ideaid="SELCT 'user' FROM 'user' WHERE author='$username'";
-//$ideainc ="SELECT 'AUTO_INCREMENT' FROM  INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = '$mydb' AND   TABLE_NAME   = 'user'"
-echo "<BR> your title is " . $title . ",username is " . $username . ",descrip is " . $descrip . ",userid is " . $userid . ",cat is " . $cat . ",subcat is ". $subcat;
-echo "<br> query: " . mysqli_query($conn,$ideaid);
-/*$sql="INSERT IGNORE INTO user (author, phone) VALUES ('$username','$phone')";
-if(mysqli_query($conn,$sql))
+$sub= stripslashes($sub);
+echo "Connected Successfully";
+echo "<br> your title is " . $title . ",username is " . $username . ",descrip is " . $descrip . ",cat is " . $cat . ",subcat is ". $sub;
+echo "<br> your lat is " . $lat . ",long is " . $long . ",state is " . $state . ",country is " . $country;
+$query=$conn->query("SELECT user FROM user WHERE author='$username'");
+$fetch=$query->fetch();
+$userid=$fetch['user'];
+echo "<br> user id is: " . $userid;
+$stmt=$conn->prepare("INSERT INTO ideas (title,author,descrip,iduser,time,cat,sub) VALUES ('$title','$username','$descrip','$userid',NOW(),'$cat','$sub')");
+if($stmt->execute())
 {
-echo "<br>values have been INSERT IGNORE INTO successfully";
+	echo "<br>idea has been INSERT INTO successfully";
 }else
 {
-echo "<br>spaghetti";
+echo "<br>idea insertion fails";
 }
-*/
+$ideaid=$conn->lastInsertID();
+echo "<br> idea insert id: " . $ideaid;
+$stmt=$conn->prepare("INSERT INTO location (ididea,lat,lng,state,country,iduser) VALUES ('$ideaid','$lat','$long','$state','$country','$userid')");
+if($stmt->execute())
+{
+	echo "<br>location has been INSERT INTO successfully";
+}else
+{
+echo "<br>idea insertion fails";
+}
+} catch(PDOException $e) {
+    echo 'ERROR: ' . $e->getMessage();
+}
 ?>
+
