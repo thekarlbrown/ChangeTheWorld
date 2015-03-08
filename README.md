@@ -121,6 +121,8 @@ add leaderboard onclicks to user profiles
 
 -- coming after initial setup --
 
+ due to complexities of php, if ($case==0) will throw an error but stil evaluate as true then change the database in favratd.php. I need to check to see how this affects the program later, but assume we are not worrying about custom attacks atm and may be a non-issue
+
 prompt for deletion of old drafts
 
 view list of friends  onclick pulls you into user or list of user ideas, and you view list of friends not a list of your friends ideas
