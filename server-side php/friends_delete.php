@@ -18,13 +18,13 @@ try{
 	$friendid=$fetch['user'];
 	echo "<br> friend id is: " . $friendid;
 
-	$stmt=$conn->prepare("INSERT IGNORE friends (iduser, idfriend) VALUES ('$userid','$friendid')");
+	$stmt=$conn->prepare("DELETE FROM friends WHERE iduser='$userid' AND idfriend='$friendid'");
 	if($stmt->execute())
 	{
-		echo "<br>" . $username . " send add to " . $friend; 
+		echo "<br>" . $username . " attempted to remove " . $friend; 
 	}else
 	{
-		echo "<br>friend request fails";
+		echo "<br>friend deletion fails";
 	}
 
 } catch(PDOException $e) {

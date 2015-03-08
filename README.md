@@ -22,7 +22,7 @@ you can click on the ideas
 
 sorting, filters, and internet connectivity with the crowd-sourced category's are on the way
 
-I am currently working on the MySQL/PHP situation
+I have finished the MySQL database, and I am forming the PHP interface
 
 ----------------------------------
 
@@ -44,20 +44,30 @@ http://thekarlbrown.com/mysqleerd.png
 
 Entity Relationship Diagram I designed for the app
 
-EDIT: added unique key to author in user
+EDIT: Completely redid MySQL abstract 3/7 to meet changing demands/new knowledge
 
 --------------------------------------------
 
 --- PHP --- 
 
-added user_add.php (needs revisions but functions to test database and app)
+currently: can add users, ideas, and manipulate favourites primitively.
+
+incorporated error messages and PDO to aide in prevention of MySQL injection
+
+todo: obtain queries in JSON, "when done: "
+
+when done: second version without error messages and push only (maybe not push only as no real security difference)
 
 --------------------------------------------
 
 
 --TO-DO/Tactics for Implementation --
 
-change php inserts so that auto_increment doesn't trigger after app is working and diagnostics are complete
+php adds: deal with null inputs for insert/update calls
+
+transform friends to following OR add friends both ways and pending/accepting/denying requests 
+
+change php inserts so that auto_increment doesn't trigger after app is working and diagnostics are complete IE add id=id+1 not autoincrements (what about holes)
 
 change user_add.php to PDO for mysql injection, from get to post, and improve autoindex (currently updates every time for testing)
 
