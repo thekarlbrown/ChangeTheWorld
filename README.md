@@ -57,6 +57,8 @@ added user_add.php (needs revisions but functions to test database and app)
 
 --TO-DO/Tactics for Implementation --
 
+change php inserts so that auto_increment doesn't trigger after app is working and diagnostics are complete
+
 change user_add.php to PDO for mysql injection, from get to post, and improve autoindex (currently updates every time for testing)
 
 retrieve categories from server instead of setting them manually
@@ -169,7 +171,7 @@ fix drawer expansion style to make it more smooth
 
 Napalm, g00s, groxx,TacticalJoke, lasserix,cbeust at #android-dev
 
-danblack, seekwill at #mysql
+danblack, seekwill, salle at #mysql
 
 alphos at #php
 

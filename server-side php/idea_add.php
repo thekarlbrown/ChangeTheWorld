@@ -1,8 +1,8 @@
-<?php error_reporting(-1); ini_set('display_errors', 1); ?>
 <?php
 try{
 	$conn = new PDO('mysql:host=localhost;dbname=mydb','root','CENSORED');
 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+echo "Connected Successfully";
 $title=$_GET["title"];
 $username=$_GET["username"];
 $descrip=$_GET["descrip"];
@@ -18,7 +18,6 @@ $username= stripslashes($username);
 $descrip= stripslashes($descrip);
 $cat= stripslashes($cat);
 $sub= stripslashes($sub);
-echo "Connected Successfully";
 echo "<br> your title is " . $title . ",username is " . $username . ",descrip is " . $descrip . ",cat is " . $cat . ",subcat is ". $sub;
 echo "<br> your lat is " . $lat . ",long is " . $long . ",state is " . $state . ",country is " . $country;
 $query=$conn->query("SELECT user FROM user WHERE author='$username'");
