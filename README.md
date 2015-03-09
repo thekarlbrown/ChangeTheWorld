@@ -16,7 +16,7 @@ I am currently in the alpha stages of development. What does this entail?
 
 --- current state of the Project ----
 
- - I have finished the MySQL database and the PHP database! 
+ - I have finished the MySQL database and the PHP backend (for now :3)! 
 
  - Sorting, filters, and internet connectivity with the crowd-sourced category's are on the way
  
