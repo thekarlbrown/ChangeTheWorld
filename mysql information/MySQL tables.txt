@@ -1,0 +1,97 @@
+--- MySQL Tables ---
+CREATE TABLE IF NOT EXISTS `mydb`.`user` (
+  `user` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `author` VARCHAR(25) NOT NULL,
+  `phone` VARCHAR(15) NULL,
+  PRIMARY KEY (`user`),
+  UNIQUE INDEX `author_UNIQUE` (`author` ASC))
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `mydb`.`ideas` (
+  `ididea` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `title` VARCHAR(35) NOT NULL,
+  `author` VARCHAR(25) NOT NULL,
+  `descrip` VARCHAR(700) NOT NULL,
+  `iduser` INT UNSIGNED NOT NULL,
+  `time` DATETIME NOT NULL,
+  `thumbsup` INT UNSIGNED NOT NULL DEFAULT 0,
+  `thumbsdown` INT UNSIGNED NOT NULL DEFAULT 0,
+  `cat` TINYINT UNSIGNED NOT NULL,
+  `sub` TINYINT UNSIGNED NOT NULL,
+  PRIMARY KEY (`ididea`),
+  INDEX `time` (`time` DESC),
+  INDEX `iduser_idx` (`iduser` ASC),
+  UNIQUE INDEX `title_UNIQUE` (`title` ASC),
+  INDEX `catsub` (`cat` ASC, `sub` ASC),
+  INDEX `thumbsup` (`thumbsup` ASC),
+  CONSTRAINT `useridideas`
+    FOREIGN KEY (`iduser`)
+    REFERENCES `mydb`.`user` (`user`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `mydb`.`favratd` (
+  `iduser` INT UNSIGNED NOT NULL,
+  `ididea` INT UNSIGNED NOT NULL,
+  `fav` TINYINT(1) UNSIGNED NOT NULL DEFAULT 0,
+  `rated` TINYINT(1) UNSIGNED NULL DEFAULT NULL,
+  `idfavratd` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`idfavratd`),
+  INDEX `iduser_idx` (`iduser` ASC),
+  INDEX `ididea_idx` (`ididea` ASC),
+  INDEX `usridea` (`iduser` ASC, `ididea` ASC),
+  CONSTRAINT `useridfavratd`
+    FOREIGN KEY (`iduser`)
+    REFERENCES `mydb`.`user` (`user`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `ideaidfavratd`
+    FOREIGN KEY (`ididea`)
+    REFERENCES `mydb`.`ideas` (`ididea`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `mydb`.`location` (
+  `ididea` INT UNSIGNED NOT NULL,
+  `lat` FLOAT(10,6) NOT NULL,
+  `lng` FLOAT(10,6) NOT NULL,
+  `state` VARCHAR(2) NOT NULL,
+  `country` VARCHAR(2) NOT NULL,
+  `iduser` INT UNSIGNED NOT NULL,
+  PRIMARY KEY (`ididea`),
+  INDEX `statecountry` (`country` ASC, `state` ASC),
+  INDEX `iduser` (`iduser` ASC),
+  UNIQUE INDEX `ididea_UNIQUE` (`ididea` ASC),
+  INDEX `latlong` (`lat` ASC, `lng` ASC),
+  CONSTRAINT `ideaidlocation`
+    FOREIGN KEY (`ididea`)
+    REFERENCES `mydb`.`ideas` (`ididea`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `useridlocation`
+    FOREIGN KEY (`iduser`)
+    REFERENCES `mydb`.`user` (`user`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
+CREATE TABLE IF NOT EXISTS `mydb`.`friends` (
+  `idfriends` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `iduser` INT UNSIGNED NOT NULL,
+  `idfriend` INT UNSIGNED NOT NULL,
+  INDEX `friends` (`iduser` ASC, `idfriend` ASC),
+  PRIMARY KEY (`idfriends`),
+  INDEX `friendid_idx` (`idfriend` ASC),
+  CONSTRAINT `useridfriend`
+    FOREIGN KEY (`iduser`)
+    REFERENCES `mydb`.`user` (`user`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `friendidfriend`
+    FOREIGN KEY (`idfriend`)
+    REFERENCES `mydb`.`user` (`user`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
