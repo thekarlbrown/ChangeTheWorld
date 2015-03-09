@@ -1,6 +1,8 @@
---- readme ---
+--- README ---
 
 As part of my Senior project, I am developing an Android app that utilizes a MySQL database on this server to enable the sharing, group evaluation, improvement and implementation of new ideas and innovation.
+
+This undertaking is my first attempt at full stack development! It has been an incredible experience, and I am not even halfway there!
 
 This app will allow people with good concepts to get them to individuals who will be able to implement them who may never do anything with them otherwise
 
@@ -12,17 +14,14 @@ I am currently in the alpha stages of development. What does this entail?
 
 --------------------------------------------
 
---- current state of the App ----
+--- current state of the Project ----
 
-bars navigate at the top
+ - I have finished the MySQL database and the PHP database! 
 
-ideally click them  once account is made
+ - Sorting, filters, and internet connectivity with the crowd-sourced category's are on the way
+ 
+ - My next step is cleaning up for prototype phase, fixing PHP to be post without output, then returning to the java code
 
-you can click on the ideas
-
-sorting, filters, and internet connectivity with the crowd-sourced category's are on the way
-
-I have finished the MySQL database, and I am forming the PHP interface
 
 ----------------------------------
 
@@ -50,13 +49,13 @@ EDIT: Completely redid MySQL abstract 3/7 to meet changing demands/new knowledge
 
 --- PHP --- 
 
-currently: can add users, ideas, and manipulate favourites primitively.
+currently: PHP complete for current needs, detailed for future goals
+
+decided on simple username/phone number verification, and following of individuals not friending
 
 incorporated error messages and PDO to aide in prevention of MySQL injection
 
-todo: obtain queries in JSON, "when done: "
-
-when done: second version without error messages and push only (maybe not push only as no real security difference)
+todo: second version without error messages and push only (maybe not push only as no real security difference)
 
 --------------------------------------------
 
@@ -65,11 +64,7 @@ when done: second version without error messages and push only (maybe not push o
 
 php adds: deal with null inputs for insert/update calls
 
-transform friends to following OR add friends both ways and pending/accepting/denying requests 
-
 change php inserts so that auto_increment doesn't trigger after app is working and diagnostics are complete IE add id=id+1 not autoincrements (what about holes)
-
-change user_add.php to PDO for mysql injection, from get to post, and improve autoindex (currently updates every time for testing)
 
 retrieve categories from server instead of setting them manually
 
@@ -87,9 +82,7 @@ use better directory for saving files
 
 pushing/pulling favourites upvote/downvote from server
 
-update selected on start based on IdeaPage so tags are selected and values are passed and leaderboard doesn't start on null
-
-for filters, have it so highlighting only occurs when you hit ok (not cancel)
+update selected on start so leaderboard doesn't start on null
 
 optimize sort algorithms change dataadapter containers new for minimum size and quickest content
 
@@ -99,31 +92,19 @@ have "check for new" and "get more" buttons at top and bottom once pushing is im
 
 description of all functions on welcome screen, potentially on start
 
-for initial screen: not seen friends ideas that are positive  then most thumbs of day positive
-
-categories has no minimum, queries category and subcategory first, most recent selected, this month
-
 search queries optimal search algorithm, starting at beginning until end, saving when minimum obtained to continue where it left off when user goes down
 
 need advisor help on leaderboard, maybe set rule for if active within. 30 days
 
 friends and idea lists are all optimized algorithm searches, decide how to determine if user has liked idea or not (will server return truth value, where will who has liked what be stored and how)
 
-decide if its optimal to display subselections by references to positions of ideablocks or create ideablock reference OR BOTH
-
 decide if leaderboard is real-time or at end of each day and if it has time
-
-consult with algorithms expert for current algorithm tactics
-
-crowd-source the category creation
 
 see what prof thinks of leaderboard pushing
 
 figure out how I am layering fragments improperly
 
 figure out why I cannot copy-paste
-
-sync favorites with database
 
 add leaderboard onclicks to user profiles
 
@@ -156,8 +137,6 @@ optimize communication of preferences/mainactivity between fragments
 implement comments
 
 scaling based on content, device, and orientation
-
-optimizing MySQL transmission
 
 import image for profile picture/make it social/all that jazz
 
