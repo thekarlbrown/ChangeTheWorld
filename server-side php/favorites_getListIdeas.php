@@ -1,6 +1,6 @@
 <?php
 try{
-	$conn = new PDO('mysql:host=localhost;dbname=mydb','root','CENSORED');
+	$conn = new PDO('mysql:host=localhost;dbname=mydb','root','sqlDEB123');
 	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	echo "Connected Successfully";
 	$username=$_GET["username"];
@@ -11,7 +11,7 @@ try{
 	$userid=$fetch['user'];
 	echo "<br> user id is: " . $userid . "<br>";
 	
-	$data = $conn->query("SELECT title,author,descrip,time,thumbsup,thumbsdown,cat,sub,ididea FROM ideas LEFT JOIN friends ON ideas.iduser=friends.idfriend WHERE friends.iduser='$userid'");
+	$data = $conn->query("SELECT title,author,descrip,time,thumbsup,thumbsdown,cat,sub FROM ideas LEFT JOIN favratd ON ideas.ididea=favratd.ididea WHERE favratd.iduser='$userid'");
 	$data->setFetchMode(PDO::FETCH_ASSOC);
 	foreach($data as $row){
 		echo json_encode($row);

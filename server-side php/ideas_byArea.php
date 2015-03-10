@@ -22,17 +22,17 @@ try{
 	
 	echo "<br> your lat is " . $lat . ",long is " . $long . ",state is " . $state . ",country is " . $country . ",case is " . $case . ",userid is " . $userid . "<br>";
 	if($case==0){
-		$data = $conn->query("SELECT title,author,descrip,time,thumbsup,thumbsdown,cat,sub,ididea FROM ideas LEFT JOIN location on ideas.ididea=location.ididea WHERE country='$country' 
+		$data = $conn->query("SELECT title,author,descrip,time,thumbsup,thumbsdown,cat,sub,ideas.ididea FROM ideas LEFT JOIN location on ideas.ididea=location.ididea WHERE country='$country' 
 		AND (SQRT(POW(RADIANS('$lat') - RADIANS(location.lat),2) + POW(((RADIANS('$long') - RADIANS(location.lng)) * (COS((RADIANS('$lat') + RADIANS(location.lat))/2))),2))*3959) < 25  ORDER BY time DESC;");
 	}else if($case==1){
-		$data = $conn->query("SELECT title,author,descrip,time,thumbsup,thumbsdown,cat,sub,ididea FROM ideas LEFT JOIN location on ideas.ididea=location.ididea WHERE country='$country' 
+		$data = $conn->query("SELECT title,author,descrip,time,thumbsup,thumbsdown,cat,sub,ideas.ididea FROM ideas LEFT JOIN location on ideas.ididea=location.ididea WHERE country='$country' 
 		AND (SQRT(POW(RADIANS('$lat') - RADIANS(location.lat),2) + POW(((RADIANS('$long') - RADIANS(location.lng)) * (COS((RADIANS('$lat') + RADIANS(location.lat))/2))),2))*3959) < 100  ORDER BY time DESC;");
 	}else if($case==2){
-		$data = $conn->query("SELECT title,author,descrip,time,thumbsup,thumbsdown,cat,sub,ididea FROM ideas LEFT JOIN location on ideas.ididea=location.ididea WHERE country='$country' AND state='$state' ORDER BY time DESC");
+		$data = $conn->query("SELECT title,author,descrip,time,thumbsup,thumbsdown,cat,sub,ideas.ididea FROM ideas LEFT JOIN location on ideas.ididea=location.ididea WHERE country='$country' AND state='$state' ORDER BY time DESC");
 	}else if($case==3){
-		$data = $conn->query("SELECT title,author,descrip,time,thumbsup,thumbsdown,cat,sub,ididea FROM ideas LEFT JOIN location on ideas.ididea=location.ididea WHERE country='$country' ORDER BY time DESC");
+		$data = $conn->query("SELECT title,author,descrip,time,thumbsup,thumbsdown,cat,sub,ideas.ididea FROM ideas LEFT JOIN location on ideas.ididea=location.ididea WHERE country='$country' ORDER BY time DESC");
 	}else if($case==4){
-		$data = $conn->query("SELECT title,author,descrip,time,thumbsup,thumbsdown,cat,sub,ididea FROM ideas ORDER BY ididea DESC");
+		$data = $conn->query("SELECT title,author,descrip,time,thumbsup,thumbsdown,cat,sub,ideas.ididea FROM ideas ORDER BY time DESC");
 	}else if ($case==5){
 		$data=$conn->query("SELECT title,author,descrip,time,thumbsup,thumbsdown,cat,sub,ididea FROM ideas LEFT JOIN friends ON ideas.iduser=friends.idfriend WHERE friends.iduser='$userid' ");
 	}
