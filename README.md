@@ -20,7 +20,7 @@ I am currently in the alpha stages of development. What does this entail?
 
  - Sorting, filters, and internet connectivity with the crowd-sourced category's are on the way
  
- - My next step is cleaning up for prototype phase, fixing PHP to be post without output, then returning to the java code
+ - Prototype complete! Now I connect the PHP to the Android app and watch the magic happen!
 
 
 ----------------------------------
