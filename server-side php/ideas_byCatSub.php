@@ -8,19 +8,12 @@ try{
 	$cat = stripslashes($cat);
 	$sub = stripslashes($sub);
 	echo "<br>cat is: " . $cat . " sub is: " . $sub . "<br>";
-	$data = $conn->query("SELECT title,author,descrip,time,thumbsup,thumbsdown,cat,sub FROM ideas WHERE cat='$cat' AND sub='$sub' ORDER BY ididea DESC");
+	$data = $conn->query("SELECT title,author,descrip,time,thumbsup,thumbsdown,cat,sub,ididea FROM ideas WHERE cat='$cat' AND sub='$sub' ORDER BY ididea DESC");
 	$data->setFetchMode(PDO::FETCH_ASSOC);
 	foreach($data as $row){
-		$r[]=json_encode($row);
+		echo json_encode($row);
 	}
 } catch(PDOException $e) {
 	echo 'ERROR: ' . $e->getMessage();
 }
 ?>
-<script type="text/javascript">
-var jArray = <?php echo json_encode($r); ?>;
-function show(j) {
-    for(var i=0; i < j.length; i++){ document.write(j[i]); }
-};
-show(jArray);
-</script>

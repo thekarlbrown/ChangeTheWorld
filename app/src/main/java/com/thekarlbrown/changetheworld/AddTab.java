@@ -173,7 +173,7 @@
                         if (position != 0) {
                             add_category = position;
                             add_subcategory = 0;
-                            int q = categoryArray[0].length;
+                            int q = categoryArray[position-1].length;
                             subcategory = new String[q];
                             System.arraycopy(categoryArray[position - 1], 0, subcategory, 0, q);
 

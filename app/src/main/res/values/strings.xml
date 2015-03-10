@@ -70,7 +70,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="profile_your_ideas">Your Ideas</string>
     <string name="profile_favorite_ideas">Favorite Ideas</string>
-    <string name="profile_friends">Your Friends Ideas</string>
+    <string name="profile_followers">Followers Ideas</string>
     <string name="profile_drafts">Your Drafts</string>
     <string name="profile_prof_im">Import Profile</string>
     <string name="profile_prof_ex">Export Profile</string>
@@ -80,8 +80,9 @@
     <string name="profile_import_success">Import was a success!</string>
     <string name="profile_export_success">Export was a success!</string>
     <string name="profile_no_drafts">You have not saved any drafts yet</string>
-    <string name="page_idea_other">More Ideas By Author</string>
+    <string name="page_idea_other">More Ideas By User</string>
     <string name="page_idea_comment">Add Improvement</string>
+    <string name="page_idea_follow">Follow User</string>
     
 
 

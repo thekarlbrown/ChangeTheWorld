@@ -150,6 +150,13 @@ public class IdeaPage extends Fragment {
                 mListener.toUserIdeaPage(idea_author);
             }
         });
+        button=(Button)rv.findViewById(R.id.page_idea_follow);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
         return rv;
     }
 

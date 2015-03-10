@@ -146,6 +146,14 @@
             android:layout_gravity="center_vertical"
             android:text="@string/page_idea_comment"
             android:textSize="8sp" />
+        <Button
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:id="@+id/page_idea_follow"
+            android:layout_gravity="center_vertical"
+            android:text="@string/page_idea_follow"
+            android:textSize="8sp" />
     </LinearLayout>
 
 

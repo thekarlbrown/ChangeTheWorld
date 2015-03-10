@@ -14,17 +14,11 @@ try{
 	$data = $conn->query("SELECT idfriend FROM friends WHERE iduser='$userid'");
 	$data->setFetchMode(PDO::FETCH_ASSOC);
 	foreach($data as $row){
-		$r[]=json_encode($row);
+		echo json_encode($row);
 	}
 } catch(PDOException $e) {
 	echo 'ERROR: ' . $e->getMessage();
 }
 ?>
-<script type="text/javascript">
-var jArray = <?php echo json_encode($r); ?>;
-function show(j) {
-    for(var i=0; i < j.length; i++){ document.write(j[i]); }
-};
-show(jArray);
-</script>
+
 
