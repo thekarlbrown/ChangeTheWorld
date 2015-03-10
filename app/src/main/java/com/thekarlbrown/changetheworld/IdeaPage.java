@@ -43,6 +43,7 @@ public class IdeaPage extends Fragment {
     Activity activity;
     boolean[]thumbd={false,false};
     boolean favorite;
+    boolean followed;
 
     public static IdeaPage newInstance() {
         IdeaPage fragment = new IdeaPage();
@@ -60,7 +61,9 @@ public class IdeaPage extends Fragment {
             //int i=savedInstanceState.getStringArray("category").length;
             // category=new String[i];
             ideaSelected=getArguments().getInt("position");
-
+            favorite=getArguments().getBoolean("favorite");
+            followed=getArguments().getBoolean("followed");
+            thumbd=getArguments().getBooleanArray("thumbd");
         }
 
 
@@ -72,7 +75,6 @@ public class IdeaPage extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        favorite=false;
         mainActivity = (MainActivity) getActivity();
         rv = inflater.inflate(R.layout.fragment_idea_page, container, false);
         curcontext = rv.getContext();
@@ -108,15 +110,10 @@ public class IdeaPage extends Fragment {
         t=(TextView)rv.findViewById(R.id.page_idea_tdown);
         t.setText(Integer.toString(idea_Tdown));
         iv=(ImageView)rv.findViewById(R.id.page_idea_favorite);
-        if(favorite)
-        {
-            iv.setImageResource(R.drawable.ic_gold_star);
-        }
         iv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(favorite)
-                {
+                if(favorite){
                     iv=(ImageView)rv.findViewById(R.id.page_idea_favorite);
                     favorite=false;
                     //push to mysql, refresh
@@ -133,14 +130,20 @@ public class IdeaPage extends Fragment {
         iv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //push to mysql thumbs down, refresh
+                if(!thumbd[0]) {
+                    //potentially alter thumbd values, depends on how we refresh
+                    //push to mysql thumbs down, refresh
+                }
             }
         });
         iv=(ImageView)rv.findViewById(R.id.page_idea_downselect);
         iv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //push to mysql thumbs down, refresh
+                if(!thumbd[1]) {
+                    //potentially alter thumbd values, depends on how we refresh
+                    //push to mysql thumbs down, refresh
+                }
             }
         });
         button=(Button)rv.findViewById(R.id.page_idea_other);
@@ -154,9 +157,18 @@ public class IdeaPage extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                if(followed){
+                    followed=false;
+                    //push to mysql to unfollow
+                    button.setText(R.string.page_idea_follow);
+                }else{
+                    followed=true;
+                    //push to mysql to follow
+                    button.setText(R.string.page_idea_unfollow);
+                }
             }
         });
+        setVisuals();
         return rv;
     }
 
@@ -182,6 +194,22 @@ public class IdeaPage extends Fragment {
             inputMethodManager.hideSoftInputFromWindow(activity.getCurrentFocus().getWindowToken(), 0);
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    //how I set if items are liked/favorited in terms of visuals
+    private void setVisuals(){
+        iv=(ImageView)rv.findViewById(R.id.page_idea_favorite);
+        if(favorite){
+            iv.setImageResource(R.drawable.ic_gold_star);
+        }else{
+            iv.setImageResource(R.drawable.ic_top_bar);
+        }
+        button=(Button)rv.findViewById(R.id.page_idea_follow);
+        if(followed){
+            button.setText(R.string.page_idea_unfollow);
+        }else{
+            button.setText(R.string.page_idea_follow);
         }
     }
 

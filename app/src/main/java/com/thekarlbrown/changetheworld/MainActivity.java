@@ -479,6 +479,12 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
         b = new Bundle();
         IdeaPage ideaPage = new IdeaPage();
         b.putInt("position", position);
+        //here we will have a asynctask that will obtain their current value based on position
+        //this will require us to know the idea id's. IdeaBlock may have an additional category added
+        //sample data for now
+        b.putBooleanArray("thumbd",new boolean[]{false,false});
+        b.putBoolean("favorite",true);
+        b.putBoolean("followed",true);
         ideaPage.setArguments(b);
         ft.replace(R.id.current_tab, ideaPage, "ideapage");
         ft.commit();

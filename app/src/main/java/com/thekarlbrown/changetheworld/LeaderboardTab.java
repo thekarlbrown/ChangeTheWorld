@@ -29,7 +29,7 @@ public class LeaderboardTab extends Fragment {
     Context curcontext;
     int selecteda;
     int selectedt;
-    boolean[]leaderselect={false,false,false,false};
+    boolean[]leaderselect={false,false,true,false};
 
     public static LeaderboardTab newInstance() {
         LeaderboardTab fragment = new LeaderboardTab();
@@ -55,11 +55,9 @@ public class LeaderboardTab extends Fragment {
         curcontext=rv.getContext();
         leaderBlock=mainActivity.leaderBlock;
         barArea.barAreaClick(rv,selecteda,getTag(),mainActivity);
-        barRankClick(rv);
+        barRankClick();
         barTime.barTimeClick(rv,selectedt,getTag(),mainActivity);
-        ladpt=new LeaderAdapter(leaderBlock,mainActivity,-1);
-        l=(ListView)rv.findViewById(R.id.leaderboard_list);
-        l.setAdapter(ladpt);
+        barRankSet();
         return rv;
     }
 
@@ -71,13 +69,12 @@ public class LeaderboardTab extends Fragment {
             e.printStackTrace();
         }
     }
-    public void barRankClick(View in) {
-        final TextView[] complete={(TextView) in.findViewById(R.id.leaderboard_accurate),
-                (TextView) in.findViewById(R.id.leaderboard_added),
-                (TextView) in.findViewById(R.id.leaderboard_quality),
-                (TextView) in.findViewById(R.id.leaderboard_comments),
+    public void barRankClick() {
+        final TextView[] complete={(TextView) rv.findViewById(R.id.leaderboard_accurate),
+                (TextView) rv.findViewById(R.id.leaderboard_added),
+                (TextView) rv.findViewById(R.id.leaderboard_quality),
+                (TextView) rv.findViewById(R.id.leaderboard_comments),
         };
-       final View fin=in;
         for(int i=0;i<complete.length;i++)
         {
             final int x=i;
@@ -101,10 +98,10 @@ public class LeaderboardTab extends Fragment {
                             }
                         }
                         ladpt=new LeaderAdapter(leaderBlock,mainActivity,x);
-                        l=(ListView)fin.findViewById(R.id.leaderboard_list);
+                        l=(ListView)rv.findViewById(R.id.leaderboard_list);
                         l.setAdapter(ladpt);
                         ladpt.notifyDataSetChanged();
-                        t=(TextView)getView().findViewById(R.id.leaderboard_selection);
+                        t=(TextView)rv.findViewById(R.id.leaderboard_selection);
                         t.setText(complete[x].getText());
 
                     }
@@ -116,6 +113,25 @@ public class LeaderboardTab extends Fragment {
     public void onDetach() {
         hideSoftKeyboard();
         super.onDetach();
+    }
+    //set selected bar on start
+    private void barRankSet(){
+        final TextView[] complete={(TextView) rv.findViewById(R.id.leaderboard_accurate),
+                (TextView) rv.findViewById(R.id.leaderboard_added),
+                (TextView) rv.findViewById(R.id.leaderboard_quality),
+                (TextView) rv.findViewById(R.id.leaderboard_comments),
+        };
+        for(int x=0;x<complete.length;x++){
+            if(leaderselect[x]){
+                complete[x].setBackgroundColor(0xffff0000);
+                ladpt=new LeaderAdapter(leaderBlock,mainActivity,x);
+                l=(ListView)rv.findViewById(R.id.leaderboard_list);
+                l.setAdapter(ladpt);
+                ladpt.notifyDataSetChanged();
+                t=(TextView)rv.findViewById(R.id.leaderboard_selection);
+                t.setText(complete[x].getText());
+            }
+        }
     }
 }
 
