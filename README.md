@@ -62,6 +62,8 @@ todo: second version without error messages and push only (maybe not push only a
 
 --TO-DO/Tactics for Implementation --
 
+change friends to followers in followers ideas 
+
 php adds: deal with null inputs for insert/update calls
 
 change php inserts so that auto_increment doesn't trigger after app is working and diagnostics are complete IE add id=id+1 not autoincrements (what about holes)

@@ -71,7 +71,7 @@ public class ByFriendsPage extends Fragment {
         fm=getFragmentManager();
         barFilter.barFilterClick(rv,fm,selectedf,getTag(),mainActivity);
         t=(TextView)rv.findViewById(R.id.by_friends_username);
-        t.setText(username + "'s friend's ideas: ");
+        t.setText(username + "'s follower's ideas: ");
         return rv;
     }
     public void filterSelected(int i)
