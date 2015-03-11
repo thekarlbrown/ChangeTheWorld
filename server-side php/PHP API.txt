@@ -1,0 +1,82 @@
+--- API for PHP server side ---
+
+favorites_getList.php 
+ - username, 
+ get list if the idideas that the user has favorited
+
+ favorites_getList.php
+ - username
+ get list of ideas that the user has favorited
+ 
+ favratd.php
+ - username, ideaid, case
+case 0: remove user favoriting ideaid
+case 1: add user favoriting ideaid
+case 2: remove user liking idea
+case 3: add user thumbs uping idea
+case 4: add user thumbs downing idea
+
+favratd_byUser.php
+- ideaid, username
+show current favorite and thumb status of ideaid for user
+
+friends_add.php
+- username, friend
+add follower for username
+
+friends_delete.php
+- username, friend
+remove follower for username
+
+friends_getIdeaList.php
+- username
+get friends ideas
+
+friends_getList.php
+- username
+get friends ids
+
+//CNU latitude and longitude: 37.063941, -76.493730
+idea_add.php
+- title, username, descrip, cat, sub, lat, long, state, country
+add idea to database and location
+
+//CNU latitude and longitude: 37.063941, -76.493730
+//Equirectangular approximation
+ideas_byArea.php
+- lat, long, state, country, username, case
+case 0: list all ideas within 25 miles
+case 1: list all ideas within 100 miles
+case 2: list all ideas within the state
+case 3: list all ideas within the country
+case 4: list all ideas globally
+case 5: list all ideas by friends 
+
+
+ideas_byCatSub.php
+- cat, sub
+list all ideas from category/subcategory sorted by time
+
+ideas_byCatSubTime.php
+- cat, sub, case
+case 0: list all ideas from category/subcategory sorted by time filtering for added in last 24 hours
+case 1: list all ideas from category/subcategory sorted by time filtering for added in last week
+case 2: list all ideas from category/subcategory sorted by time filtering for added in last month
+case 3: list all ideas from category/subcategory sorted by time filtering for added in last year
+case 4: list all ideas from category/subcategory sorted by time not filtered (all time)
+
+ideas_byIdeaID.php
+- ideaid
+list idea at ideaID
+
+ideas_bySearch.php
+- search
+list ideas that have search in title or description
+
+ideas_byUser.php
+- username
+list ideas by username
+
+user_add.php
+- username, phone
+add user to the database
