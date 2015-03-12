@@ -23,11 +23,9 @@ import android.widget.TextView;
 public class ByFriendsPage extends Fragment {
 
     View rv;
-    TextView t, temp;
+    TextView t;
     ListView l;
-    SharedPreferences pref;
     DataAdapter dapt;
-    IdeaBlock ib;
     MainActivity mainActivity;
     FragmentManager fm;
     FragmentTransaction ft;
@@ -64,8 +62,9 @@ public class ByFriendsPage extends Fragment {
                              Bundle savedInstanceState) {
         mainActivity=(MainActivity)getActivity();
         rv = inflater.inflate(R.layout.fragment_by_friends_page, container, false);
-        ib = mainActivity.bytemp;
-        dapt = new IdeaDataAdapter(ib,mainActivity);
+        mainActivity.ib=new IdeaBlock();
+        mainActivity.getJSONtoIdeaBlock("http://www.thekarlbrown.com/ctwapp/friends_getIdeaListJSON.php?username=" + username);
+        dapt = new IdeaDataAdapter(mainActivity.ib,mainActivity);
         l = (ListView) rv.findViewById(R.id.by_friends_list);
         l.setAdapter(dapt);
         fm=getFragmentManager();

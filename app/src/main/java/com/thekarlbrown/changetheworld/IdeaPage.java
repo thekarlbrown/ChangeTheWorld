@@ -87,8 +87,8 @@ public class IdeaPage extends Fragment {
         categoryArray = mainActivity.categories;
         ib=mainActivity.ib;
         idea_title=ib.getTitle(ideaSelected);
-        idea_category=categoryArray[ib.getCategory(ideaSelected)][0];
-        idea_subcategory=categoryArray[ib.getCategory(ideaSelected)][ib.getSubcategory(ideaSelected)+1];
+        idea_category=categoryArray[ib.getCategory(ideaSelected)-1][0];
+        idea_subcategory=categoryArray[ib.getCategory(ideaSelected)-1][ib.getSubcategory(ideaSelected)];
         idea_description=ib.getIdea(ideaSelected);
         idea_author=ib.getAuthor(ideaSelected);
         idea_Tdown=ib.getTdown(ideaSelected);

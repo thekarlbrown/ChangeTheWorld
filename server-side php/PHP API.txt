@@ -1,82 +1,122 @@
 --- API for PHP server side ---
 
+--- Final JSON Ready PHP Requests ---
+
+favorites_getListIdeasJSON.php
+ - username
+Get list of ideas that the user has favorited
+ 
+ //CNU latitude and longitude: 37.063941, -76.493730
+//Equirectangular approximation
+ideas_byAreaJSON.php
+- lat, long, state, country, username, case
+Case 0: List all ideas within 25 miles
+Case 1: List all ideas within 100 miles
+Case 2: List all ideas within the state
+Case 3: List all ideas within the country
+Case 4: List all ideas globally
+Case 5: List all ideas by friends 
+
+
+ideas_byCatSubJSON.php
+- cat, sub
+List all ideas from category/subcategory sorted by time
+
+ideas_byCatSubTimeJSON.php
+- cat, sub, case
+Case 0: List all ideas from category/subcategory sorted by time filtering for added in last 24 hours
+Case 1: List all ideas from category/subcategory sorted by time filtering for added in last week
+Case 2: List all ideas from category/subcategory sorted by time filtering for added in last month
+Case 3: List all ideas from category/subcategory sorted by time filtering for added in last year
+Case 4: List all ideas from category/subcategory sorted by time not filtered (all time)
+
+ideas_bySearchJSON.php
+- search
+List ideas that have search in title or description
+
+ideas_byUserJSON.php
+- username
+List ideas by username
+
+--- Pre-JSON ---
+
 favorites_getList.php 
  - username, 
- get list if the idideas that the user has favorited
+Get list if the idideas that the user has favorited
 
- favorites_getList.php
+ favorites_getListIdeas.php
  - username
- get list of ideas that the user has favorited
+ Get list of ideas that the user has favorited
  
  favratd.php
  - username, ideaid, case
-case 0: remove user favoriting ideaid
-case 1: add user favoriting ideaid
-case 2: remove user liking idea
-case 3: add user thumbs uping idea
-case 4: add user thumbs downing idea
+Case 0: Remove user favoriting ideaid
+Case 1: Add user favoriting ideaid
+Case 2: Remove user liking idea
+Case 3: Add user thumbs uping idea
+Case 4: Add user thumbs downing idea
 
 favratd_byUser.php
 - ideaid, username
-show current favorite and thumb status of ideaid for user
+Show current favorite and thumb status of ideaid for user
 
 friends_add.php
 - username, friend
-add follower for username
+Add follower for username
 
 friends_delete.php
 - username, friend
-remove follower for username
+Remove follower for username
 
 friends_getIdeaList.php
 - username
-get friends ideas
+Get friends ideas
 
 friends_getList.php
 - username
-get friends ids
+Get friends ids
 
 //CNU latitude and longitude: 37.063941, -76.493730
 idea_add.php
 - title, username, descrip, cat, sub, lat, long, state, country
-add idea to database and location
+Add idea to database and location
 
 //CNU latitude and longitude: 37.063941, -76.493730
 //Equirectangular approximation
 ideas_byArea.php
 - lat, long, state, country, username, case
-case 0: list all ideas within 25 miles
-case 1: list all ideas within 100 miles
-case 2: list all ideas within the state
-case 3: list all ideas within the country
-case 4: list all ideas globally
-case 5: list all ideas by friends 
+Case 0: List all ideas within 25 miles
+Case 1: List all ideas within 100 miles
+Case 2: List all ideas within the state
+Case 3: List all ideas within the country
+Case 4: List all ideas globally
+Case 5: List all ideas by friends 
 
 
 ideas_byCatSub.php
 - cat, sub
-list all ideas from category/subcategory sorted by time
+List all ideas from category/subcategory sorted by time
 
 ideas_byCatSubTime.php
 - cat, sub, case
-case 0: list all ideas from category/subcategory sorted by time filtering for added in last 24 hours
-case 1: list all ideas from category/subcategory sorted by time filtering for added in last week
-case 2: list all ideas from category/subcategory sorted by time filtering for added in last month
-case 3: list all ideas from category/subcategory sorted by time filtering for added in last year
-case 4: list all ideas from category/subcategory sorted by time not filtered (all time)
+Case 0: List all ideas from category/subcategory sorted by time filtering for added in last 24 hours
+Case 1: List all ideas from category/subcategory sorted by time filtering for added in last week
+Case 2: List all ideas from category/subcategory sorted by time filtering for added in last month
+Case 3: List all ideas from category/subcategory sorted by time filtering for added in last year
+Case 4: List all ideas from category/subcategory sorted by time not filtered (all time)
 
 ideas_byIdeaID.php
 - ideaid
-list idea at ideaID
+List idea at ideaID
 
 ideas_bySearch.php
 - search
-list ideas that have search in title or description
+List ideas that have search in title or description
 
 ideas_byUser.php
 - username
-list ideas by username
+List ideas by username
 
 user_add.php
 - username, phone
-add user to the database
+Add user to the database

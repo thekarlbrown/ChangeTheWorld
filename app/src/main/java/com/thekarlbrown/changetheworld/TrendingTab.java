@@ -21,7 +21,6 @@ public class TrendingTab extends Fragment {
     TextView t;
     ListView l;
     DataAdapter dapt;
-    IdeaBlock ib;
     MainActivity mainActivity;
     FragmentManager fm;
     FragmentTransaction ft;
@@ -62,8 +61,7 @@ public class TrendingTab extends Fragment {
                              Bundle savedInstanceState) {
         mainActivity=(MainActivity)getActivity();
         rv = inflater.inflate(R.layout.fragment_trending_tab, container, false);
-        ib = mainActivity.ib;
-        dapt = new IdeaDataAdapter(ib,mainActivity);
+        dapt = new IdeaDataAdapter(mainActivity.ib,mainActivity);
         l = (ListView) rv.findViewById(R.id.trending_list);
         l.setAdapter(dapt);
         fm=getFragmentManager();

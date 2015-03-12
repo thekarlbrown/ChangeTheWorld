@@ -106,15 +106,9 @@ public class IdeaBlock implements Serializable {
     {
         return tdowns.get(position);
     }
-    public int getNumber(int position)
-    {
-        return numbers.get(position);
-    }
+    public int getNumber(int position){return numbers.get(position); }
     public int getCategory(int position){return categorys.get(position);}
-    public int getSubcategory(int position)
-    {
-        return subcategorys.get(position);
-    }
+    public int getSubcategory(int position){return subcategorys.get(position);}
     //adding to the almighty container
     public void add(List<String> title,List<String> idea,List<String> author, List<Integer> tup, List<Integer> tdown,List<Integer>number,List<Integer>category,List<Integer>subcategory)
     {

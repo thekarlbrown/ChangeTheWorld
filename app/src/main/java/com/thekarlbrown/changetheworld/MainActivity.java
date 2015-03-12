@@ -7,7 +7,12 @@ import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 /*
        where everything goes through
        will be implementing asynctask for mysql handling
@@ -34,9 +39,8 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
     SplitToolbar st;
     Bundle b;
     OpeningScreen os;
-    IdeaBlock ib, bytemp, drafts, byfavorite;
+    IdeaBlock ib, drafts, ibtop,ibratio,ibthumbs;
     LeaderBlock leaderBlock;
-    String searchQuery;
     SearchDialog searchDialog;
     int minratio;
     int minthumbs;
@@ -50,12 +54,21 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
     ByFavoritePage favoritePage;
     boolean[] bar_filter_status = {false, false};
 
+    //for asynctask
+    ASyncParser aSyncParser;
+    JSONObject jsonObject;
+    JSONArray jsonArray;
+    String username, state,country;
+    //float lat, long;
+
     public SharedPreferences getPref() {
         return sharedPref;
     }
 
     public void openTrending() {
         if (fm.findFragmentByTag("trending") == null) {
+            ib=new IdeaBlock();
+            getJSONtoIdeaBlock("http://www.thekarlbrown.com/ctwapp/ideas_byAreaJSON.php?lat=37&long=-76&state=" + state + "&country=" + country + "&username= " + sharedPref.getString(getString(R.string.preference_username),"YouGoofed") +"&case=3");
             fm = getFragmentManager();
             ft = fm.beginTransaction();
             b = new Bundle();
@@ -132,14 +145,15 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
     @Override
     public void onSearchDialogPositiveClick(String r) {
         if (r != null) {
-            searchQuery = r;
-            //do the IB change based on search here
+            //searchQuery = r;
+            ib=new IdeaBlock();
+            getJSONtoIdeaBlock("http://www.thekarlbrown.com/ctwapp/ideas_bySearchJSON.php?search=" + r);
             //should I process filters?
             fm = getFragmentManager();
             ft = fm.beginTransaction();
             searchTab = new SearchTab();
             b = new Bundle();
-            b.putString("query", searchQuery);
+            b.putString("query", r);
             b.putBooleanArray("selectedf", new boolean[]{false, false, true, false});
             bar_filter_status=new boolean[]{false,false};
             searchTab.setArguments(b);
@@ -161,12 +175,18 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
 
         //test blocks of data due to lack of mysql implementation
-        //ideablock
+        /*ideablock
         ib = new IdeaBlock("Placeholder", "Heres a lllama theres a llama and another little llama fuzzy llama funny llama llamma llamma duck Heres a lllama theres a llama and another little llama fuzzy llama funny llama llamma llamma duck Heres a lllama theres a llama and another little llama fuzzy llama funny llama llamma llamma duck", "Karl Brown", 999, 1, 70, 2, 11);
         ib.add("heres the plan", "add yo ideas like crazy till da brain feels lazy", "k breezy", 100, 0, 63, 4, 4);
         ib.add(new String[]{"I have a suggestion", "However please remember"}, new String[]{"Try to break the app and tell me what messed up", "There is test data available. Please also have the latest release, and check what I know is broken, will be changed, and will be implemented later"}, new String[]{"Richard Stallman", "George Soros"}, new int[]{2, 3}, new int[]{2, 3}, new int[]{2, 3}, new int[]{7, 3}, new int[]{3, 4});
         ib.add(ib.titles, ib.ideas, ib.authors, ib.tups, ib.tdowns, ib.numbers, ib.categorys, ib.subcategorys);
         ib.add(ib.titles, ib.ideas, ib.authors, ib.tups, ib.tdowns, ib.numbers, ib.categorys, ib.subcategorys);
+        */
+        ib=new IdeaBlock();
+        state="va";
+        country="us";
+        username="lisaslover";
+        getJSONtoIdeaBlock("http://www.thekarlbrown.com/ctwapp/ideas_byAreaJSON.php?lat=37&long=-76&state=" + state + "&country=" + country + "&username=" + username +"&case=3");
         //leaderblock
         leaderBlock = new LeaderBlock(new String[]{"putin", "obama", "farage", "assad", "kadyrov"}, new String[]{"putin", "obama", "farage", "assad", "kadyrov"}, new String[]{"putin", "obama", "farage", "assad", "kadyrov"}, new String[]{"putin", "obama", "farage", "assad", "kadyrov"},
                 new double[]{59.523, 42.70, 9.11, 3.041, 99.99}, new int[]{999, 70, 911, 101, 1337}, new double[]{59.523, 42.69, 9.11, 3.041, 99.99}, new double[]{59.523, 42.70, 9.11, 3.041, 99.99});
@@ -493,7 +513,6 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
     @Override
     public void toUserIdeaPage(String username) {
         //call the necessary requirements for byuser here
-        bytemp = ib;
         fm = getFragmentManager();
         ft = fm.beginTransaction();
         userPage = new ByUserPage();
@@ -508,7 +527,6 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
     @Override
     public void toFriendsIdeaPage(String username) {
         //call the necessary requirements for favoriteideas here
-        bytemp = ib;
         fm = getFragmentManager();
         ft = fm.beginTransaction();
         friendsPage = new ByFriendsPage();
@@ -523,7 +541,6 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
     @Override
     public void toFavoriteIdeaPage(String username) {
         //call the necessary requirements for favoriteideas here
-        bytemp = ib;
         fm = getFragmentManager();
         ft = fm.beginTransaction();
         favoritePage = new ByFavoritePage();
@@ -563,6 +580,34 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
                 }
             }
         });
+    }
+
+    /**
+     * Gets JSON data from URL and put into IdeaBlock
+     * @param url - URL to connect to
+     */
+    public void getJSONtoIdeaBlock(String url){
+        aSyncParser=new ASyncParser(url);
+        try{
+            aSyncParser.execute();
+            jsonArray=aSyncParser.get();
+        }catch(Exception e){
+            Log.println(0, "Error", e.getMessage());
+        }
+        try{
+            for(int i=0;i<jsonArray.length();i++){
+                jsonObject=jsonArray.getJSONObject(i);
+                ib.add(jsonObject.getString("title"), jsonObject.getString("descrip"), jsonObject.getString("author"),
+                        Integer.parseInt(jsonObject.getString("thumbsup")), Integer.parseInt(jsonObject.getString("thumbsdown")), Integer.parseInt(jsonObject.getString("ididea")),
+                        Integer.parseInt(jsonObject.getString("cat")), Integer.parseInt(jsonObject.getString("sub")));
+            }
+        }catch (JSONException e){
+            Log.println(0,"Error",e.getMessage());
+        }
+        if (ib.size()==0){
+            ib.add(":[","There does not seem to be any ideas here yet! Too bad. Either you have internet connectivitivity issues, or you are in an empty category","thekarlbrown",
+                    0,999,1,8,2);
+        }
     }
     //communicate to those silly filtering fragments
     /*right now, I am saving object references as fields

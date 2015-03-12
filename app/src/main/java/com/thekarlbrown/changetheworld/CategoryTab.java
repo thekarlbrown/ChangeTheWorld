@@ -26,7 +26,6 @@ public class CategoryTab extends Fragment {
     TextView t;
     ListView l;
     DataAdapter dapt;
-    IdeaBlock ib;
     MainActivity mainActivity;
     //drawer expander
     DrawerLayout mDrawerLayout;
@@ -60,12 +59,13 @@ public class CategoryTab extends Fragment {
             selectedf=getArguments().getBooleanArray("selectedf");
             selectedt=getArguments().getInt("selectedt");
         }
+        mainActivity=(MainActivity)getActivity();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        mainActivity=(MainActivity)getActivity();
+
         categoryarray=mainActivity.categories;
         rv = inflater.inflate(R.layout.fragment_category_tab, container, false);
 
@@ -74,10 +74,7 @@ public class CategoryTab extends Fragment {
         mDrawerList.setAdapter(new ArrayAdapter<>(mainActivity,R.layout.category_drawer_container,categoryarraytitles));
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
         mDrawerLayout.openDrawer(mDrawerList);
-        ib = mainActivity.ib;
-        dapt = new IdeaDataAdapter(ib, mainActivity);
-        l = (ListView) rv.findViewById(R.id.category_list);
-        l.setAdapter(dapt);
+
         fm=getFragmentManager();
         barFilter.barFilterClick(rv,fm,selectedf,getTag(),mainActivity);
         barTime.barTimeClick(rv,selectedt,getTag(),mainActivity);
@@ -109,6 +106,11 @@ public class CategoryTab extends Fragment {
         private void selectItem(int position)
         {
             categorysecond=(position+1);
+            mainActivity.ib=new IdeaBlock();
+            mainActivity.getJSONtoIdeaBlock("http://www.thekarlbrown.com/ctwapp/ideas_byCatSubTimeJSON.php?cat=" + (categoryfirst+1) + "&sub=" + categorysecond +"&case=4");
+            dapt = new IdeaDataAdapter(mainActivity.ib, mainActivity);
+            l = (ListView) rv.findViewById(R.id.category_list);
+            l.setAdapter(dapt);
             //mDrawerList.setItemChecked(position, true);
             mDrawerLayout.closeDrawer(mDrawerList);
             mDrawerList.setAdapter(new ArrayAdapter<>(mainActivity,R.layout.category_drawer_container,categoryarraytitles));

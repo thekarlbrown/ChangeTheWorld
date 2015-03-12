@@ -18,10 +18,9 @@ import android.widget.TextView;
 public class ByUserPage extends Fragment {
 
     View rv;
-    TextView t, temp;
+    TextView t;
     ListView l;
     DataAdapter dapt;
-    IdeaBlock ib;
     MainActivity mainActivity;
     FragmentManager fm;
     FragmentTransaction ft;
@@ -58,8 +57,9 @@ public class ByUserPage extends Fragment {
                              Bundle savedInstanceState) {
         mainActivity=(MainActivity)getActivity();
         rv = inflater.inflate(R.layout.fragment_by_user_page, container, false);
-        ib = mainActivity.bytemp;
-        dapt = new IdeaDataAdapter(ib,mainActivity);
+        mainActivity.ib=new IdeaBlock();
+        mainActivity.getJSONtoIdeaBlock("http://www.thekarlbrown.com/ctwapp/ideas_byUserJSON.php?username=" + username);
+        dapt = new IdeaDataAdapter(mainActivity.ib,mainActivity);
         l = (ListView) rv.findViewById(R.id.by_user_list);
         l.setAdapter(dapt);
         fm=getFragmentManager();
