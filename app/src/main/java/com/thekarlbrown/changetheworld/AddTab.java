@@ -222,8 +222,7 @@
                 public void onClick(View v) {
                     t=(TextView)rv.findViewById(R.id.add_submission_status);
                     hideSoftKeyboard();
-                    if(isDone())
-                    {
+                    if(isDone()) {
                         //fire up prompt switch comments once prompt is done
                         if(!Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())){
                             t.setText(R.string.add_external_unavail);
@@ -247,12 +246,13 @@
                 public void onClick(View v) {
                     t=(TextView)rv.findViewById(R.id.add_submission_status);
                     hideSoftKeyboard();
-                    if(isDone())
-                    {
+                    if(isDone()){
                         //fire up prompt switch comments once prompt is done
-
-                        mainActivity.ib.add(add_title,add_description,pref.getString(getString(R.string.preference_username),"No author"),0,0,11,add_category-1,add_subcategory-1);
-                        t.setText(R.string.add_submit_success);
+                        if(mainActivity.verifyAdd(add_title,add_description,add_category,add_subcategory)){
+                            t.setText(R.string.add_submit_success);
+                        }else{
+                            t.setText(R.string.add_submit_fail);
+                        }
                     }else{
                         t.setText(R.string.add_fields_bad);
                     }

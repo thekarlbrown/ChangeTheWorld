@@ -33,7 +33,7 @@ I am currently in the alpha stages of development. What does this entail?
 
 4. There are a ton of place-holders for features to be added later or backend that is not yet implemented
 
-5. There is currently an emulator for the app here: https://appetize.io/app/rtkyh4gvg02x56uzeffx1349k4 Please use 100%, Nexus 7, as I have not moved development to any other platforms as of yet
+5. Emulator currently disabled as it does not support location services. Will have APK's and will have mock locations soon!
 
 --------------------------------------------
 
@@ -61,6 +61,10 @@ todo: second version without error messages and push only (maybe not push only a
 
 
 --TO-DO/Tactics for Implementation --
+
+figure out why appetize is crashing (likely because of location data issues) and figure out how to deal with that 
+
+move reverse geocoding to server size depending on performance difference, required if app goes international due to hashmap
 
 improve incorrect queries/returns of how things failed then with new information give more detail client side about what was wrong about login
 

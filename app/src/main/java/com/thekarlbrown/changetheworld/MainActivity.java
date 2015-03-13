@@ -22,6 +22,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -84,7 +86,7 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
     public void openTrending() {
         if (fm.findFragmentByTag("trending") == null) {
             ib = new IdeaBlock();
-            getJSONtoIdeaBlock("http://www.thekarlbrown.com/ctwapp/ideas_byAreaJSON.php?lat="+latitude+"&long="+longitude+"&state=" + state + "&country=" + country + "&username= " + sharedPref.getString(getString(R.string.preference_username), "YouGoofed") + "&case=3");
+            getJSONtoIdeaBlock("http://www.thekarlbrown.com/ctwapp/ideas_byAreaJSON.php?lat="+latitude+"&long="+longitude+"&state=" + state + "&country=" + country + "&username=" + username + "&case=3");
             fm = getFragmentManager();
             ft = fm.beginTransaction();
             b = new Bundle();
@@ -695,8 +697,38 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
         }
     }
 
-    //Location tracking :3
+    public boolean verifyAdd(String title, String description,int cat,int sub) {
+        try{
+            title= URLEncoder.encode(title,"utf-8");
+            description=URLEncoder.encode(description,"utf-8");
+        }catch(UnsupportedEncodingException e){
+            Log.println(0,"Error: ",e.getMessage());
+        }
+        aSyncParser = new ASyncParser("http://www.thekarlbrown.com/ctwapp/idea_addJSON.php?title="+title+ "&username=" + username + "&descrip=" + description + "&cat=" + cat +"&sub="+sub+"&lat="+latitude+"&long="+longitude+"&state="+state+"&country="+country);
+        try {
+            aSyncParser.execute();
+            jsonArray = aSyncParser.get();
+        } catch (Exception e) {
+            Log.println(0, "Error", e.getMessage());
+            return false;
+        }
+        try {
+            int result = Integer.parseInt(jsonArray.getJSONObject(0).getString("added"));
+            if (result == 0) {
+                return false;
+            } else {
+                // do whatever must be done upon successful idea creation here
+                return true;
+            }
+        } catch (Exception e) {
+            Log.println(0, "Error", e.getMessage());
+            return false;
+        }
+    }
 
+
+
+    //Location tracking :3
     /**
      * Get the last location
      */
@@ -750,6 +782,10 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
             mGoogleApiClient.connect();
         }
     }
+
+    /**\
+     * State to abbreviation hashmap
+     */
     public void setStatesMap(){
         states = new HashMap<String, String>();
         states.put("Alabama","AL");

@@ -57,7 +57,7 @@
     <string name="add_draft_success">Your draft was saved successfully</string>
     <string name="add_draft_fail">Your draft failed to save</string>
     <string name="add_submit_success">Your idea was successfully submitted</string>
-    <string name="add_submit_fail">Your idea failed to submit</string>
+    <string name="add_submit_fail">Your idea failed to submit! Your title is not unique and must be modified!</string>
     <string name="add_fields_bad">Please correctly fill out all fields</string>
     <string name="add_external_unavail">External storage is currently unavailable</string>
     <string name="leaderboard_welcome">Please select an Award Category from above!</string>

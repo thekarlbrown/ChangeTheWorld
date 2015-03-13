@@ -6,6 +6,8 @@ import android.util.Log;
 import org.json.JSONArray;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 public class ASyncParser extends AsyncTask<String, String, JSONArray>
 {
@@ -13,7 +15,7 @@ public class ASyncParser extends AsyncTask<String, String, JSONArray>
     JSONArray jsonArray;
     String http_request;
     public ASyncParser(String url_request){
-        http_request=url_request;
+            http_request=url_request;
     }
     @Override
     protected JSONArray doInBackground(String... params) {
