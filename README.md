@@ -55,12 +55,14 @@ decided on simple username/phone number verification, and following of individua
 
 incorporated error messages and PDO to aide in prevention of MySQL injection
 
-todo: second version without error messages and push only (maybe not push only as no real security difference)
+todo: second version without error messages and push only (maybe not push only as no real security difference), get real UI input  from someone
 
 --------------------------------------------
 
 
 --TO-DO/Tactics for Implementation --
+
+(for example, special characters in password fields vs weaker passwords for users vs certain characters not allowed. will PHP adequately protect Database with PDO?) 
 
 change friends to followers in followers ideas 
 
@@ -114,11 +116,15 @@ add leaderboard onclicks to user profiles
 
 -- coming after initial setup --
 
- due to complexities of php, if ($case==0) will throw an error but stil evaluate as true then change the database in favratd.php. I need to check to see how this affects the program later, but assume we are not worrying about custom attacks atm and may be a non-issue
+get good UI input for re-design
+
+due to complexities of php, if ($case==0) will throw an error but stil evaluate as true then change the database in favratd.php. I need to check to see how this affects the program later, but assume we are not worrying about custom attacks atm and may be a non-issue
 
 prompt for deletion of old drafts
 
-view list of friends  onclick pulls you into user or list of user ideas, and you view list of friends not a list of your friends ideas
+view list of followers  onclick pulls you into list of followers not ideas, which then pulls into each individuals ideas (requires new data container)
+
+bring custom picture for each user (or do away with picture in profile)
 
 optimize views used (ie button instead of image instead of text or whatever)
 
@@ -166,6 +172,6 @@ Napalm, g00s, groxx,TacticalJoke, lasserix,cbeust at #android-dev
 
 danblack, seekwill, salle at #mysql
 
-alphos at #php
+alphos, xyphoid at #php
 
 cmalekpour on github

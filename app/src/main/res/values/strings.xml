@@ -39,9 +39,7 @@
     <string name="preference_username">com.thekarlbrown.ChangeTheWorld.preference_username</string>
     <string name="preference_fav_list">com.thekarlbrown.ChangeTheWorld.preference_fav_list</string>
     <string name="preference_friend_list">com.thekarlbrown.ChangeTheWorld.preference_friend_list</string>
-    <string name="initial_nameprompt">Please enter your desired or existing username</string>
-    <string name="initial_learn">I want to learn</string>
-    <string name="initial_ready">I am ready for change</string>
+
     <string name="search_dialogue">Find a specific idea by searching</string>
     <string name="search_cancel">Cancel Search</string>
     <string name="search_accept">Search Description</string>
@@ -84,7 +82,17 @@
     <string name="page_idea_comment">Add Improvement</string>
     <string name="page_idea_follow">Follow User</string>
     <string name="page_idea_unfollow">Unfollow User</string>
-
-
-
+    <string name="login_welcome">Welcome to the app that enables the sharing, evaluation, and \n tweaking of new ideas and innovation! Navigate with the bars at the top! \n Enter your username and login or create an account to continue</string>
+    <string name="login_login_button">Login</string>
+    <string name="login_create_button">Create account</string>
+    <string name="login_username_prompt">Please enter your username</string>
+    <string name="login_username_problem">Max 25 letters/numbers only</string>
+    <string name="login_password_prompt">Please enter your password</string>
+    <string name="login_password_confirm">Confirm your password</string>
+    <string name="login_password_problem">Your passwords do not match</string>
+    <string name="login_email_prompt">Please enter an Email</string>
+    <string name="login_email_confirm">Confirm your Email</string>
+    <string name="login_email_problem_valid">Your Email is not valid</string>
+    <string name="login_email_problem_matching">Your Email\'s don\'t match</string>
+    <string name="login_error_login">Your credentials were rejected</string>
 </resources>

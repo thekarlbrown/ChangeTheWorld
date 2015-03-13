@@ -2,6 +2,14 @@
 
 --- Final JSON Ready PHP Requests ---
 
+user_verifyPHash.php 
+- username, password
+Checks a users password against the hash stored on the server. Returns JSON verified 1 if accurate, verified 0 if incorrect or username doesn't exist
+
+user_addPHash.php
+- email, username, password
+Adds a user account if possible to the database with username, email and password. Returns JSON created=1 if successful
+
 favorites_getListIdeasJSON.php
  - username
 Get list of ideas that the user has favorited

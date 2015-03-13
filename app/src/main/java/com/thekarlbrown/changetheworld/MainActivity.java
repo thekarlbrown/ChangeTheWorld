@@ -193,7 +193,7 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
 
 
         //this deletes your user every time. comment it out to save username and be more persistent
-        sharedPref.edit().remove(getString(R.string.preference_setup)).apply();
+        sharedPref.edit().remove(getString(R.string.preference_username)).apply();
 
         //create category titles
         createTitles();
@@ -202,17 +202,17 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
         if (fm == null) {
             fm = getFragmentManager();
             ft = fm.beginTransaction();
+            /*
             if (sharedPref.getBoolean(getString(R.string.preference_setup), false)) {
                 os = new OpeningScreen();
                 ft.add(R.id.current_tab, os, "opening");
                 searchTabClick();
             } else {
                 InitialScreen init = new InitialScreen();
-                b = new Bundle();
-                b.putStringArray("categorytitles", createAddTitles());
                 init.setArguments(b);
-                ft.add(R.id.current_tab, init, "initial");
-            }
+                */
+                ft.add(R.id.current_tab, new InitialScreen(), "initial");
+            //}
             ft.commit();
         }
 
