@@ -33,7 +33,7 @@ I am currently in the alpha stages of development. What does this entail?
 
 4. There are a ton of place-holders for features to be added later or backend that is not yet implemented
 
-5. There is currently an emulator for the OFFLINE ONLY app here (online APK/emulator on the way) : https://appetize.io/app/rtkyh4gvg02x56uzeffx1349k4 Please use 100%, Nexus 7, as I have not moved development to any other platforms as of yet
+5. There is currently an emulator for the app here: https://appetize.io/app/rtkyh4gvg02x56uzeffx1349k4 Please use 100%, Nexus 7, as I have not moved development to any other platforms as of yet
 
 --------------------------------------------
 

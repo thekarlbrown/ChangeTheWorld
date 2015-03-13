@@ -6,31 +6,44 @@ import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 /*
        core of application
        currently implementing asynctask for PHP backend
        potentially will be creating separate activity for algorithms applied to data containers, but may just use asynctask
  */
 
-public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAdapterListener, ProfileTab.ProfileTabListener, IdeaPage.IdeaPageListener, DraftDataAdapter.DraftDataAdapterListener, SearchDialog.SearchDialogListener, RatioDialogue.NoticeRatioDialogListener, ThumbDialogue.NoticeThumbDialogListener {
+public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAdapterListener, ProfileTab.ProfileTabListener, IdeaPage.IdeaPageListener, DraftDataAdapter.DraftDataAdapterListener, SearchDialog.SearchDialogListener, RatioDialogue.NoticeRatioDialogListener, ThumbDialogue.NoticeThumbDialogListener, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener {
 
-    String[][] categories = {{"Inventions","Electronic","Medical","Environmental","Tools","Machines","Industrial","Chemical","Agricultural","Instruments","Build It Yourself","Other"},
-            {"Innovations","Recipes","College Hacks","Thrifty Living","Manufacturing Techniques","Going Green","Home Decor","Pet Hacks","Parenting Hacks",
-                    "Costume/Cosplay Inspiration","Common Mistake/Solutions","Fixing Everyday Issues","Other"},
-            {"Abstract/Concepts/Processes","Algorithms","Computer Programs/Mobile Apps","Economic/Governmental/Social Systems","Philosophical","Real World Services",
-                    "Internet Services","Cultural","Events/Conventions/Meetups","Party Concepts","Processes","Dance Moves","Other"},
-            {"The Suggestion Box","Government","Public School","College","Economics","Rules,Regulations, and Laws","Life Tips","Other"},
-            {"Written/Visual Compositions","TV Shows","Movie Plots","Book Ideas","Theatre","Fine Art","Fashion","Other"},
-            {"NSFW","Sexual Maneuvers","Combat Techniques","Stealth","Immoral","Got It For \"Free\"","Politically Incorrect","Other"},
-            {"Joke Ideas","Bad","Funny","Inherently Flawed","Sarcastic","Absolutely Ridiculous","What-Ifs","Other"},
-            {"Other","Doesn't Fit Anywhere","Suggestions for App","New Category's/Subcategory","Bugs Discovered","Messages to the Creator","Other"}
+    String[][] categories = {{"Inventions", "Electronic", "Medical", "Environmental", "Tools", "Machines", "Industrial", "Chemical", "Agricultural", "Instruments", "Build It Yourself", "Other"},
+            {"Innovations", "Recipes", "College Hacks", "Thrifty Living", "Manufacturing Techniques", "Going Green", "Home Decor", "Pet Hacks", "Parenting Hacks",
+                    "Costume/Cosplay Inspiration", "Common Mistake/Solutions", "Fixing Everyday Issues", "Other"},
+            {"Abstract/Concepts/Processes", "Algorithms", "Computer Programs/Mobile Apps", "Economic/Governmental/Social Systems", "Philosophical", "Real World Services",
+                    "Internet Services", "Cultural", "Events/Conventions/Meetups", "Party Concepts", "Processes", "Dance Moves", "Other"},
+            {"The Suggestion Box", "Government", "Public School", "College", "Economics", "Rules,Regulations, and Laws", "Life Tips", "Other"},
+            {"Written/Visual Compositions", "TV Shows", "Movie Plots", "Book Ideas", "Theatre", "Fine Art", "Fashion", "Other"},
+            {"NSFW", "Sexual Maneuvers", "Combat Techniques", "Stealth", "Immoral", "Got It For \"Free\"", "Politically Incorrect", "Other"},
+            {"Joke Ideas", "Bad", "Funny", "Inherently Flawed", "Sarcastic", "Absolutely Ridiculous", "What-Ifs", "Other"},
+            {"Other", "Doesn't Fit Anywhere", "Suggestions for App", "New Category's/Subcategory", "Bugs Discovered", "Messages to the Creator", "Other"}
     };
     String[] categorytitles;
     FragmentManager fm;
@@ -38,7 +51,7 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
     SharedPreferences sharedPref;
     SplitToolbar st;
     Bundle b;
-    IdeaBlock ib, drafts, ibtop,ibratio,ibthumbs;
+    IdeaBlock ib, drafts, ibtop, ibratio, ibthumbs;
     LeaderBlock leaderBlock;
     SearchDialog searchDialog;
     int minratio;
@@ -52,27 +65,31 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
     ByFriendsPage friendsPage;
     ByFavoritePage favoritePage;
     boolean[] bar_filter_status = {false, false};
-
+    String username;
     //for asynctask
     ASyncParser aSyncParser;
     JSONObject jsonObject;
     JSONArray jsonArray;
-    String username, state,country;
-    //float lat, long;
-
+    //For location data
+    GoogleApiClient mGoogleApiClient;
+    String state, country;
+    double latitude, longitude;
+    Geocoder geocoder;
+    Location mLastLocation;
+    Map<String,String> states;
     public SharedPreferences getPref() {
         return sharedPref;
     }
 
     public void openTrending() {
         if (fm.findFragmentByTag("trending") == null) {
-            ib=new IdeaBlock();
-            getJSONtoIdeaBlock("http://www.thekarlbrown.com/ctwapp/ideas_byAreaJSON.php?lat=37&long=-76&state=" + state + "&country=" + country + "&username= " + sharedPref.getString(getString(R.string.preference_username),"YouGoofed") +"&case=3");
+            ib = new IdeaBlock();
+            getJSONtoIdeaBlock("http://www.thekarlbrown.com/ctwapp/ideas_byAreaJSON.php?lat="+latitude+"&long="+longitude+"&state=" + state + "&country=" + country + "&username= " + sharedPref.getString(getString(R.string.preference_username), "YouGoofed") + "&case=3");
             fm = getFragmentManager();
             ft = fm.beginTransaction();
             b = new Bundle();
             b.putBooleanArray("selectedf", new boolean[]{false, false, true, false});
-            bar_filter_status=new boolean[]{false,false};
+            bar_filter_status = new boolean[]{false, false};
             b.putInt("selecteda", 0);
             trendingTab = new TrendingTab();
             trendingTab.setArguments(b);
@@ -90,12 +107,12 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
             categoryTab = new CategoryTab();
             b.putStringArray("titles", categorytitles);
             b.putBooleanArray("selectedf", new boolean[]{false, false, true, false});
-            bar_filter_status=new boolean[]{false,false};
+            bar_filter_status = new boolean[]{false, false};
             b.putInt("selectedt", 4);
             categoryTab.setArguments(b);
             ft.replace(R.id.current_tab, categoryTab, "category");
             ft.commit();
-        }else{
+        } else {
             categoryTab.mDrawerLayout.openDrawer(categoryTab.mDrawerList);
         }
     }
@@ -147,7 +164,7 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
     public void onSearchDialogPositiveClick(String r) {
         if (r != null) {
             //searchQuery = r;
-            ib=new IdeaBlock();
+            ib = new IdeaBlock();
             getJSONtoIdeaBlock("http://www.thekarlbrown.com/ctwapp/ideas_bySearchJSON.php?search=" + r);
             //should I process filters?
             fm = getFragmentManager();
@@ -156,7 +173,7 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
             b = new Bundle();
             b.putString("query", r);
             b.putBooleanArray("selectedf", new boolean[]{false, false, true, false});
-            bar_filter_status=new boolean[]{false,false};
+            bar_filter_status = new boolean[]{false, false};
             searchTab.setArguments(b);
             ft.replace(R.id.current_tab, searchTab, "search");
             ft.commit();
@@ -164,6 +181,7 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
             searchDialog.show(getFragmentManager(), "SearchDialog");
         }
     }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -183,19 +201,24 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
         ib.add(ib.titles, ib.ideas, ib.authors, ib.tups, ib.tdowns, ib.numbers, ib.categorys, ib.subcategorys);
         ib.add(ib.titles, ib.ideas, ib.authors, ib.tups, ib.tdowns, ib.numbers, ib.categorys, ib.subcategorys);
         */
-        ib=new IdeaBlock();
-        state="va";
-        country="us";
+        ib = new IdeaBlock();
+        state = "va";
+        country = "us";
         //leaderblock
         leaderBlock = new LeaderBlock(new String[]{"putin", "obama", "farage", "assad", "kadyrov"}, new String[]{"putin", "obama", "farage", "assad", "kadyrov"}, new String[]{"putin", "obama", "farage", "assad", "kadyrov"}, new String[]{"putin", "obama", "farage", "assad", "kadyrov"},
                 new double[]{59.523, 42.70, 9.11, 3.041, 99.99}, new int[]{999, 70, 911, 101, 1337}, new double[]{59.523, 42.69, 9.11, 3.041, 99.99}, new double[]{59.523, 42.70, 9.11, 3.041, 99.99});
 
 
         //this deletes your user every time. comment it out to save username and be more persistent
-        sharedPref.edit().remove(getString(R.string.preference_username)).apply();
+        //sharedPref.edit().remove(getString(R.string.preference_username)).apply();
 
         //create category titles
         createTitles();
+
+        //initiate google tracking
+        buildGoogleApiClient();
+        setStatesMap();
+        getLocationDataFromGoogle();
 
 
         if (fm == null) {
@@ -210,11 +233,10 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
                 InitialScreen init = new InitialScreen();
                 init.setArguments(b);
                 */
-                ft.add(R.id.current_tab, new InitialScreen(), "initial");
+            ft.add(R.id.current_tab, new InitialScreen(), "initial");
             //}
             ft.commit();
         }
-
     }
 
     public void createTitles() {
@@ -327,10 +349,9 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
             }
         }
     }
-    public void switchBarFilter(boolean which, String tag)
-    {
-        if(which)
-        {
+
+    public void switchBarFilter(boolean which, String tag) {
+        if (which) {
             //insert algorithm to sort by recent
             switch (tag) {
                 case "byfriends":
@@ -355,7 +376,7 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
                     tag = "leave b4 admin bans u";
                     break;
             }
-        }else{
+        } else {
             //insert algorithm to sort by top rated
             switch (tag) {
                 case "byfriends":
@@ -382,8 +403,8 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
             }
         }
     }
-    public void pullAreaBar(int area,String tag)
-    {
+
+    public void pullAreaBar(int area, String tag) {
         //set area of choice to be pulled here
         //method with int area
         switch (tag) {
@@ -410,8 +431,8 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
                 break;
         }
     }
-    public void pullTimeBar(int time,String tag)
-    {
+
+    public void pullTimeBar(int time, String tag) {
         //set time of choice to be pulled here
         //method with int time
         switch (tag) {
@@ -438,6 +459,7 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
                 break;
         }
     }
+
     @Override
     public void onThumbDialogPositiveClick(int i, String tag) {
         minthumbs = i;
@@ -501,9 +523,9 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
         //here we will have a asynctask that will obtain their current value based on position
         //this will require us to know the idea id's. IdeaBlock may have an additional category added
         //sample data for now
-        b.putBooleanArray("thumbd",new boolean[]{false,false});
-        b.putBoolean("favorite",true);
-        b.putBoolean("followed",true);
+        b.putBooleanArray("thumbd", new boolean[]{false, false});
+        b.putBoolean("favorite", true);
+        b.putBoolean("followed", true);
         ideaPage.setArguments(b);
         ft.replace(R.id.current_tab, ideaPage, "ideapage");
         ft.commit();
@@ -517,7 +539,7 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
         userPage = new ByUserPage();
         b.putString("username", username);
         b.putBooleanArray("selectedf", new boolean[]{false, false, true, false});
-        bar_filter_status=new boolean[]{false,false};
+        bar_filter_status = new boolean[]{false, false};
         userPage.setArguments(b);
         ft.replace(R.id.current_tab, userPage, "byuser");
         ft.commit();
@@ -531,7 +553,7 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
         friendsPage = new ByFriendsPage();
         b.putString("username", username);
         b.putBooleanArray("selectedf", new boolean[]{false, false, true, false});
-        bar_filter_status=new boolean[]{false,false};
+        bar_filter_status = new boolean[]{false, false};
         friendsPage.setArguments(b);
         ft.replace(R.id.current_tab, friendsPage, "byfriends");
         ft.commit();
@@ -545,13 +567,13 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
         favoritePage = new ByFavoritePage();
         b.putString("username", username);
         b.putBooleanArray("selectedf", new boolean[]{false, false, true, false});
-        bar_filter_status=new boolean[]{false,false};
+        bar_filter_status = new boolean[]{false, false};
         favoritePage.setArguments(b);
         ft.replace(R.id.current_tab, favoritePage, "byfavorite");
         ft.commit();
     }
-    public void searchTabClick()
-    {
+
+    public void searchTabClick() {
         st.setOnMenuItemClickListener(new SplitToolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
@@ -583,83 +605,223 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
 
     /**
      * Gets JSON data from URL and put into IdeaBlock
+     *
      * @param url - URL to connect to
      */
-    public void getJSONtoIdeaBlock(String url){
-        aSyncParser=new ASyncParser(url);
-        try{
+    public void getJSONtoIdeaBlock(String url) {
+        aSyncParser = new ASyncParser(url);
+        try {
             aSyncParser.execute();
-            jsonArray=aSyncParser.get();
-        }catch(Exception e){
+            jsonArray = aSyncParser.get();
+        } catch (Exception e) {
             Log.println(0, "Error", e.getMessage());
         }
-        try{
-            for(int i=0;i<jsonArray.length();i++){
-                jsonObject=jsonArray.getJSONObject(i);
+        try {
+            for (int i = 0; i < jsonArray.length(); i++) {
+                jsonObject = jsonArray.getJSONObject(i);
                 ib.add(jsonObject.getString("title"), jsonObject.getString("descrip"), jsonObject.getString("author"),
                         Integer.parseInt(jsonObject.getString("thumbsup")), Integer.parseInt(jsonObject.getString("thumbsdown")), Integer.parseInt(jsonObject.getString("ididea")),
                         Integer.parseInt(jsonObject.getString("cat")), Integer.parseInt(jsonObject.getString("sub")));
             }
-        }catch (JSONException e){
-            Log.println(0,"Error",e.getMessage());
+        } catch (JSONException e) {
+            Log.println(0, "Error", e.getMessage());
         }
-        if (ib.size()==0){
-            ib.add(":[","There does not seem to be any ideas here yet! Too bad. Either you have internet connectivitivity issues, or you are in an empty category","thekarlbrown",
-                    0,999,1,8,2);
+        if (ib.size() == 0) {
+            ib.add(":[", "There does not seem to be any ideas here yet! Too bad. Either you have internet connectivitivity issues, or you are in an empty category", "thekarlbrown",
+                    0, 999, 1, 8, 2);
         }
     }
 
     /**
      * Login Query to JSON
+     *
      * @param username - Username to attempt login with
      * @param password - Password to attempt login with
      * @return - Boolean representing success of query
      */
-    public boolean verifyLogon(String username,String password){
-        aSyncParser=new ASyncParser("http://www.thekarlbrown.com/ctwapp/user_verifyPHash.php?username="+username+"&password="+password);
-        try{
+    public boolean verifyLogon(String username, String password) {
+        aSyncParser = new ASyncParser("http://www.thekarlbrown.com/ctwapp/user_verifyPHash.php?username=" + username + "&password=" + password);
+        try {
             aSyncParser.execute();
-            jsonArray=aSyncParser.get();
-        }catch(Exception e){
+            jsonArray = aSyncParser.get();
+        } catch (Exception e) {
             Log.println(0, "Error", e.getMessage());
             return false;
         }
-        try{
-            int result=Integer.parseInt(jsonArray.getJSONObject(0).getString("verified"));
-            if(result==0){
+        try {
+            int result = Integer.parseInt(jsonArray.getJSONObject(0).getString("verified"));
+            if (result == 0) {
                 return false;
-            }else{
+            } else {
                 // do whatever must be done upon successful password verification here if necessary for security
-                this.username=username;
+                this.username = username;
                 return true;
             }
-        }catch (Exception e){
-            Log.println(0,"Error",e.getMessage());
+        } catch (Exception e) {
+            Log.println(0, "Error", e.getMessage());
             return false;
         }
     }
 
-    public boolean verifyCreate(String username,String password,String email){
-        aSyncParser=new ASyncParser("http://www.thekarlbrown.com/ctwapp/user_addPHash.php?username="+username+"&password="+password+"&email="+email);
-        try{
+    /**
+     * Attempt account creation
+     *
+     * @param username - Username to be created
+     * @param password - Password to be used
+     * @param email    - Email to be user
+     * @return Boolean based on success of account addition to database
+     */
+    public boolean verifyCreate(String username, String password, String email) {
+        aSyncParser = new ASyncParser("http://www.thekarlbrown.com/ctwapp/user_addPHash.php?username=" + username + "&password=" + password + "&email=" + email);
+        try {
             aSyncParser.execute();
-            jsonArray=aSyncParser.get();
-        }catch(Exception e){
+            jsonArray = aSyncParser.get();
+        } catch (Exception e) {
             Log.println(0, "Error", e.getMessage());
             return false;
         }
-        try{
-            int result=Integer.parseInt(jsonArray.getJSONObject(0).getString("created"));
-            if(result==0){
+        try {
+            int result = Integer.parseInt(jsonArray.getJSONObject(0).getString("created"));
+            if (result == 0) {
                 return false;
-            }else{
+            } else {
                 // do whatever must be done upon successful account creation here if necessary for security
-                this.username=username;
+                this.username = username;
                 return true;
             }
-        }catch (Exception e){
-            Log.println(0,"Error",e.getMessage());
+        } catch (Exception e) {
+            Log.println(0, "Error", e.getMessage());
             return false;
         }
+    }
+
+    //Location tracking :3
+
+    /**
+     * Get the last location
+     */
+    public void obtainLocation(){
+        mLastLocation=LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+        latitude=mLastLocation.getLatitude();
+        longitude=mLastLocation.getLongitude();
+        getMyLocationAddress();
+    }
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+
+    }
+    @Override
+    public void onConnected(Bundle bundle) {
+        obtainLocation();
+        mGoogleApiClient.disconnect();
+    }
+    @Override
+    public void onConnectionSuspended(int i) {
+
+    }
+    protected synchronized void buildGoogleApiClient() {
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addConnectionCallbacks(this)
+                .addOnConnectionFailedListener(this)
+                .addApi(LocationServices.API)
+                .build();
+    }
+    public void getMyLocationAddress() {
+        geocoder = new Geocoder(this, Locale.ENGLISH);
+        try {
+            List<Address> addresses = geocoder.getFromLocation(latitude, longitude, 1);
+            if (addresses != null) {
+               state = states.get(addresses.get(0).getAdminArea());
+               country=addresses.get(0).getCountryCode();
+            }else{
+                state = "NA";
+                country = "US";
+            }
+        } catch (IOException e) {
+            Log.println(0, "Error", e.getMessage());
+        }
+    }
+
+    /**
+     * Get latitude, longitude, state, and country
+     */
+    public void getLocationDataFromGoogle(){
+        if(!mGoogleApiClient.isConnected()){
+            mGoogleApiClient.connect();
+        }
+    }
+    public void setStatesMap(){
+        states = new HashMap<String, String>();
+        states.put("Alabama","AL");
+        states.put("Alaska","AK");
+        states.put("Alberta","AB");
+        states.put("American Samoa","AS");
+        states.put("Arizona","AZ");
+        states.put("Arkansas","AR");
+        states.put("Armed Forces (AE)","AE");
+        states.put("Armed Forces Americas","AA");
+        states.put("Armed Forces Pacific","AP");
+        states.put("British Columbia","BC");
+        states.put("California","CA");
+        states.put("Colorado","CO");
+        states.put("Connecticut","CT");
+        states.put("Delaware","DE");
+        states.put("District Of Columbia","DC");
+        states.put("Florida","FL");
+        states.put("Georgia","GA");
+        states.put("Guam","GU");
+        states.put("Hawaii","HI");
+        states.put("Idaho","ID");
+        states.put("Illinois","IL");
+        states.put("Indiana","IN");
+        states.put("Iowa","IA");
+        states.put("Kansas","KS");
+        states.put("Kentucky","KY");
+        states.put("Louisiana","LA");
+        states.put("Maine","ME");
+        states.put("Manitoba","MB");
+        states.put("Maryland","MD");
+        states.put("Massachusetts","MA");
+        states.put("Michigan","MI");
+        states.put("Minnesota","MN");
+        states.put("Mississippi","MS");
+        states.put("Missouri","MO");
+        states.put("Montana","MT");
+        states.put("Nebraska","NE");
+        states.put("Nevada","NV");
+        states.put("New Brunswick","NB");
+        states.put("New Hampshire","NH");
+        states.put("New Jersey","NJ");
+        states.put("New Mexico","NM");
+        states.put("New York","NY");
+        states.put("Newfoundland","NF");
+        states.put("North Carolina","NC");
+        states.put("North Dakota","ND");
+        states.put("Northwest Territories","NT");
+        states.put("Nova Scotia","NS");
+        states.put("Nunavut","NU");
+        states.put("Ohio","OH");
+        states.put("Oklahoma","OK");
+        states.put("Ontario","ON");
+        states.put("Oregon","OR");
+        states.put("Pennsylvania","PA");
+        states.put("Prince Edward Island","PE");
+        states.put("Puerto Rico","PR");
+        states.put("Quebec","PQ");
+        states.put("Rhode Island","RI");
+        states.put("Saskatchewan","SK");
+        states.put("South Carolina","SC");
+        states.put("South Dakota","SD");
+        states.put("Tennessee","TN");
+        states.put("Texas","TX");
+        states.put("Utah","UT");
+        states.put("Vermont","VT");
+        states.put("Virgin Islands","VI");
+        states.put("Virginia","VA");
+        states.put("Washington","WA");
+        states.put("West Virginia","WV");
+        states.put("Wisconsin","WI");
+        states.put("Wyoming","WY");
+        states.put("Yukon Territory","YT");
     }
 }
