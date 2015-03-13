@@ -14,9 +14,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 /*
-       where everything goes through
-       will be implementing asynctask for mysql handling
-       potentially will be creating separate activity for algorithms applied to data containers, but may just use java class
+       core of application
+       currently implementing asynctask for PHP backend
+       potentially will be creating separate activity for algorithms applied to data containers, but may just use asynctask
  */
 
 public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAdapterListener, ProfileTab.ProfileTabListener, IdeaPage.IdeaPageListener, DraftDataAdapter.DraftDataAdapterListener, SearchDialog.SearchDialogListener, RatioDialogue.NoticeRatioDialogListener, ThumbDialogue.NoticeThumbDialogListener {
@@ -38,7 +38,6 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
     SharedPreferences sharedPref;
     SplitToolbar st;
     Bundle b;
-    OpeningScreen os;
     IdeaBlock ib, drafts, ibtop,ibratio,ibthumbs;
     LeaderBlock leaderBlock;
     SearchDialog searchDialog;
@@ -96,6 +95,8 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
             categoryTab.setArguments(b);
             ft.replace(R.id.current_tab, categoryTab, "category");
             ft.commit();
+        }else{
+            categoryTab.mDrawerLayout.openDrawer(categoryTab.mDrawerList);
         }
     }
 
@@ -185,8 +186,6 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
         ib=new IdeaBlock();
         state="va";
         country="us";
-        username="lisaslover";
-        getJSONtoIdeaBlock("http://www.thekarlbrown.com/ctwapp/ideas_byAreaJSON.php?lat=37&long=-76&state=" + state + "&country=" + country + "&username=" + username +"&case=3");
         //leaderblock
         leaderBlock = new LeaderBlock(new String[]{"putin", "obama", "farage", "assad", "kadyrov"}, new String[]{"putin", "obama", "farage", "assad", "kadyrov"}, new String[]{"putin", "obama", "farage", "assad", "kadyrov"}, new String[]{"putin", "obama", "farage", "assad", "kadyrov"},
                 new double[]{59.523, 42.70, 9.11, 3.041, 99.99}, new int[]{999, 70, 911, 101, 1337}, new double[]{59.523, 42.69, 9.11, 3.041, 99.99}, new double[]{59.523, 42.70, 9.11, 3.041, 99.99});
@@ -609,35 +608,58 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
                     0,999,1,8,2);
         }
     }
-    //communicate to those silly filtering fragments
-    /*right now, I am saving object references as fields
-    public interface ByFavoritePageListener {
 
+    /**
+     * Login Query to JSON
+     * @param username - Username to attempt login with
+     * @param password - Password to attempt login with
+     * @return - Boolean representing success of query
+     */
+    public boolean verifyLogon(String username,String password){
+        aSyncParser=new ASyncParser("http://www.thekarlbrown.com/ctwapp/user_verifyPHash.php?username="+username+"&password="+password);
+        try{
+            aSyncParser.execute();
+            jsonArray=aSyncParser.get();
+        }catch(Exception e){
+            Log.println(0, "Error", e.getMessage());
+            return false;
+        }
+        try{
+            int result=Integer.parseInt(jsonArray.getJSONObject(0).getString("verified"));
+            if(result==0){
+                return false;
+            }else{
+                // do whatever must be done upon successful password verification here if necessary for security
+                this.username=username;
+                return true;
+            }
+        }catch (Exception e){
+            Log.println(0,"Error",e.getMessage());
+            return false;
+        }
     }
-    public interface ByFriendsPageListener {
 
+    public boolean verifyCreate(String username,String password,String email){
+        aSyncParser=new ASyncParser("http://www.thekarlbrown.com/ctwapp/user_addPHash.php?username="+username+"&password="+password+"&email="+email);
+        try{
+            aSyncParser.execute();
+            jsonArray=aSyncParser.get();
+        }catch(Exception e){
+            Log.println(0, "Error", e.getMessage());
+            return false;
+        }
+        try{
+            int result=Integer.parseInt(jsonArray.getJSONObject(0).getString("created"));
+            if(result==0){
+                return false;
+            }else{
+                // do whatever must be done upon successful account creation here if necessary for security
+                this.username=username;
+                return true;
+            }
+        }catch (Exception e){
+            Log.println(0,"Error",e.getMessage());
+            return false;
+        }
     }
-    public interface ByUserPageListener {
-
-    }
-    public interface CategoryTabListener {
-
-    }
-    public interface LeaderboardTabListener {
-
-    }
-    public interface SearchTabListener {
-
-    }
-    public interface TrendingTabListener {
-
-    }
-    CategoryTabListener ctListener;
-    LeaderboardTabListener ltListener;
-    TrendingTabListener ttListener;
-    SearchTabListener stListener;
-    ByFavoritePageListener bfavpListener;
-    ByFriendsPageListener bfripListener;
-    ByUserPageListener bupListener;
-    */
 }

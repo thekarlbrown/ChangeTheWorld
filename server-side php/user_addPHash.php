@@ -16,6 +16,8 @@ $hash = password_hash($password,PASSWORD_BCRYPT,$options);
 $stmt=$conn->prepare("INSERT INTO user (author,hash,email) VALUES ('$username','$hash','$email')");
 if($stmt->execute()){
 	echo "[{\"created\":\"1\"}]";
+}else{
+	echo "[{\"created\":\"0\"}]";
 }
 
 } catch(PDOException $e) {

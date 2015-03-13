@@ -94,5 +94,6 @@
     <string name="login_email_confirm">Confirm your Email</string>
     <string name="login_email_problem_valid">Your Email is not valid</string>
     <string name="login_email_problem_matching">Your Email\'s don\'t match</string>
-    <string name="login_error_login">Your credentials were rejected</string>
+    <string name="login_error_login">Your login credentials were rejected! Is your internet connected?\nDoes your username exist? Was your password correct?</string>
+    <string name="login_error_create">Your account creation was rejected! Is your internet connected?\nIs this a newly registered email? Password recovery is available\nIf you have never used the email, the username already exists</string>
 </resources>

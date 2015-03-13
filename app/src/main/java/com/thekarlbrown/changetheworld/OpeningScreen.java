@@ -1,3 +1,6 @@
+/*
+NOTE: Class is currently deprecated (along with accompanying XML) and if not re-incorporated will be removed
+
 package com.thekarlbrown.changetheworld;
 
 import android.content.SharedPreferences;
@@ -10,9 +13,9 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 
-/**
-screen the user is presented with if there is no initial creation
- */
+
+//screen the user is presented with if there is no initial creation
+
 public class OpeningScreen extends Fragment {
 
     View v;
@@ -58,3 +61,4 @@ public class OpeningScreen extends Fragment {
         return v;
     }
 }
+*/

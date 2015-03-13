@@ -97,19 +97,25 @@ public class InitialScreen extends Fragment {
                     editText.setHint(R.string.login_username_problem);
                     editText.setText(null);
                 } else {
-                    System.out.println("We made it test");
-                    /*if(mainActivity.verifyLogin(username,((EditText)rv.findViewById(R.id.login_password)).getText())){
+                    if(mainActivity.verifyLogon(username,((EditText)rv.findViewById(R.id.login_password)).getText().toString())){
+                        hideSoftKeyboard();
                         mainActivity.searchTabClick();
                         epref=pref.edit();
                         epref.putString(getString(R.string.preference_username), username);
                         epref.apply();
-                        mainActivity.authenticated(username);
+                        mainActivity.openTrending();
+                        //mainActivity.authenticated(username); if necessary?
                     }else{
+                        hideSoftKeyboard();
                         ((TextView) rv.findViewById(R.id.welcometext)).setText(R.string.login_error_login);
-                        ((EditText) rv.findViewById(R.id.login_username)).setText(R.string.login_username_prompt);
-                        ((EditText) rv.findViewById(R.id.login_password)).setText(R.string.login_password_prompt);
+                        editText=(EditText) rv.findViewById(R.id.login_username);
+                        editText.setHint(R.string.login_username_prompt);
+                        editText.setText(null);
+                        editText=(EditText) rv.findViewById(R.id.login_password);
+                        editText.setHint(R.string.login_password_prompt);
+                        editText.setText(null);
                     }
-                    */
+
                 }
             }
         });
@@ -152,23 +158,34 @@ public class InitialScreen extends Fragment {
                         editText.setHint(R.string.login_email_problem_matching);
                         editText.setText(null);
                     }else{
-                        System.out.println("We made it test");
-                   /* if(mainActivity.verifyCreate(username,((EditText)rv.findViewById(R.id.login_password)).getText(),email)){
+
+                    if(mainActivity.verifyCreate(username,((EditText)rv.findViewById(R.id.login_password)).getText().toString(),email)){
+                        hideSoftKeyboard();
                         mainActivity.searchTabClick();
                         epref=pref.edit();
                         epref.putString(getString(R.string.preference_username), username);
                         epref.apply();
-                        mainActivity.authenticated(username);
+                        mainActivity.openTrending();
+                        //mainActivity.authenticated(username); if necessary?
                     }else{
-                        ((TextView) rv.findViewById(R.id.welcometext)).setText(R.string.login_error_login);
-                        ((EditText) rv.findViewById(R.id.login_username)).setText(R.string.login_username_prompt);
-                        ((EditText) rv.findViewById(R.id.login_password)).setText(R.string.login_password_prompt);
-                        ((EditText) rv.findViewById(R.id.login_password_confirm)).setText(R.string.login_password_prompt);
-                        ((EditText) rv.findViewById(R.id.login_email)).setText(R.string.login_email_prompt);
-                        ((EditText) rv.findViewById(R.id.login_email_confirm)).setText(R.string.login_email_prompt);
+                        hideSoftKeyboard();
+                        ((TextView) rv.findViewById(R.id.welcometext)).setText(R.string.login_error_create);
+                        editText=(EditText) rv.findViewById(R.id.login_username);
+                        editText.setHint(R.string.login_username_prompt);
+                        editText.setText(null);
+                        editText=(EditText) rv.findViewById(R.id.login_password);
+                        editText.setHint(R.string.login_password_prompt);
+                        editText.setText(null);
+                        editText=(EditText) rv.findViewById(R.id.login_password_confirm);
+                        editText.setHint(R.string.login_password_prompt);
+                        editText.setText(null);
+                        editText=(EditText) rv.findViewById(R.id.login_email);
+                        editText.setHint(R.string.login_email_prompt);
+                        editText.setText(null);
+                        editText=(EditText) rv.findViewById(R.id.login_email);
+                        editText.setHint(R.string.login_email_confirm);
+                        editText.setText(null);
                     }
-                    */
-
                     }
                 }
             }
@@ -179,7 +196,6 @@ public class InitialScreen extends Fragment {
 
     @Override
     public void onDetach() {
-        hideSoftKeyboard();
         super.onDetach();
 
     }
