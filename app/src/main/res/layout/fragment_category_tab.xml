@@ -8,17 +8,20 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
-        android:background="#FF0000"
+        android:background="#668DE6"
         android:orientation="vertical"
         tools:context="com.thekarlbrown.changetheworld.CategoryTab"
         android:weightSum="1"
         android:paddingBottom="5dip">
 
-        <ImageView
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:src="@drawable/ic_logo_category" />
+            android:textSize="40sp"
+            android:textColor="#1754E0"
+            android:text="@string/menu_category"
+            android:textStyle="bold" />
         <TextView
             android:id="@+id/category_query"
             android:layout_width="match_parent"
@@ -51,7 +54,7 @@
         android:layout_width="240dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:background="#111"
+        android:background="#FFFFFF"
         android:choiceMode="singleChoice"
         android:divider="@android:color/transparent"
         android:dividerHeight="0dp" />

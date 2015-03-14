@@ -70,7 +70,7 @@ public class BarFilter extends Fragment {
                 if (!filter[2]) {
                     filter[2] = true;
                     filter[3] = false;
-                    complete[2].setBackgroundColor(0xffff0000);
+                    complete[2].setBackgroundColor(0xff00AC00);
                     complete[3].setBackgroundColor(0xffffffff);
                     mainActivity.switchBarFilter(true,tag);
                 }
@@ -82,7 +82,7 @@ public class BarFilter extends Fragment {
                 if (!filter[3]) {
                     filter[2] = false;
                     filter[3] = true;
-                    complete[3].setBackgroundColor(0xffff0000);
+                    complete[3].setBackgroundColor(0xff00AC00);
                     complete[2].setBackgroundColor(0xffffffff);
                     mainActivity.switchBarFilter(false,tag);
                 }
@@ -96,7 +96,7 @@ public class BarFilter extends Fragment {
     }
     public void setSelected(int i)
     {
-        complete[i].setBackgroundColor(0xffff0000);
+        complete[i].setBackgroundColor(0xff00AC00);
         filter[i]=true;
     }
 }

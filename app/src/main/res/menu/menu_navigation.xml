@@ -1,25 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:ctw="http://schemas.android.com/apk/res-auto">
-<item android:id="@+id/tab_trending"
-    android:icon="@drawable/ic_trending_bar"
-    ctw:showAsAction="always"
-    android:title="@string/menu_trending"/>
-
     <item android:id="@+id/tab_category"
         android:icon="@drawable/ic_category_bar"
         ctw:showAsAction="always"
         android:title="@string/menu_category"/>
+
+    <item android:id="@+id/tab_trending"
+    android:icon="@drawable/ic_trending_bar"
+    ctw:showAsAction="always"
+    android:title="@string/menu_trending"/>
+    <item android:id="@+id/tab_add"
+        android:icon="@drawable/ic_add_bar"
+        ctw:showAsAction="always"
+        android:title="@string/menu_add"/>
+
 <item android:id="@+id/tab_search"
     android:icon="@drawable/ic_search_bar"
     ctw:showAsAction="always"
     android:title="@string/menu_search"/>
 
 
-    <item android:id="@+id/tab_add"
-        android:icon="@drawable/ic_add_bar"
-        ctw:showAsAction="always"
-        android:title="@string/menu_add"/>
+
     <item android:id="@+id/tab_top"
         android:icon="@drawable/ic_top_bar"
         ctw:showAsAction="always"
@@ -27,7 +29,7 @@
     <item android:id="@+id/tab_profile"
         android:icon="@drawable/ic_person_bar"
         ctw:showAsAction="always"
-        android:title="@string/menu_person"/>
+        android:title="@string/menu_profile"/>
 
 
 </menu>

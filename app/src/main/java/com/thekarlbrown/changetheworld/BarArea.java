@@ -27,7 +27,7 @@ public class BarArea extends Fragment {
                     if(!areas[x])
                     {
                         areas[x]=true;
-                        complete[x].setBackgroundColor(0xffff0000);
+                        complete[x].setBackgroundColor(0xff00AC00);
                         for(int y=0;y<areas.length;y++)
                         {
                             if(y!=x)
@@ -50,7 +50,7 @@ public class BarArea extends Fragment {
     }
     public void setSelected(int i)
     {
-        complete[i].setBackgroundColor(0xffff0000);
+        complete[i].setBackgroundColor(0xff00AC00);
         areas[i]=true;
     }
 }

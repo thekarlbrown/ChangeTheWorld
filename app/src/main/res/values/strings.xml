@@ -3,7 +3,7 @@
 
     <string name="app_name">ChangeTheWorld</string>
     <string name="action_settings">Settings</string>
-    <string name="menu_search">Search</string>
+    <string name="menu_search">SEARCH</string>
     <string name="menu_nearby">Nearby</string>
     <string name="menu_hundred">100 Miles</string>
     <string name="menu_state">State</string>
@@ -17,13 +17,15 @@
     <string name="menu_ever">All Time</string>
     <string name="menu_ratio">Minimum Ratio</string>
     <string name="menu_thumbs">Minimum Thumbs</string>
+    <string name="menu_ratio_caps">MINIMUM RATIO</string>
+    <string name="menu_thumbs_caps">MINIMUM THUMBS</string>
     <string name="menu_recent">Most Recent</string>
     <string name="menu_top_rated">Top Rated</string>
-    <string name="menu_trending">Trending</string>
-    <string name="menu_category">Category</string>
-    <string name="menu_person">Person</string>
-    <string name="menu_add">Add Idea</string>
-    <string name="menu_top_users">Top Users</string>
+    <string name="menu_trending">TRENDING</string>
+    <string name="menu_category">CATEGORY</string>
+    <string name="menu_profile">PROFILE</string>
+    <string name="menu_add">ADD IDEA</string>
+    <string name="menu_top_users">LEADERBOARD</string>
     <string name="menu_accurate">Accurate Thumbs</string>
     <string name="menu_added">Most Quality Ideas</string>
     <string name="menu_quality">Highest Rated Idea</string>
@@ -39,7 +41,9 @@
     <string name="preference_username">com.thekarlbrown.ChangeTheWorld.preference_username</string>
     <string name="preference_fav_list">com.thekarlbrown.ChangeTheWorld.preference_fav_list</string>
     <string name="preference_friend_list">com.thekarlbrown.ChangeTheWorld.preference_friend_list</string>
-
+    <string name="idea_title">IDEA</string>
+    <string name="comments_coming_soon">COMMENTS\nCOMING\nSOON</string>
+    <string name="app_title_bold">CHANGE\nTHE\nWORLD</string>
     <string name="search_dialogue">Find a specific idea by searching</string>
     <string name="search_cancel">Cancel Search</string>
     <string name="search_accept">Search Description</string>
@@ -67,9 +71,9 @@
     <string name="thumb_dialogue_cancel">No Thumb Requirement</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="profile_your_ideas">Your Ideas</string>
-    <string name="profile_favorite_ideas">Favorite Ideas</string>
-    <string name="profile_followers">Followers Ideas</string>
-    <string name="profile_drafts">Your Drafts</string>
+    <string name="profile_favorite_ideas">FAVORITE IDEAS</string>
+    <string name="profile_followers">FOLLOWERS IDEAS</string>
+    <string name="profile_drafts">YOUR DRAFTS</string>
     <string name="profile_prof_im">Import Profile</string>
     <string name="profile_prof_ex">Export Profile</string>
     <string name="profile_error_unknown">Something went wrong with your file</string>
@@ -82,7 +86,7 @@
     <string name="page_idea_comment">Add Improvement</string>
     <string name="page_idea_follow">Follow User</string>
     <string name="page_idea_unfollow">Unfollow User</string>
-    <string name="login_welcome">Welcome to the app that enables the sharing, evaluation, and \n tweaking of new ideas and innovation! Navigate with the bars at the top! \n Enter your username and login or create an account to continue</string>
+    <string name="login_welcome">Welcome to the app that enables the sharing, evaluation, and \n tweaking of new ideas and innovation! Navigate with the top bar! \n Enter your username and login or create an account to continue</string>
     <string name="login_login_button">Login</string>
     <string name="login_create_button">Create account</string>
     <string name="login_username_prompt">Please enter your username</string>

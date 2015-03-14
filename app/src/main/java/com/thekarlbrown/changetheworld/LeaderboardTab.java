@@ -84,7 +84,7 @@ public class LeaderboardTab extends Fragment {
                     if(!leaderselect[x])
                     {
                         leaderselect[x]=true;
-                        complete[x].setBackgroundColor(0xffff0000);
+                        complete[x].setBackgroundColor(0xff00AC00);
                         for(int y=0;y<leaderselect.length;y++)
                         {
                             if(y!=x)
@@ -123,7 +123,7 @@ public class LeaderboardTab extends Fragment {
         };
         for(int x=0;x<complete.length;x++){
             if(leaderselect[x]){
-                complete[x].setBackgroundColor(0xffff0000);
+                complete[x].setBackgroundColor(0xff00AC00);
                 ladpt=new LeaderAdapter(leaderBlock,mainActivity,x);
                 l=(ListView)rv.findViewById(R.id.leaderboard_list);
                 l.setAdapter(ladpt);

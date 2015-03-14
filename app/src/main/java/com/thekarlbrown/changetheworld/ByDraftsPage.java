@@ -19,7 +19,7 @@ import java.io.File;
 public class ByDraftsPage extends Fragment {
 
     View rv;
-    TextView t, temp;
+    TextView t;
     ListView l;
     SharedPreferences pref;
     DataAdapter dapt;
@@ -62,8 +62,6 @@ public class ByDraftsPage extends Fragment {
         dapt = new DraftDataAdapter(ib,mainActivity);
         l = (ListView) rv.findViewById(R.id.by_drafts_list);
         l.setAdapter(dapt);
-        t=(TextView)rv.findViewById(R.id.by_drafts_username);
-        t.setText(pref.getString(getString(R.string.preference_username),"yagoofed"));
         return rv;
     }
 

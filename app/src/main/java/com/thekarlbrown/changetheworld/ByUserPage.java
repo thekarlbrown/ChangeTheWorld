@@ -65,7 +65,7 @@ public class ByUserPage extends Fragment {
         fm=getFragmentManager();
         barFilter.barFilterClick(rv,fm,selectedf,getTag(),mainActivity);
         t=(TextView)rv.findViewById(R.id.by_user_username);
-        t.setText(username + "'s ideas:");
+        t.setText(username.toUpperCase() + "'S IDEAS");
         return rv;
     }
     public void filterSelected(int i)

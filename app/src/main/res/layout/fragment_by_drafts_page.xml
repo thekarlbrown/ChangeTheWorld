@@ -2,25 +2,20 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:background="#FF0000"
+    android:background="#668DE6"
     tools:context="com.thekarlbrown.changetheworld.ByDraftsPage"
     android:weightSum="1"
     android:paddingBottom="5dip">
 
-    <ImageView
-        android:src="@drawable/ic_logo_drafts"
+    <TextView
+        android:text="@string/profile_drafts"
+        android:textSize="40sp"
+        android:textColor="#1754E0"
+        android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:paddingBottom="5dp"/>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/by_drafts_username"
-        android:textSize="20sp"
-        android:layout_gravity="center_horizontal"
-        android:paddingBottom="5dp"
-        />
 
     <ListView
         android:layout_width="fill_parent"

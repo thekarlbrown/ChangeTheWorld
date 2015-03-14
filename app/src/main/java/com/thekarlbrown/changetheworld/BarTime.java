@@ -27,7 +27,7 @@ public class BarTime extends Fragment {
                     if(!times[x])
                     {
                         times[x]=true;
-                        complete[x].setBackgroundColor(0xffff0000);
+                        complete[x].setBackgroundColor(0xff00AC00);
                         for(int y=0;y<times.length;y++)
                         {
                             if(y!=x)
@@ -50,7 +50,7 @@ public class BarTime extends Fragment {
     public void setSelected (int i)
     {
         times[i]=true;
-        complete[i].setBackgroundColor(0xffff0000);
+        complete[i].setBackgroundColor(0xff00AC00);
     }
 
 }

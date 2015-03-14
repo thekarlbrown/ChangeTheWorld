@@ -2,11 +2,15 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:background="#FF0000"
-    tools:context="com.thekarlbrown.changetheworld.AddTab">
+    android:background="#668DE6"
+    tools:context="com.thekarlbrown.changetheworld.AddTab"
+    >
 
-    <ImageView
-        android:src="@drawable/ic_logo_addidea"
+    <TextView
+        android:textSize="40sp"
+        android:textColor="#1754E0"
+        android:text="@string/menu_add"
+        android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"/>
@@ -14,11 +18,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginBottom="5dip">
+        android:layout_marginBottom="5dip"
+        android:paddingLeft="20dp"
+        android:paddingStart="20dp"
+        >
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
+            android:textColor="#FFFFFF"
             android:text="@string/add_title"
             android:textSize="20sp"
             android:paddingBottom="5dip"
@@ -45,11 +52,13 @@
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:paddingStart="20dp">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
+            android:textColor="#FFFFFF"
             android:text="@string/add_category_subcategory"
             android:textSize="20sp"
             android:paddingBottom="5dip"
@@ -87,17 +96,11 @@
         android:layout_marginTop="5dip"
         android:layout_marginBottom="5dip"
         android:layout_weight="1"
+        android:paddingLeft="20dp"
+        android:paddingStart="20dp"
         >
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:text="@string/add_description"
-            android:textSize="20sp"
-            android:paddingBottom="5dip"
-            android:layout_marginRight="5dip"
-            android:layout_marginEnd="5dip"/>
+
         <EditText
             android:layout_width="0dp"
             android:layout_height="fill_parent"
@@ -108,6 +111,8 @@
             android:layout_marginEnd="5dip"
             android:textColor="#000000"
             android:layout_weight="1"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
             />
         <ImageView
             android:id="@+id/add_ok_description"

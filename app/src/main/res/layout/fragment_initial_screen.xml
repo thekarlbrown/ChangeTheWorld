@@ -2,21 +2,25 @@
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:background="#FF0000"
+    android:background="#668DE6"
     android:focusableInTouchMode="true"
     tools:context="com.thekarlbrown.changetheworld.InitialScreen">
 
-    <ImageView
-        android:src="@drawable/ic_mainlogo"
+    <TextView
+        android:textSize="40sp"
+        android:textColor="#1754E0"
+        android:text="@string/app_title_bold"
+        android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"/>
+        android:layout_gravity="center_horizontal"
+        android:gravity="center_horizontal"/>
     <TextView
         android:id="@+id/welcometext"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:textSize="15sp"/>
+        android:textSize="20sp"/>
     <EditText android:id="@+id/login_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
