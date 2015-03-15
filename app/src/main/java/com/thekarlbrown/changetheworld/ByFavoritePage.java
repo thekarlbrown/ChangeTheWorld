@@ -61,8 +61,6 @@ public class ByFavoritePage extends Fragment {
         l.setAdapter(dapt);
         fm=getFragmentManager();
         barFilter.barFilterClick(rv,fm,selectedf,getTag(),mainActivity);
-        t=(TextView)rv.findViewById(R.id.by_favorite_username);
-        t.setText(username + "'s favorite ideas: ");
         return rv;
     }
     public void filterSelected(int i)

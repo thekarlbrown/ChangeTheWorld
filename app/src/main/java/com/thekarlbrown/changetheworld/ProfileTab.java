@@ -89,7 +89,7 @@ public class ProfileTab extends Fragment {
         username = pref.getString(getString(R.string.preference_username), "yagoofed");
         userid = pref.getInt(getString(R.string.preference_userid), -1);
         t = (TextView) rv.findViewById(R.id.profile_welcome);
-        t.setText("Welcome " + username);
+        t.setText("     Welcome " + username);
         button = (Button) rv.findViewById(R.id.profile_your_ideas);
         button.setOnClickListener(new View.OnClickListener() {
             @Override

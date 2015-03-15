@@ -1,8 +1,8 @@
 --- README ---
 
-As part of my Senior project, I am developing an Android app that utilizes a MySQL database on this server to enable the sharing, group evaluation, improvement and implementation of new ideas and innovation.
+I am developing an Android app that utilizes a MySQL database on this server to enable the sharing, group evaluation, improvement and implementation of new ideas and innovation.
 
-This undertaking is my first attempt at full stack development! It has been an incredible experience, and I am not even halfway there!
+This undertaking is my first attempt at full stack development and it has been an incredible experience!
 
 This app will allow people with good concepts to get them to individuals who will be able to implement them who may never do anything with them otherwise
 
@@ -22,7 +22,7 @@ I am currently in the alpha stages of development. What does this entail?
  
  - Prototype complete! Now I connect the PHP to the Android app and watch the magic happen!
 
-
+ - The UI is being completely re-defined
 ----------------------------------
 
 1. The app is in the earliest of alpha. Its performance is not optimized. In fact, I have a list of things I intend on doing, bugs that need to be fixed, and what I intend to do further on in a huge list
@@ -182,6 +182,6 @@ Napalm, g00s, groxx,TacticalJoke, lasserix,cbeust at #android-dev
 
 danblack, seekwill, salle at #mysql
 
-alphos, xyphoid at #php
+alphos, xyphoid. TML at #php
 
 cmalekpour on github

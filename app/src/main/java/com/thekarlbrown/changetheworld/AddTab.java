@@ -98,7 +98,6 @@
                         add_title = et.getText().toString();
                         if(!Pattern.matches("(?i)^([^\"\\[:\\]\\|=\\+\\*\\?<>\\\\\\/\\r\\n]+)$", add_title)||(add_title==null))
                         {
-                            et.setText(null);
                             iv.setImageResource(R.drawable.ic_red_x);
                             add_title=null;
                         }else
@@ -132,9 +131,8 @@
                     et = (EditText) rv.findViewById(R.id.add_edit_description);
                     try {
                         add_description = et.getText().toString();
-                        if(!Pattern.matches("(?i)^([^\"\\[:\\]\\|=\\+\\*\\?<>\\\\\\/]+)$", add_description)||(add_description==null))
+                        if(!Pattern.matches("(?i)^([^\"\\[:\\]\\|=\\+\\*<>\\\\\\/]+)$", add_description)||(add_description==null))
                         {
-                            et.setText(null);
                             iv.setImageResource(R.drawable.ic_red_x);
                             add_description=null;
                         }else
@@ -302,7 +300,7 @@
             boolean wegood=true;
             try {
                 add_title = et.getText().toString();
-                if (!Pattern.matches("(?i)^([^\"\\[:\\]\\|=\\+\\*\\?<>\\\\\\/\\r\\n]+)$", add_title) ||(add_title==null)) {
+                if (!Pattern.matches("(?i)^([^\"\\[:\\]\\|=\\+\\*<>\\\\\\/\\r\\n]+)$", add_title) ||(add_title==null)) {
                     iv.setImageResource(R.drawable.ic_red_x);
                     add_title = null;
                     wegood= false;
@@ -330,7 +328,7 @@
             et = (EditText) rv.findViewById(R.id.add_edit_description);
             try {
                 add_description = et.getText().toString();
-                if (!Pattern.matches("(?i)^([^\"\\[:\\]\\|=\\+\\*\\?<>\\\\\\/]+)$", add_description) || (add_description==null)) {
+                if (!Pattern.matches("(?i)^([^\"\\[:\\]\\|=\\+\\*<>\\\\\\/]+)$", add_description) || (add_description==null)) {
                     iv.setImageResource(R.drawable.ic_red_x);
                     add_description = null;
                     wegood= false;

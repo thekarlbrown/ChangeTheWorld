@@ -18,7 +18,7 @@ public class DataAdapter extends BaseAdapter{
     TextView t;
     int curposition;
     //for later when I am doing screen scaling
-    int adjustable = 115;
+    int adjustable = 150;
 
 
     public DataAdapter(IdeaBlock i, Context context) {
@@ -51,6 +51,7 @@ public class DataAdapter extends BaseAdapter{
                     .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView=inflater.inflate(R.layout.idea_container, parent, false);
             viewHolder=new ViewHolderData();
+            viewHolder.ideatitle=(TextView)convertView.findViewById(R.id.container_idea_title);
             viewHolder.ideatext=(TextView)convertView.findViewById(R.id.container_idea_text);
             viewHolder.upcount=(TextView) convertView.findViewById(R.id.container_up_count);
             viewHolder.downcount=(TextView) convertView.findViewById(R.id.container_down_count);
@@ -58,10 +59,12 @@ public class DataAdapter extends BaseAdapter{
         }else{
             viewHolder=(ViewHolderData) convertView.getTag();
         }
+        viewHolder.ideatitle.setText( current.getTitle(position));
         if( current.getIdea(position).length()>adjustable) {
-            viewHolder.ideatext.setText("Title: " + current.getTitle(position) + "\n" + current.getIdea(position).substring(0, adjustable) + ".....");
+
+            viewHolder.ideatext.setText(current.getIdea(position).substring(0, adjustable) + ".....");
         }else{
-            viewHolder.ideatext.setText("Title: " + current.getTitle(position) + "\n" + current.getIdea(position));
+            viewHolder.ideatext.setText(current.getIdea(position));
         }
         viewHolder.upcount.setText(Integer.toString(current.getTup(position)));
         viewHolder.downcount.setText(Integer.toString(current.getTdown(position)));
@@ -69,6 +72,7 @@ public class DataAdapter extends BaseAdapter{
     }
     static class ViewHolderData
     {
+        TextView ideatitle;
         TextView ideatext;
         TextView upcount;
         TextView downcount;

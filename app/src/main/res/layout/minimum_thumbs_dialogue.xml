@@ -10,7 +10,11 @@
         android:textSize="40sp"
         android:textColor="#000000"
         android:textStyle="bold"
-        android:gravity="center_horizontal"/>
+        android:gravity="center_horizontal"
+        android:shadowColor="#FFFFFF"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="2"/>
     <EditText
         android:id="@+id/thumbs_dialogue_entry"
         android:layout_width="match_parent"

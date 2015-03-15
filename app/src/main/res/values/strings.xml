@@ -23,6 +23,9 @@
     <string name="menu_top_rated">Top Rated</string>
     <string name="menu_trending">TRENDING</string>
     <string name="menu_category">CATEGORY</string>
+    <string name="idea_category">Category: </string>
+    <string name="idea_subcategory">Subcategory: </string>
+    <string name="idea_idea_title">Title: </string>
     <string name="menu_profile">PROFILE</string>
     <string name="menu_add">ADD IDEA</string>
     <string name="menu_top_users">LEADERBOARD</string>
@@ -52,7 +55,7 @@
     <string name="add_title">Idea Title: </string>
     <string name="add_edit_title">What will you call your idea?</string>
     <string name="add_description">Description: </string>
-    <string name="add_edit_description">Describe what you are thinking as best you can. Please take your time. Remember to search before you add, make it obvious to a layman (if possible), look up if it has been done, and try to figure out huge issues before submitting.</string>
+    <string name="add_edit_description">-Write your idea\'s Title above\n-Choose a Category and Subcategory!\n-Describe what you are thinking as best you can. Please take your time. Remember to search before you add, make it obvious to a layman (if possible), look up if it has been done, and try to figure out huge issues before submitting.</string>
     <string name="add_draft">Save as Draft</string>
     <string name="add_submit">Submit your Idea</string>
     <string name="add_category_subcategory">Category: </string>
@@ -86,7 +89,7 @@
     <string name="page_idea_comment">Add Improvement</string>
     <string name="page_idea_follow">Follow User</string>
     <string name="page_idea_unfollow">Unfollow User</string>
-    <string name="login_welcome">Welcome to the app that enables the sharing, evaluation, and \n tweaking of new ideas and innovation! Navigate with the top bar! \n Enter your username and login or create an account to continue</string>
+    <string name="login_welcome">Welcome to the app that enables the sharing of new ideas!\nNavigate with the top icons after making an account!\nCreate an account or login to continue!</string>
     <string name="login_login_button">Login</string>
     <string name="login_create_button">Create account</string>
     <string name="login_username_prompt">Please enter your username</string>

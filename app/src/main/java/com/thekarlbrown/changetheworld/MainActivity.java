@@ -642,6 +642,12 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
      * @return - Boolean representing success of query
      */
     public boolean verifyLogon(String username, String password) {
+        try {
+            username = URLEncoder.encode(username, "utf-8");
+            password = URLEncoder.encode(password, "utf-8");
+        }catch (UnsupportedEncodingException e){
+            Log.println(0,"Error: ",e.toString());
+        }
         aSyncParser = new ASyncParser("http://www.thekarlbrown.com/ctwapp/user_verifyPHash.php?username=" + username + "&password=" + password);
         try {
             aSyncParser.execute();
@@ -674,6 +680,13 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
      * @return Boolean based on success of account addition to database
      */
     public boolean verifyCreate(String username, String password, String email) {
+        try {
+            username = URLEncoder.encode(username, "utf-8");
+            password = URLEncoder.encode(password, "utf-8");
+            email=URLEncoder.encode(email,"utf-8");
+        }catch (UnsupportedEncodingException e){
+            Log.println(0,"Error: ",e.toString());
+        }
         aSyncParser = new ASyncParser("http://www.thekarlbrown.com/ctwapp/user_addPHash.php?username=" + username + "&password=" + password + "&email=" + email);
         try {
             aSyncParser.execute();

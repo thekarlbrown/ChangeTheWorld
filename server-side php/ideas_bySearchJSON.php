@@ -1,11 +1,12 @@
 <?php
 try{
-	$conn = new PDO('mysql:host=localhost;dbname=mydb','root','CENSORED');
+	$conn = new PDO('mysql:host=localhost;dbname=mydb;charset=utf8','root','CENSORED');
 	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	$search=$_GET["search"];
-	$search = stripslashes($search);
-	$data = $conn->query("SELECT title,author,descrip,time,thumbsup,thumbsdown,cat,sub,ididea FROM ideas WHERE title LIKE '%$search%'	OR descrip LIKE '%$search%' ORDER BY ididea DESC");
+
+	$data = $conn->prepare("SELECT title,author,descrip,time,thumbsup,thumbsdown,cat,sub,ididea FROM ideas WHERE title LIKE '%$search%'	OR descrip LIKE '%:search%' ORDER BY ididea DESC");	
 	$data->setFetchMode(PDO::FETCH_ASSOC);
+	$data->execute();
 	$data_array=$data->fetchAll();
 	echo "[";
 	$count=count($data_array)-1;

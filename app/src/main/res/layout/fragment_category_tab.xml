@@ -21,8 +21,14 @@
             android:textSize="40sp"
             android:textColor="#1754E0"
             android:text="@string/menu_category"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:shadowColor="#FFFFFF"
+            android:shadowDx="0"
+            android:shadowDy="0"
+            android:shadowRadius="2"
+            />
         <TextView
+            android:textColor="#FFFFFF"
             android:id="@+id/category_query"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

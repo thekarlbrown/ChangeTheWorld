@@ -5,15 +5,16 @@ $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 $username=$_GET["username"];
 $email=$_GET["email"];
 $password=$_GET["password"];
-$username = stripslashes($username);
-$email = stripslashes($email);
+
 $password=stripslashes($password);
 
 $options = [
     'cost' => 12,
 ];
 $hash = password_hash($password,PASSWORD_BCRYPT,$options);
-$stmt=$conn->prepare("INSERT INTO user (author,hash,email) VALUES ('$username','$hash','$email')");
+$stmt=$conn->prepare("INSERT INTO user (author,hash,email) VALUES (:username,'$hash',:email)");
+$stmt->bindValue(':username',$username,PDO::PARAM_STR);
+$stmt->bindValue(':email',$username,PDO::PARAM_STR);
 if($stmt->execute()){
 	echo "[{\"created\":\"1\"}]";
 }else{

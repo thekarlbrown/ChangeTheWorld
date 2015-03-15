@@ -99,9 +99,9 @@ public class IdeaPage extends Fragment {
         t=(TextView)rv.findViewById(R.id.page_idea_author);
         t.setText("Author: " +  idea_author);
         t=(TextView)rv.findViewById(R.id.page_idea_category);
-        t.setText("Category: " + idea_category);
+        t.setText(idea_category);
         t=(TextView)rv.findViewById(R.id.page_idea_subcategory);
-        t.setText("Subcategory: " + idea_subcategory);
+        t.setText(idea_subcategory);
         t=(TextView)rv.findViewById(R.id.page_idea_description);
         t.setText(idea_description);
         t.setMovementMethod(new ScrollingMovementMethod());

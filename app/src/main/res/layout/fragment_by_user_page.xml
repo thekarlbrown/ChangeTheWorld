@@ -16,6 +16,10 @@
         android:id="@+id/by_user_username"
         android:layout_gravity="center_horizontal"
         android:paddingBottom="5dp"
+        android:shadowColor="#FFFFFF"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="2"
         />
     <ListView
         android:layout_width="fill_parent"

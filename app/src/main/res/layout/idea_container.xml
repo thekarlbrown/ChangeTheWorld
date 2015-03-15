@@ -2,49 +2,71 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal" android:layout_width="match_parent"
     android:layout_height="match_parent"
-   android:background="#3E70E3"
-    >
+   android:background="#3E70E3">
+    <LinearLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+        android:layout_gravity="left"
+        android:layout_weight="1">
+    <TextView
+        android:textColor="#FFFFFF"
+        android:paddingLeft="5dip"
+        android:paddingRight="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/container_idea_title"
+
+        android:layout_gravity="center_horizontal"/>
     <TextView
         android:paddingLeft="5dip"
         android:paddingRight="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/container_idea_text"
-        android:layout_weight="1"
+        android:textColor="#55E1E1"
         android:gravity="start"
         android:layout_gravity="fill_horizontal"/>
+    </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingEnd="10dp"
+        android:paddingRight="10dp"
+        android:gravity="end"
+        android:layout_gravity="end"
+        android:layout_weight="0">
     <ImageView
 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/ic_thumbsup"
         android:gravity="end"
-        android:layout_weight="0"/>
+        />
         <ImageView
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_thumbsdown"
             android:gravity="end"
-            android:layout_weight="0"/>
+            />
 
     </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:layout_gravity="right"
+        android:layout_weight="0">
         <TextView
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/container_up_count"
             android:textColor="#FFFFFF"
+            android:layout_gravity="end"
 
-            android:layout_weight="0"
             android:textSize="20sp"/>
 
     <TextView
@@ -53,8 +75,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/container_down_count"
         android:textColor="#FFFFFF"
-
+        android:layout_gravity="end"
         android:textSize="20sp"
-        android:layout_weight="0"/>
+        />
     </LinearLayout>
 </LinearLayout>

@@ -7,15 +7,21 @@
     tools:context="com.thekarlbrown.changetheworld.InitialScreen">
 
     <TextView
-        android:textSize="40sp"
+        android:textSize="50sp"
         android:textColor="#1754E0"
         android:text="@string/app_title_bold"
         android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:gravity="center_horizontal"/>
+        android:gravity="center_horizontal"
+        android:shadowColor="#FFFFFF"
+        android:shadowDx="0"
+        android:shadowDy="0"
+        android:shadowRadius="2"
+        />
     <TextView
+        android:textColor="#FFFFFF"
         android:id="@+id/welcometext"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

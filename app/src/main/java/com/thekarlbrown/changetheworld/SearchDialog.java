@@ -29,7 +29,7 @@ public class SearchDialog extends DialogFragment {
                     public void onClick(DialogInterface dialog, int which) {
                         try {
                             String temp = ((EditText) view.findViewById(R.id.search_dialogue_entry)).getText().toString();
-                            if (!Pattern.matches("(?i)^([^\"\\[:\\]\\|=\\+\\*\\?<>\\\\\\/\\r\\n]+)$", temp)) {
+                            if (!Pattern.matches("(?i)^([^\"\\[:\\]\\|=\\+\\*<>\\\\\\/\\r\\n]+)$", temp)) {
 
                             } else {
                                 mListener.onSearchDialogPositiveClick(temp);
