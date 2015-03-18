@@ -86,6 +86,7 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
     }
 
     public void openTrending() {
+
             ib = new IdeaBlock();
             getJSONtoIdeaBlock("http://www.thekarlbrown.com/ctwapp/ideas_byAreaJSON.php?lat="+latitude+"&long="+longitude+"&state=" + state + "&country=" + country + "&username=" + username + "&case=3");
             fm = getFragmentManager();
