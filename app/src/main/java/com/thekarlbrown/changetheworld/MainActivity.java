@@ -870,11 +870,13 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
                state = states.get(addresses.get(0).getAdminArea());
                country=addresses.get(0).getCountryCode();
             }else{
-                state = "NA";
+                state = "VA";
                 country = "US";
             }
         } catch (IOException e) {
             Log.println(0, "Error", e.getMessage());
+            state = "VA";
+            country = "US";
         }
     }
 

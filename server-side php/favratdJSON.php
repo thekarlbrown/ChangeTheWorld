@@ -6,12 +6,12 @@ try{
 	$ideaid=$_GET["ideaid"];
 	$case=$_GET["case"];
 
-	$query=$conn->prepare("SELECT user FROM user WHERE author=?");
-	$query->execute(array($username));
-	$fetch=$query->fetch(PDO::FETCH_ASSOC);
+	$stmt=$conn->prepare("SELECT user FROM user WHERE author=?");
+	$stmt->execute(array($username));
+	$fetch=$stmt->fetch(PDO::FETCH_ASSOC);
 	$userid=$fetch['user'];
 
-	$stmt=$conn->prepare("INSERT IGNORE favratd (iduser, ididea) VALUES (:userid,:ideaid)");
+	$stmt=$conn->prepare("INSERT IGNORE INTO favratd (iduser, ididea) VALUES (:userid,:ideaid)");
 	$stmt->bindValue(':userid',$userid,PDO::PARAM_INT);
 	$stmt->bindValue(':ideaid',$ideaid,PDO::PARAM_INT);
 	if($stmt->execute()){
@@ -21,44 +21,46 @@ try{
 		}
 
 	if($case==0){
-		$stmt=$conn->prepare("UPDATE favratd set fav='0' WHERE iduser='$userid' AND ididea='$ideaid'");
+		$stmt=$conn->prepare("UPDATE favratd set fav='0' WHERE iduser=:userid AND ididea=:ideaid");
 		$stmt->bindValue(':userid',$userid,PDO::PARAM_INT);
 		$stmt->bindValue(':ideaid',$ideaid,PDO::PARAM_INT);
 		$stmt->execute();
 	}else if($case==1){
-		$stmt=$conn->prepare("UPDATE favratd set fav='1' WHERE iduser='$userid' AND ididea='$ideaid'");
+		$stmt=$conn->prepare("UPDATE favratd set fav='1' WHERE iduser=:userid AND ididea=:ideaid");
 		$stmt->bindValue(':userid',$userid,PDO::PARAM_INT);
 		$stmt->bindValue(':ideaid',$ideaid,PDO::PARAM_INT);
 		$stmt->execute();
 	}else if($case==2){
-		$query=$conn->prepare("SELECT rated FROM favratd WHERE iduser=:userid AND ididea=:ideaid");
-		$query->bindValue(':userid',$userid,PDO::PARAM_INT);
-		$query->bindValue(':ideaid',$ideaid,PDO::PARAM_INT);
-		$query->execute();
-		$fetch=$query->fetch(PDO::FETCH_ASSOC);
+		$stmt=$conn->prepare("SELECT rated FROM favratd WHERE iduser=:userid AND ididea=:ideaid");
+		$stmt->bindValue(':userid',$userid,PDO::PARAM_INT);
+		$stmt->bindValue(':ideaid',$ideaid,PDO::PARAM_INT);
+		$stmt->execute();
+		$fetch=$stmt->fetch(PDO::FETCH_ASSOC);
 		$lastrated=$fetch['rated'];
-		$stmt=$conn->prepare("UPDATE favratd set rated=NULL WHERE iduser=:userid AND ididea=:userid");
+		//echo $lastrated;
+		$stmt=$conn->prepare("UPDATE favratd set rated=NULL WHERE iduser=:userid AND ididea=:ideaid");
 		$stmt->bindValue(':userid',$userid,PDO::PARAM_INT);
 		$stmt->bindValue(':ideaid',$ideaid,PDO::PARAM_INT);
 		if($stmt->execute()){
 			if($lastrated==NULL){
 			}else if($lastrated==0){
-				$stmt=$conn->prepare("UPDATE ideas set thumbsdown=thumbsdown-1 WHERE ididea='$ideaid'");
-				$query->bindValue(':ideaid',$ideaid,PDO::PARAM_INT);
+				$stmt=$conn->prepare("UPDATE ideas set thumbsdown=thumbsdown-1 WHERE ididea=:ideaid");
+				$stmt->bindValue(':ideaid',$ideaid,PDO::PARAM_INT);
 				$stmt->execute();
 			}else if($lastrated==1){
-				$stmt=$conn->prepare("UPDATE ideas set thumbsup=thumbsup-1 WHERE ididea='$ideaid'");
-				$query->bindValue(':ideaid',$ideaid,PDO::PARAM_INT);
+				$stmt=$conn->prepare("UPDATE ideas set thumbsup=thumbsup-1 WHERE ididea=:ideaid");
+				$stmt->bindValue(':ideaid',$ideaid,PDO::PARAM_INT);
 				$stmt->execute();
 			}
 		}
 	}else if($case==3){
-		$query=$conn->prepare("SELECT rated FROM favratd WHERE iduser=:userid AND ididea=:ideaid");
-		$query->bindValue(':userid',$userid,PDO::PARAM_INT);
-		$query->bindValue(':ideaid',$ideaid,PDO::PARAM_INT);
-		$query->execute();
-		$fetch=$query->fetch(PDO::FETCH_ASSOC);
+		$stmt=$conn->prepare("SELECT rated FROM favratd WHERE iduser=:userid AND ididea=:ideaid");
+		$stmt->bindValue(':userid',$userid,PDO::PARAM_INT);
+		$stmt->bindValue(':ideaid',$ideaid,PDO::PARAM_INT);
+		$stmt->execute();
+		$fetch=$stmt->fetch(PDO::FETCH_ASSOC);
 		$lastrated=$fetch['rated'];
+		//echo $lastrated;
 		$stmt=$conn->prepare("UPDATE favratd set rated='1' WHERE iduser=:userid AND ididea=:ideaid");
 		$stmt->bindValue(':userid',$userid,PDO::PARAM_INT);
 		$stmt->bindValue(':ideaid',$ideaid,PDO::PARAM_INT);
@@ -78,12 +80,13 @@ try{
 			}
 		}
 	}else if($case==4){
-		$query=$conn->prepare("SELECT rated FROM favratd WHERE iduser=:userid AND ididea=:ideaid");
-		$query->bindValue(':userid',$userid,PDO::PARAM_INT);
-		$query->bindValue(':ideaid',$ideaid,PDO::PARAM_INT);
-		$query->execute();
-		$fetch=$query->fetch(PDO::FETCH_ASSOC);
+		$stmt=$conn->prepare("SELECT rated FROM favratd WHERE iduser=:userid AND ididea=:ideaid");
+		$stmt->bindValue(':userid',$userid,PDO::PARAM_INT);
+		$stmt->bindValue(':ideaid',$ideaid,PDO::PARAM_INT);
+		$stmt->execute();
+		$fetch=$stmt->fetch(PDO::FETCH_ASSOC);
 		$lastrated=$fetch['rated'];
+		//echo $lastrated;
 		$stmt=$conn->prepare("UPDATE favratd set rated='0' WHERE iduser=:userid AND ididea=:ideaid");
 		$stmt->bindValue(':userid',$userid,PDO::PARAM_INT);
 		$stmt->bindValue(':ideaid',$ideaid,PDO::PARAM_INT);

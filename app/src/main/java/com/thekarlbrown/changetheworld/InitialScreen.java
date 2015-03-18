@@ -78,8 +78,7 @@ public class InitialScreen extends Fragment {
         username=pref.getString(getString(R.string.preference_username), "defaultUSERcheck$3");
         if(mainActivity.verifyLogon(username,pref.getString(getString(R.string.preference_password),"defaultPASScheck$3"))){
             mainActivity.searchTabClick();
-            while(mainActivity.state==null){
-            }
+
             mainActivity.openTrending();
             //mainActivity.authenticated(username); if necessary?
         }else{
@@ -113,8 +112,7 @@ public class InitialScreen extends Fragment {
                         epref.putString(getString(R.string.preference_username), username);
                         epref.putString(getString(R.string.preference_password),((EditText)rv.findViewById(R.id.login_password)).getText().toString());
                         epref.apply();
-                        while(mainActivity.state==null){
-                        }
+
                        mainActivity.openTrending();
                         //mainActivity.authenticated(username); if necessary?
                     }else{
@@ -176,8 +174,7 @@ public class InitialScreen extends Fragment {
                         epref=pref.edit();
                         epref.putString(getString(R.string.preference_username), username);
                         epref.apply();
-                        while(mainActivity.state==null){
-                        }
+
                         mainActivity.openTrending();
                         //mainActivity.authenticated(username); if necessary?
                     }else{
