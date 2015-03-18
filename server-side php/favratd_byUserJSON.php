@@ -40,7 +40,7 @@ try{
 	}else{
 		echo "{\"followed\":\"0\"}";
 	}
-		echo "]";
+	echo "]";
 } catch(PDOException $e) {
 	echo 'ERROR: ' . $e->getMessage();
 }

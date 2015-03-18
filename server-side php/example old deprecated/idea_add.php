@@ -2,6 +2,7 @@
 try{
 	$conn = new PDO('mysql:host=localhost;dbname=mydb','root','CENSORED');
 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+echo "Connected Successfully";
 $title=$_GET["title"];
 $username=$_GET["username"];
 $descrip=$_GET["descrip"];

@@ -1,6 +1,6 @@
 <?php
 try{
-	$conn = new PDO('mysql:host=localhost;dbname=mydb;charset=utf8','root','sqlDEB123');
+	$conn = new PDO('mysql:host=localhost;dbname=mydb;charset=utf8','root','CENSORED');
 	$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	$lat=$_GET["lat"];
 	$long=$_GET["long"];
