@@ -62,7 +62,7 @@ todo: second version without error messages and push only (maybe not push only a
 
 --TO-DO/Tactics for Implementation --
 
-if favorite/follow/rate fails, do I re-attempt rating, revert changes on the user page and alert the user, or an alternative
+improve how I change trending in relation to geocoding (the current band-aide due to desire to push to alpha stage is hilarious)
 
 figure out why appetize is crashing (likely because of location data issues) and figure out how to deal with that 
 

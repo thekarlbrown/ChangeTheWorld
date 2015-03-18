@@ -9,7 +9,7 @@
     <string name="menu_state">State</string>
     <string name="menu_country">Country</string>
     <string name="menu_globally">Globally</string>
-    <string name="menu_friends">Friends</string>
+    <string name="menu_followers">Followers</string>
     <string name="menu_today">Today</string>
     <string name="menu_week">This Week</string>
     <string name="menu_month">This Month</string>

@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ListView;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -392,7 +393,7 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
         //set area of choice to be pulled here
         //method with int area
         switch (tag) {
-            case "byfriends":
+            /*case "byfriends":
                 friendsPage.dapt.notifyDataSetChanged();
                 break;
             case "byfavorite":
@@ -401,14 +402,22 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
             case "byuser":
                 userPage.dapt.notifyDataSetChanged();
                 break;
-            case "trending":
-                trendingTab.dapt.notifyDataSetChanged();
-                break;
+
             case "category":
                 categoryTab.dapt.notifyDataSetChanged();
                 break;
             case "search":
                 searchTab.dapt.notifyDataSetChanged();
+                break;
+                */
+            case "trending":
+                ib=new IdeaBlock();
+                getJSONtoIdeaBlock("http://www.thekarlbrown.com/ctwapp/ideas_byAreaJSON.php?lat="+latitude+"&long="+longitude+"&state=" + state + "&country=" + country + "&username=" + username + "&case="+area);
+                trendingTab.dapt = new IdeaDataAdapter(ib,this);
+                trendingTab.l.setAdapter(trendingTab.dapt);
+                break;
+            case "leaderboard":
+                //deal with this bad boi;
                 break;
             default:
                 tag = "leave b4 admin bans u";
@@ -420,6 +429,7 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
         //set time of choice to be pulled here
         //method with int time
         switch (tag) {
+            /*
             case "byfriends":
                 friendsPage.dapt.notifyDataSetChanged();
                 break;
@@ -432,11 +442,18 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
             case "trending":
                 trendingTab.dapt.notifyDataSetChanged();
                 break;
-            case "category":
-                categoryTab.dapt.notifyDataSetChanged();
-                break;
             case "search":
                 searchTab.dapt.notifyDataSetChanged();
+                break;
+            */
+            case "category":
+                ib=new IdeaBlock();
+                getJSONtoIdeaBlock("http://www.thekarlbrown.com/ctwapp/ideas_byCatSubTimeJSON.php?cat=" + (categoryTab.categoryfirst+1) + "&sub=" + categoryTab.categorysecond +"&case="+time);
+                categoryTab.dapt = new IdeaDataAdapter(ib,this);
+                categoryTab.l.setAdapter(categoryTab.dapt);
+                break;
+            case "leaderboard":
+                //deal with this bad boi;
                 break;
             default:
                 tag = "leave b4 admin bans u";
@@ -850,6 +867,10 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
     public void onConnected(Bundle bundle) {
         obtainLocation();
         mGoogleApiClient.disconnect();
+        //This is a temporary bandaid but still pretty funny
+        if(st.getVisibility()==View.VISIBLE){
+            openTrending();
+        }
     }
     @Override
     public void onConnectionSuspended(int i) {
