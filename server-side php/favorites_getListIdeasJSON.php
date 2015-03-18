@@ -9,7 +9,7 @@ try{
 	$fetch=$query->fetch(PDO::FETCH_ASSOC);
 	$userid=$fetch['user'];
 	
-	$data = $conn->query("SELECT title,author,descrip,time,thumbsup,thumbsdown,cat,sub FROM ideas LEFT JOIN favratd ON ideas.ididea=favratd.ididea WHERE favratd.iduser='$userid'");
+	$data = $conn->query("SELECT title,author,descrip,time,thumbsup,thumbsdown,cat,sub,ididea FROM ideas LEFT JOIN favratd ON ideas.ididea=favratd.ididea WHERE favratd.iduser='$userid'");
 	$data->setFetchMode(PDO::FETCH_ASSOC);
 	$data_array=$data->fetchAll();
 	echo "[";

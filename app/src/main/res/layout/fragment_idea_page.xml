@@ -123,57 +123,91 @@
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="24dp"
+        android:layout_height="30dp"
         android:orientation="horizontal"
+        android:gravity="center"
 
 
         android:layout_weight="0.10">
+        <Button
+            android:layout_width="68sp"
+
+            android:layout_height="30sp"
+            android:id="@+id/page_idea_upselect"
+            android:gravity="center"
+            android:layout_gravity="start|center_vertical"
+            android:text="@string/page_idea_upvote"
+            android:textSize="10sp" />
         <ImageView
-            android:paddingLeft="10dp"
-            android:clickable="true"
+            android:gravity="center"
+            android:layout_gravity="start|center_vertical"
+            android:paddingLeft="2dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_thumbsup"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="0"
-            android:id="@+id/page_idea_upselect"/>
-        <TextView
 
+            />
+
+        <TextView
+            android:gravity="center"
+            android:layout_gravity="start|center_vertical"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/page_idea_tup"
             android:textColor="#000000"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="0"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:textSize="20sp"/>
+        <Button
+            android:layout_width="80sp"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:layout_height="30sp"
+            android:id="@+id/page_idea_downselect"
+            android:text="@string/page_idea_downvote"
+            android:textSize="10sp" />
         <ImageView
-            android:clickable="true"
+            android:gravity="center"
+            android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_thumbsdown"
-            android:id="@+id/page_idea_downselect"
-            android:layout_gravity="center_vertical"
-            android:layout_weight="0"/>
+            />
         <TextView
-            android:paddingLeft="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/page_idea_tdown"
             android:textColor="#000000"
-            android:layout_gravity="center_vertical"
-
-            android:textSize="20sp"
-            android:layout_weight="0"/>
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textSize="20sp"/>
+        <Button
+            android:gravity="center"
+            android:layout_gravity="end|center_vertical"
+            android:layout_width="85sp"
+            android:layout_height="30sp"
+            android:id="@+id/page_idea_favorite"
+            android:text="@string/page_idea_favorite"
+            android:textSize="10sp"/>
         <ImageView
+            android:gravity="center"
+            android:layout_gravity="end|center_vertical"
             android:clickable="true"
-            android:layout_width="43dp"
+            android:layout_width="40dp"
+            android:id="@+id/page_idea_favorite_image"
             android:layout_height="match_parent"
             android:src="@drawable/ic_top_bar"
-            android:id="@+id/page_idea_favorite"
-            android:layout_gravity="center_vertical"
             android:focusable="false" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="25dp"
+        android:orientation="horizontal"
+
+
+        android:layout_weight="0.10">
         <Button
             android:layout_width="match_parent"
             android:layout_weight="1"
@@ -182,7 +216,7 @@
             android:text="@string/page_idea_other"
 
             android:layout_gravity="center_vertical"
-            android:textSize="8sp" />
+            android:textSize="10sp" />
         <Button
             android:layout_width="match_parent"
             android:layout_weight="1"
@@ -190,7 +224,7 @@
             android:id="@+id/page_idea_comment"
             android:layout_gravity="center_vertical"
             android:text="@string/page_idea_comment"
-            android:textSize="8sp" />
+            android:textSize="10sp" />
         <Button
             android:layout_width="match_parent"
             android:layout_weight="1"
@@ -198,7 +232,7 @@
             android:id="@+id/page_idea_follow"
             android:layout_gravity="center_vertical"
             android:text="@string/page_idea_follow"
-            android:textSize="8sp" />
+            android:textSize="10sp" />
     </LinearLayout>
 
 

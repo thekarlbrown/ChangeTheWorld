@@ -11,6 +11,7 @@
         android:background="#00D9D9"
         android:id="@+id/toolbar_top"
         android:layout_marginBottom="5dp"
+        android:visibility="gone"
     />
 
 

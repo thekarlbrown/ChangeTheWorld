@@ -12,6 +12,7 @@ import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -66,6 +67,7 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
     ByUserPage userPage;
     ByFriendsPage friendsPage;
     ByFavoritePage favoritePage;
+    ProfileTab profileTab;
     boolean[] bar_filter_status = {false, false};
     String username;
     //for asynctask
@@ -84,7 +86,6 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
     }
 
     public void openTrending() {
-        if (fm.findFragmentByTag("trending") == null) {
             ib = new IdeaBlock();
             getJSONtoIdeaBlock("http://www.thekarlbrown.com/ctwapp/ideas_byAreaJSON.php?lat="+latitude+"&long="+longitude+"&state=" + state + "&country=" + country + "&username=" + username + "&case=3");
             fm = getFragmentManager();
@@ -98,7 +99,7 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
             ft.replace(R.id.current_tab, trendingTab, "trending");
 
             ft.commit();
-        }
+
     }
 
     public void openCategory() {
@@ -156,7 +157,11 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
         if (fm.findFragmentByTag("profile") == null) {
             fm = getFragmentManager();
             ft = fm.beginTransaction();
-            ft.replace(R.id.current_tab, new ProfileTab(), "profile");
+            profileTab=new ProfileTab();
+            b=new Bundle();
+            b.putString("username",username);
+            profileTab.setArguments(b);
+            ft.replace(R.id.current_tab, profileTab , "profile");
             ft.commit();
         }
     }
@@ -184,7 +189,6 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
         }
     }
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -195,24 +199,10 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
         sharedPref = getApplicationContext().getSharedPreferences(
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
 
-        //test blocks of data due to lack of mysql implementation
-        /*ideablock
-        ib = new IdeaBlock("Placeholder", "Heres a lllama theres a llama and another little llama fuzzy llama funny llama llamma llamma duck Heres a lllama theres a llama and another little llama fuzzy llama funny llama llamma llamma duck Heres a lllama theres a llama and another little llama fuzzy llama funny llama llamma llamma duck", "Karl Brown", 999, 1, 70, 2, 11);
-        ib.add("heres the plan", "add yo ideas like crazy till da brain feels lazy", "k breezy", 100, 0, 63, 4, 4);
-        ib.add(new String[]{"I have a suggestion", "However please remember"}, new String[]{"Try to break the app and tell me what messed up", "There is test data available. Please also have the latest release, and check what I know is broken, will be changed, and will be implemented later"}, new String[]{"Richard Stallman", "George Soros"}, new int[]{2, 3}, new int[]{2, 3}, new int[]{2, 3}, new int[]{7, 3}, new int[]{3, 4});
-        ib.add(ib.titles, ib.ideas, ib.authors, ib.tups, ib.tdowns, ib.numbers, ib.categorys, ib.subcategorys);
-        ib.add(ib.titles, ib.ideas, ib.authors, ib.tups, ib.tdowns, ib.numbers, ib.categorys, ib.subcategorys);
-        */
         ib = new IdeaBlock();
-        state = "va";
-        country = "us";
         //leaderblock
         leaderBlock = new LeaderBlock(new String[]{"putin", "obama", "farage", "assad", "kadyrov"}, new String[]{"putin", "obama", "farage", "assad", "kadyrov"}, new String[]{"putin", "obama", "farage", "assad", "kadyrov"}, new String[]{"putin", "obama", "farage", "assad", "kadyrov"},
                 new double[]{59.523, 42.70, 9.11, 3.041, 99.99}, new int[]{999, 70, 911, 101, 1337}, new double[]{59.523, 42.69, 9.11, 3.041, 99.99}, new double[]{59.523, 42.70, 9.11, 3.041, 99.99});
-
-
-        //this deletes your user every time. comment it out to save username and be more persistent
-        //sharedPref.edit().remove(getString(R.string.preference_username)).apply();
 
         //create category titles
         createTitles();
@@ -226,15 +216,6 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
         if (fm == null) {
             fm = getFragmentManager();
             ft = fm.beginTransaction();
-            /*
-            if (sharedPref.getBoolean(getString(R.string.preference_setup), false)) {
-                os = new OpeningScreen();
-                ft.add(R.id.current_tab, os, "opening");
-                searchTabClick();
-            } else {
-                InitialScreen init = new InitialScreen();
-                init.setArguments(b);
-                */
             ft.add(R.id.current_tab, new InitialScreen(), "initial");
             //}
             ft.commit();
@@ -519,15 +500,11 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
     public void onIdeaListClick(int position) {
         fm = getFragmentManager();
         ft = fm.beginTransaction();
-        b = new Bundle();
         IdeaPage ideaPage = new IdeaPage();
+        b = new Bundle();
         b.putInt("position", position);
-        //here we will have a asynctask that will obtain their current value based on position
-        //this will require us to know the idea id's. IdeaBlock may have an additional category added
-        //sample data for now
-        b.putBooleanArray("thumbd", new boolean[]{false, false});
-        b.putBoolean("favorite", true);
-        b.putBoolean("followed", true);
+        //bundle values assigned here after querying server
+        getFavRatD(username,ib.getNumber(position));
         ideaPage.setArguments(b);
         ft.replace(R.id.current_tab, ideaPage, "ideapage");
         ft.commit();
@@ -576,6 +553,7 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
     }
 
     public void searchTabClick() {
+        st.setVisibility(View.VISIBLE);
         st.setOnMenuItemClickListener(new SplitToolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
@@ -710,6 +688,14 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
         }
     }
 
+    /**
+     * Adding ideas
+     * @param title - Idea title
+     * @param description - Idea description
+     * @param cat - Category starting at 1
+     * @param sub -Subcategory starting at 1
+     * @return If idea was successfully queried or not
+     */
     public boolean verifyAdd(String title, String description,int cat,int sub) {
         try{
             title= URLEncoder.encode(title,"utf-8");
@@ -739,6 +725,110 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
         }
     }
 
+    public boolean changeFollow(String follower,int choice) {
+        try{
+            username= URLEncoder.encode(username,"utf-8");
+            follower=URLEncoder.encode(follower,"utf-8");
+        }catch(UnsupportedEncodingException e){
+            Log.println(0,"Error: ",e.getMessage());
+        }
+        aSyncParser = new ASyncParser("http://www.thekarlbrown.com/ctwapp/follower_JSON.php?&username=" + username + "&follower=" + follower + "&case=" + choice);
+        try {
+            aSyncParser.execute();
+            jsonArray = aSyncParser.get();
+        } catch (Exception e) {
+            Log.println(0, "Error", e.getMessage());
+            return false;
+        }
+        try {
+            int result = Integer.parseInt(jsonArray.getJSONObject(0).getString("succeeded"));
+            if (result == 0) {
+                return false;
+            } else {
+                return true;
+            }
+        } catch (Exception e) {
+            Log.println(0, "Error", e.getMessage());
+            return false;
+        }
+    }
+
+    /**
+     * Get the current favorited, followed, and rated status of the given idea for the user
+     * @param username - Username of current user
+     * @param ideaid - IdeaID of selected idea
+     */
+    public void getFavRatD(String username, int ideaid) {
+        try{
+            username= URLEncoder.encode(username,"utf-8");
+        }catch(UnsupportedEncodingException e){
+            Log.println(0,"Error: ",e.getMessage());
+        }
+        aSyncParser = new ASyncParser("http://www.thekarlbrown.com/ctwapp/favratd_byUserJSON.php?ideaid=" + ideaid + "&username=" + username);
+        try {
+            aSyncParser.execute();
+            jsonArray = aSyncParser.get();
+        } catch (Exception e) {
+            Log.println(0, "Error", e.getMessage());
+            b.putBoolean("favorite", false);
+            b.putBooleanArray("thumbd", new boolean[]{false, false});
+            b.putBoolean("followed", false);
+        }
+        try {
+            String result = jsonArray.getJSONObject(0).getString("fav");
+            if (result.equals("null")||result.equals("0") ) {
+                b.putBoolean("favorite", false);
+            } else {
+                b.putBoolean("favorite", true);
+            }
+            result = jsonArray.getJSONObject(0).getString("rated");
+            if (result.equals("null") ) {
+                b.putBooleanArray("thumbd", new boolean[]{false, false});
+            } else if (result.equals("0")){
+                b.putBooleanArray("thumbd", new boolean[]{false, true});
+            }else{
+                b.putBooleanArray("thumbd", new boolean[]{true, false});
+            }
+            result = jsonArray.getJSONObject(1).getString("followed");
+            if (result.equals("0")){
+                b.putBoolean("followed", false);
+            }else{
+                b.putBoolean("followed", true);
+            }
+        } catch (Exception e) {
+            Log.println(0, "Error", e.getMessage());
+            b.putBoolean("favorite", false);
+            b.putBooleanArray("thumbd", new boolean[]{false, false});
+            b.putBoolean("followed", false);
+        }
+    }
+
+    /**
+     * This tool is used to set the selection in the ideapage and update the database accordingly
+     * @param username - Username of current user
+     * @param ideaid - IdeaID of selected idea
+     * @param selection - Selector based on what the user clicked
+     */
+    public void setFavRatD(String username, int ideaid, int selection) {
+        try{
+            username= URLEncoder.encode(username,"utf-8");
+        }catch(UnsupportedEncodingException e){
+            Log.println(0,"Error: ",e.getMessage());
+        }
+        aSyncParser = new ASyncParser("http://www.thekarlbrown.com/ctwapp/favratdJSON.php?username="+username+"&ideaid="+ideaid+"&case="+selection);
+        try {
+            aSyncParser.execute();
+            jsonArray = aSyncParser.get();
+        } catch (Exception e) {
+            Log.println(0, "Error", e.getMessage());
+        }
+        try {
+            //TODO: if favorite/follow/rate fails, do I re-attempt rating, revert changes on the user page and alert the user, or alternative
+            String result = jsonArray.getJSONObject(0).getString("added");
+        } catch (Exception e) {
+            Log.println(0, "Error", e.getMessage());
+        }
+    }
 
 
     //Location tracking :3

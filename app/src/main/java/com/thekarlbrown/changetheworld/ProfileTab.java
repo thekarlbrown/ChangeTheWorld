@@ -40,9 +40,8 @@ public class ProfileTab extends Fragment {
     MainActivity mainActivity;
     Context curcontext;
     Button button;
-    int userid;
+    SharedPreferences.Editor editor;
     String username;
-    SharedPreferences.Editor epref;
     LocalIdeas localIdeas = new LocalIdeas();
     FragmentTransaction ft;
     FragmentManager fm;
@@ -61,8 +60,7 @@ public class ProfileTab extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            //int i=savedInstanceState.getStringArray("category").length;
-            // category=new String[i];
+            username=getArguments().getString("username");
         }
     }
     ProfileTabListener mListener;
@@ -86,8 +84,6 @@ public class ProfileTab extends Fragment {
         }
 
         pref = mainActivity.getPref();
-        username = pref.getString(getString(R.string.preference_username), "yagoofed");
-        userid = pref.getInt(getString(R.string.preference_userid), -1);
         t = (TextView) rv.findViewById(R.id.profile_welcome);
         t.setText("     Welcome " + username);
         button = (Button) rv.findViewById(R.id.profile_your_ideas);
@@ -130,111 +126,26 @@ public class ProfileTab extends Fragment {
                 }
             }
         });
-        button = (Button) rv.findViewById(R.id.profile_import);
+        button = (Button) rv.findViewById(R.id.profile_logout);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                t = (TextView) rv.findViewById(R.id.profile_prof_status);
-                try {
-                    if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
-                        if (loadSharedPreferencesFromFile(new File(Environment.getExternalStoragePublicDirectory(
-                                Environment.DIRECTORY_DOWNLOADS), pref.getString(getString(R.string.preference_username), "yagoofed")))) {
-                            t.setText(R.string.profile_import_success);
-                        } else {
-                            t.setText(R.string.profile_error_missing);
-                        }
-                    } else {
-                        t.setText(R.string.profile_error_access);
-                    }
-                } catch (Exception e) {
-                    t.setText(R.string.profile_error_unknown);
-                }
+                editor=pref.edit();
+                editor.remove(getString(R.string.preference_password));
+                editor.remove(getString(R.string.preference_username));
+                editor.apply();
+                mainActivity.st.setVisibility(View.GONE);
+                mainActivity.username=null;
+                fm=getFragmentManager();
+                ft=fm.beginTransaction();
+                ft.replace(R.id.current_tab,new InitialScreen(),"initialscreen");
+                ft.commit();
             }
         });
-        button = (Button) rv.findViewById(R.id.profile_export);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                t = (TextView) rv.findViewById(R.id.profile_prof_status);
-                try {
-                    if (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState())) {
-                        if (saveSharedPreferencesToFile(new File(Environment.getExternalStoragePublicDirectory(
-                                Environment.DIRECTORY_DOWNLOADS), pref.getString(getString(R.string.preference_username), "yagoofed")))) {
-                            t.setText(R.string.profile_export_success);
-                        } else {
-                            t.setText(R.string.profile_error_unknown);
-                        }
-                    } else {
-                        t.setText(R.string.profile_error_access);
-                    }
-                } catch (Exception e) {
-                    t.setText(R.string.profile_error_unknown);
-                }
-            }
-        });
+
+
         return rv;
     }
-    //import/export preferences
-    private boolean saveSharedPreferencesToFile(File dst) {
-        boolean res = false;
-        ObjectOutputStream output = null;
-        try {
-            output = new ObjectOutputStream(new FileOutputStream(dst));
-            output.writeObject(pref.getAll());
-            res = true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            res = false;
-        } finally {
-            try {
-                if (output != null) {
-                    output.flush();
-                    output.close();
-                }
-            } catch (IOException ex) {
-                ex.printStackTrace();
-                res = false;
-            }
-        }
-        return res;
-    }
-    @SuppressWarnings({"unchecked"})
-    private boolean loadSharedPreferencesFromFile(File src) {
-        boolean res = false;
-        ObjectInputStream input = null;
-        try {
-            input = new ObjectInputStream(new FileInputStream(src));
-            epref = pref.edit();
-            epref.clear();
-            Map<String, ?> entries = (Map<String, ?>) input.readObject();
-            for (Map.Entry<String, ?> entry : entries.entrySet()) {
-                Object v = entry.getValue();
-                String key = entry.getKey();
 
-                if (v instanceof Boolean)
-                    epref.putBoolean(key, ((Boolean) v));
-                else if (v instanceof Integer)
-                    epref.putInt(key, ((Integer) v));
-                else if (v instanceof String)
-                    epref.putString(key, ((String) v));
-                else if (v instanceof Set)
-                    epref.putStringSet(key, ((Set) v));
-            }
-            epref.apply();
-            res = true;
-        } catch (Exception e) {
-            e.printStackTrace();
-            res = false;
-        } finally {
-            try {
-                if (input != null) {
-                    input.close();
-                }
-            } catch (IOException ex) {
-                ex.printStackTrace();
-                res = false;
-            }
-        }
-        return res;
-    }
+
 }

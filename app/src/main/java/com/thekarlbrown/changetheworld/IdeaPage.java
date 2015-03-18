@@ -109,40 +109,82 @@ public class IdeaPage extends Fragment {
         t.setText(Integer.toString(idea_Tup));
         t=(TextView)rv.findViewById(R.id.page_idea_tdown);
         t.setText(Integer.toString(idea_Tdown));
-        iv=(ImageView)rv.findViewById(R.id.page_idea_favorite);
-        iv.setOnClickListener(new View.OnClickListener() {
+        button=(Button)rv.findViewById(R.id.page_idea_favorite);
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(favorite){
-                    iv=(ImageView)rv.findViewById(R.id.page_idea_favorite);
-                    favorite=false;
-                    //push to mysql, refresh
+                    mainActivity.setFavRatD(mainActivity.username,idea_number,0);
+                    button=(Button)rv.findViewById(R.id.page_idea_favorite);
+                    button.setText(R.string.page_idea_favorite);
+                    iv=(ImageView)rv.findViewById(R.id.page_idea_favorite_image);
                     iv.setImageResource(R.drawable.ic_top_bar);
+                    favorite=false;
                 }else{
-                    iv=(ImageView)rv.findViewById(R.id.page_idea_favorite);
+                    mainActivity.setFavRatD(mainActivity.username,idea_number,1);
+                    iv=(ImageView)rv.findViewById(R.id.page_idea_favorite_image);
                     favorite=true;
-                    //push to mysql, refresh
                     iv.setImageResource(R.drawable.ic_gold_star);
+                    button=(Button)rv.findViewById(R.id.page_idea_favorite);
+                    button.setText(R.string.page_idea_unfavorite);
                 }
             }
         });
-        iv=(ImageView)rv.findViewById(R.id.page_idea_upselect);
-        iv.setOnClickListener(new View.OnClickListener() {
+        button=(Button)rv.findViewById(R.id.page_idea_upselect);
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!thumbd[0]) {
-                    //potentially alter thumbd values, depends on how we refresh
-                    //push to mysql thumbs down, refresh
+                if(!thumbd[0]&&!thumbd[1]) {
+                    mainActivity.setFavRatD(mainActivity.username,idea_number,3);
+                    idea_Tup++;
+                    t=(TextView)rv.findViewById(R.id.page_idea_tup);
+                    t.setText(Integer.toString(idea_Tup));
+                    thumbd[0]=true;
+                }else if(thumbd[1]&&!thumbd[0]){
+                    mainActivity.setFavRatD(mainActivity.username,idea_number,3);
+                    idea_Tup++;
+                    thumbd[0]=true;
+                    idea_Tdown--;
+                    thumbd[1]=false;
+                    t=(TextView)rv.findViewById(R.id.page_idea_tup);
+                    t.setText(Integer.toString(idea_Tup));
+                    t=(TextView)rv.findViewById(R.id.page_idea_tdown);
+                    t.setText(Integer.toString(idea_Tdown));
+                }else if(thumbd[0]){
+                    mainActivity.setFavRatD(mainActivity.username,idea_number,2);
+                    thumbd[0]=false;
+                    idea_Tup--;
+                    t=(TextView)rv.findViewById(R.id.page_idea_tup);
+                    t.setText(Integer.toString(idea_Tup));
                 }
             }
         });
-        iv=(ImageView)rv.findViewById(R.id.page_idea_downselect);
-        iv.setOnClickListener(new View.OnClickListener() {
+        button=(Button)rv.findViewById(R.id.page_idea_downselect);
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!thumbd[1]) {
-                    //potentially alter thumbd values, depends on how we refresh
-                    //push to mysql thumbs down, refresh
+                if(!thumbd[1]&&!thumbd[0]) {
+                    mainActivity.setFavRatD(mainActivity.username,idea_number,4);
+                    idea_Tdown++;
+                    thumbd[1]=true;
+                    t=(TextView)rv.findViewById(R.id.page_idea_tdown);
+                    t.setText(Integer.toString(idea_Tdown));
+                }else if(thumbd[0]&&!thumbd[1]){
+                    mainActivity.setFavRatD(mainActivity.username,idea_number,4);
+                    idea_Tdown++;
+                    thumbd[1]=true;
+                    idea_Tup--;
+                    thumbd[0]=false;
+                    t=(TextView)rv.findViewById(R.id.page_idea_tup);
+                    t.setText(Integer.toString(idea_Tup));
+                    t=(TextView)rv.findViewById(R.id.page_idea_tdown);
+                    t.setText(Integer.toString(idea_Tdown));
+                }else if(thumbd[1]){
+                    mainActivity.setFavRatD(mainActivity.username,idea_number,2);
+                    thumbd[1]=false;
+                    idea_Tdown--;
+                    t=(TextView)rv.findViewById(R.id.page_idea_tdown);
+                    t.setText(Integer.toString(idea_Tdown));
                 }
             }
         });
@@ -158,13 +200,17 @@ public class IdeaPage extends Fragment {
             @Override
             public void onClick(View v) {
                 if(followed){
-                    followed=false;
-                    //push to mysql to unfollow
-                    button.setText(R.string.page_idea_follow);
+                    if(mainActivity.changeFollow(idea_author,0)) {
+                        button = (Button) rv.findViewById(R.id.page_idea_follow);
+                        button.setText(R.string.page_idea_follow);
+                        followed=false;
+                    }
                 }else{
-                    followed=true;
-                    //push to mysql to follow
-                    button.setText(R.string.page_idea_unfollow);
+                    if(mainActivity.changeFollow(idea_author,1)) {
+                        button = (Button) rv.findViewById(R.id.page_idea_follow);
+                        button.setText(R.string.page_idea_unfollow);
+                        followed=true;
+                    }
                 }
             }
         });
@@ -176,17 +222,9 @@ public class IdeaPage extends Fragment {
     @Override
     public void onDetach() {
         hideSoftKeyboard();
-        if(thumbd[0]){
-            //send a thumbs up to idea and do required activity
-        }else if(thumbd[1]){
-            //send a thumbs up to idea and do required activity
-        }
-        /*
-        if(favorite){
-           //deal with favoriting
-        }*/
         super.onDetach();
     }
+    //Hide that keyboard
     public void hideSoftKeyboard() {
         try {
             activity=getActivity();
@@ -199,11 +237,11 @@ public class IdeaPage extends Fragment {
 
     //how I set if items are liked/favorited in terms of visuals
     private void setVisuals(){
-        iv=(ImageView)rv.findViewById(R.id.page_idea_favorite);
+        iv=(ImageView)rv.findViewById(R.id.page_idea_favorite_image);
+        button=(Button)rv.findViewById(R.id.page_idea_favorite);
         if(favorite){
             iv.setImageResource(R.drawable.ic_gold_star);
-        }else{
-            iv.setImageResource(R.drawable.ic_top_bar);
+            button.setText(R.string.page_idea_unfavorite);
         }
         button=(Button)rv.findViewById(R.id.page_idea_follow);
         if(followed){

@@ -2,6 +2,10 @@
 
 --- Final JSON Ready PHP Requests ---
 
+favratd_byUserJSON.php
+- ideaid, username
+Show current favorite and thumb status of ideaid for user
+
 user_verifyPHash.php 
 - username, password
 Checks a users password against the hash stored on the server. Returns JSON verified 1 if accurate, verified 0 if incorrect or username doesn't exist

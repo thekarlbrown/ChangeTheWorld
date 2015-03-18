@@ -75,9 +75,16 @@ public class InitialScreen extends Fragment {
         rv = inflater.inflate(R.layout.fragment_initial_screen, container, false);
         mainActivity=((MainActivity)getActivity());
         pref = mainActivity.getPref();
-        username=pref.getString(getString(R.string.preference_username), "defaultUSERcheck");
-        if(!username.equals("defaultUSERcheck")){
-            ((EditText) rv.findViewById(R.id.login_username)).setText(username);
+        username=pref.getString(getString(R.string.preference_username), "defaultUSERcheck$3");
+        if(mainActivity.verifyLogon(username,pref.getString(getString(R.string.preference_password),"defaultPASScheck$3"))){
+            mainActivity.searchTabClick();
+            mainActivity.openTrending();
+            //mainActivity.authenticated(username); if necessary?
+        }else{
+            epref=pref.edit();
+            epref.remove(getString(R.string.preference_password));
+            epref.remove(getString(R.string.preference_username));
+            epref.apply();
         }
         t = (TextView) rv.findViewById(R.id.welcometext);
         t.setText(R.string.login_welcome);
@@ -97,16 +104,16 @@ public class InitialScreen extends Fragment {
                     editText.setHint(R.string.login_username_problem);
                     editText.setText(null);
                 } else {
+                    hideSoftKeyboard();
                     if(mainActivity.verifyLogon(username,((EditText)rv.findViewById(R.id.login_password)).getText().toString())){
-                        hideSoftKeyboard();
                         mainActivity.searchTabClick();
                         epref=pref.edit();
                         epref.putString(getString(R.string.preference_username), username);
+                        epref.putString(getString(R.string.preference_password),((EditText)rv.findViewById(R.id.login_password)).getText().toString());
                         epref.apply();
                         mainActivity.openTrending();
                         //mainActivity.authenticated(username); if necessary?
                     }else{
-                        hideSoftKeyboard();
                         ((TextView) rv.findViewById(R.id.welcometext)).setText(R.string.login_error_login);
                         editText=(EditText) rv.findViewById(R.id.login_username);
                         editText.setHint(R.string.login_username_prompt);

@@ -26,17 +26,16 @@
             android:id="@+id/profile_welcome"
             android:textColor="#FFFFFF"
             android:textSize="20sp"
-            android:paddingBottom="5dip"
+            android:paddingBottom="10dip"
             android:drawableStart="@drawable/profile_picture_m"
             android:drawableLeft="@drawable/profile_picture_m"
-            android:layout_weight="1"
             android:gravity="center_vertical" />
 
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="9"
+        android:layout_height="wrap_content"
+        android:weightSum="4"
         android:orientation="vertical"
         android:background="#00D9D9"
         android:paddingStart="5dip"
@@ -48,7 +47,7 @@
     <Button
         android:id="@+id/profile_your_ideas"
         android:layout_width="match_parent"
-        android:layout_height="0dip"
+        android:layout_height="wrap_content"
         android:layout_weight="1"
         android:padding="10dip"
         android:text="@string/profile_your_ideas"
@@ -61,7 +60,7 @@
         <Button
             android:id="@+id/profile_favorite_ideas"
             android:layout_width="match_parent"
-            android:layout_height="0dip"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:padding="10dip"
             android:text="@string/profile_favorite_ideas"
@@ -72,7 +71,7 @@
         <Button
             android:id="@+id/profile_friends"
             android:layout_width="match_parent"
-            android:layout_height="0dip"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:padding="10dip"
             android:text="@string/profile_followers"
@@ -83,7 +82,7 @@
         <Button
             android:id="@+id/profile_drafts"
             android:layout_width="match_parent"
-            android:layout_height="0dip"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:padding="10dip"
             android:text="@string/profile_drafts"
@@ -91,53 +90,30 @@
             android:layout_marginBottom="5dip"
             android:layout_marginTop="5dip"
             android:layout_gravity="center" />
+        <Button
+            android:id="@+id/profile_logout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:padding="10dip"
+            android:text="@string/profile_prof_log"
+            android:textSize="30sp"
+            android:layout_marginBottom="5dip"
+            android:layout_gravity="center" />
     </LinearLayout>
 
 
-    <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:background="#00D9D9"
-            android:layout_marginTop="10dip"
-            android:layout_weight=".2"
-        android:paddingLeft="5dip"
-        android:paddingStart="5dip"
-        android:paddingRight="5dip"
-        android:paddingEnd="5dip"
-            >
-
-       <Button
-            android:id="@+id/profile_import"
-            android:layout_height="wrap_content"
-
-            android:text="@string/profile_prof_im"
-           android:layout_gravity="center_vertical"
-            android:textSize="30sp"
-           android:layout_weight="1"
-           android:layout_width="0dip"
-            />
-            <Button
-                android:id="@+id/profile_export"
-                android:layout_height="wrap_content"
-
-                android:text="@string/profile_prof_ex"
-                android:layout_gravity="center_vertical"
-                android:textSize="30sp"
-                android:layout_weight="1"
-                android:layout_width="0dip"
-                />
 
 
 
 
-        </LinearLayout>
     <TextView
         android:id="@+id/profile_prof_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp"
         android:layout_gravity="center_horizontal"
+        android:gravity="bottom"
         />
 
 

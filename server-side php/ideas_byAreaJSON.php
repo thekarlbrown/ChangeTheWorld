@@ -41,7 +41,7 @@ try{
 	$data->execute();
 	$data_array=$data->fetchAll();
 	echo "[";
-	$count=count($data_array)-1;
+	$count=count($data_array);
 	for($i=0;$i<$count+1;$i++){
 		if($i<$count){
 		echo json_encode($data_array[$i]);
