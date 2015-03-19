@@ -16,13 +16,10 @@ I am currently in the alpha stages of development. What does this entail?
 
 --- current state of the Project ----
 
- - I have finished the MySQL database and the PHP backend (for now :3)! 
+- Open testing, algorithmic additions required, working on stability, performance, changing the "back" function, and adding comments.
 
- - Sorting, filters, and internet connectivity with the crowd-sourced category's are on the way
- 
- - Prototype complete! Now I connect the PHP to the Android app and watch the magic happen!
+- Fully network connected! Your accounts and data are now saved and persistent!
 
- - The UI is being completely re-defined
 ----------------------------------
 
 1. The app is in the earliest of alpha. Its performance is not optimized. In fact, I have a list of things I intend on doing, bugs that need to be fixed, and what I intend to do further on in a huge list
