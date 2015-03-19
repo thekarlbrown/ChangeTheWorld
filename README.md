@@ -31,7 +31,7 @@ I am currently in the alpha stages of development. What does this entail?
 
 3. If you are interested in helping me setting up the category's and subcategory's/check out https://docs.google.com/a/cnu.edu/document/d/1GVSz_fBI7GjAc4JJta39_EX0B0SVpZ5PUdZyDpbF0Jw/edit
 
-4. The first public alpha is here! Please send feedback!
+4. The first public alpha is here! Please send feedback! I will be working on stability, performance, changing the "back" function, and adding comments.
 
 5. Emulator here: appetize.io/app/rtkyh4gvg02x56uzeffx1349k4 - You MUST use Nexus 7/9, and emulator connects to my server but cannot handle Google Apps so reverse geocoding/location services are emulated
 
