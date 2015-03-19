@@ -31,9 +31,9 @@ I am currently in the alpha stages of development. What does this entail?
 
 3. If you are interested in helping me setting up the category's and subcategory's/check out https://docs.google.com/a/cnu.edu/document/d/1GVSz_fBI7GjAc4JJta39_EX0B0SVpZ5PUdZyDpbF0Jw/edit
 
-4. There are a ton of place-holders for features to be added later or backend that is not yet implemented
+4. The first public alpha is here! Please send feedback!
 
-5. Emulator currently disabled as it does not support location services. Will have APK's and will have mock locations soon!
+5. Emulator here: appetize.io/app/rtkyh4gvg02x56uzeffx1349k4 - You MUST use Nexus 7/9, and emulator connects to my server but cannot handle Google Apps so reverse geocoding/location services are emulated
 
 --------------------------------------------
 
@@ -187,3 +187,5 @@ danblack, seekwill, salle at #mysql
 alphos, xyphoid. TML at #php
 
 cmalekpour on github
+
+Lisa Slover for excellent icon ideas

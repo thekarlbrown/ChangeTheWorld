@@ -209,10 +209,18 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
         //create category titles
         createTitles();
 
+        //default tracking data for if we are not using google tracking
+        /*
+        state="VA";
+        country="US";
+        latitude=38.957657;
+        longitude=-77.175932;
+        */
         //initiate google tracking
-        buildGoogleApiClient();
+  buildGoogleApiClient();
         setStatesMap();
         getLocationDataFromGoogle();
+
 
 
         if (fm == null) {
@@ -393,23 +401,6 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
         //set area of choice to be pulled here
         //method with int area
         switch (tag) {
-            /*case "byfriends":
-                friendsPage.dapt.notifyDataSetChanged();
-                break;
-            case "byfavorite":
-                favoritePage.dapt.notifyDataSetChanged();
-                break;
-            case "byuser":
-                userPage.dapt.notifyDataSetChanged();
-                break;
-
-            case "category":
-                categoryTab.dapt.notifyDataSetChanged();
-                break;
-            case "search":
-                searchTab.dapt.notifyDataSetChanged();
-                break;
-                */
             case "trending":
                 ib=new IdeaBlock();
                 getJSONtoIdeaBlock("http://www.thekarlbrown.com/ctwapp/ideas_byAreaJSON.php?lat="+latitude+"&long="+longitude+"&state=" + state + "&country=" + country + "&username=" + username + "&case="+area);
@@ -429,23 +420,6 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
         //set time of choice to be pulled here
         //method with int time
         switch (tag) {
-            /*
-            case "byfriends":
-                friendsPage.dapt.notifyDataSetChanged();
-                break;
-            case "byfavorite":
-                favoritePage.dapt.notifyDataSetChanged();
-                break;
-            case "byuser":
-                userPage.dapt.notifyDataSetChanged();
-                break;
-            case "trending":
-                trendingTab.dapt.notifyDataSetChanged();
-                break;
-            case "search":
-                searchTab.dapt.notifyDataSetChanged();
-                break;
-            */
             case "category":
                 ib=new IdeaBlock();
                 getJSONtoIdeaBlock("http://www.thekarlbrown.com/ctwapp/ideas_byCatSubTimeJSON.php?cat=" + (categoryTab.categoryfirst+1) + "&sub=" + categoryTab.categorysecond +"&case="+time);
