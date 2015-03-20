@@ -22,15 +22,17 @@ I am currently in the alpha stages of development. What does this entail?
 
 ----------------------------------
 
-1. The app is in the earliest of alpha. Its performance is not optimized. In fact, I have a list of things I intend on doing, bugs that need to be fixed, and what I intend to do further on in a huge list
+1. Emulator here: You MUST use Nexus 7/9 - www.appetize.io/app/rtkyh4gvg02x56uzeffx1349k4 - You MUST use Nexus 7/9, and emulator connects to my server but cannot handle Google Apps so reverse geocoding/location services are emulated
 
-2. I would love your feedback, and much later on in the process will need android devices to test on (in addition to whatever I will be testing)
+2. The app is in the earliest of alpha. Its performance is not optimized. In fact, I have a list of things I intend on doing, bugs that need to be fixed, and what I intend to do further on in a huge list
 
-3. If you are interested in helping me setting up the category's and subcategory's/check out https://docs.google.com/a/cnu.edu/document/d/1GVSz_fBI7GjAc4JJta39_EX0B0SVpZ5PUdZyDpbF0Jw/edit
+3. I would love your feedback, and much later on in the process will need android devices to test on (in addition to whatever I will be testing)
 
-4. The first public alpha is here! Please send feedback! I will be working on stability, performance, changing the "back" function, and adding comments.
+4. If you are interested in helping me setting up the category's and subcategory's/check out https://docs.google.com/a/cnu.edu/document/d/1GVSz_fBI7GjAc4JJta39_EX0B0SVpZ5PUdZyDpbF0Jw/edit
 
-5. Emulator here: appetize.io/app/rtkyh4gvg02x56uzeffx1349k4 - You MUST use Nexus 7/9, and emulator connects to my server but cannot handle Google Apps so reverse geocoding/location services are emulated
+5. The first public alpha is here! Please send feedback! I will be working on stability, performance, changing the "back" function, and adding comments.
+
+
 
 --------------------------------------------
 

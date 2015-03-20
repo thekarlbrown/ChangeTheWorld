@@ -217,7 +217,7 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
         longitude=-77.175932;
         */
         //initiate google tracking
-  buildGoogleApiClient();
+        buildGoogleApiClient();
         setStatesMap();
         getLocationDataFromGoogle();
 
