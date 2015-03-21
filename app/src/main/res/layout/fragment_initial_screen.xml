@@ -4,9 +4,11 @@
     android:orientation="vertical"
     android:background="#668DE6"
     android:focusableInTouchMode="true"
-    tools:context="com.thekarlbrown.changetheworld.InitialScreen">
+    tools:context="com.thekarlbrown.changetheworld.InitialScreen"
+    android:id="@+id/login_background">
 
     <ImageView
+        android:id="@+id/login_mainlogo"
         android:paddingTop="10dp"
         android:src="@drawable/ic_mainlogo"
         android:layout_width="wrap_content"

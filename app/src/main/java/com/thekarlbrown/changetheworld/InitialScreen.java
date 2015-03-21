@@ -9,11 +9,14 @@ import android.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import java.util.regex.Pattern;
@@ -89,6 +92,28 @@ public class InitialScreen extends Fragment {
         }
         t = (TextView) rv.findViewById(R.id.welcometext);
         t.setText(R.string.login_welcome);
+        t.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                hideSoftKeyboard();
+                return false;
+            }
+        });
+        ImageView imageView=(ImageView)rv.findViewById(R.id.login_mainlogo);
+        imageView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                hideSoftKeyboard();
+                return false;
+            }
+        });
+        LinearLayout linearLayout=(LinearLayout)rv.findViewById(R.id.login_background);
+        linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hideSoftKeyboard();
+            }
+        });
         but = (Button)rv.findViewById(R.id.login_attempt_login);
         but.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,6 +131,10 @@ public class InitialScreen extends Fragment {
                     editText.setText(null);
                 } else {
                     hideSoftKeyboard();
+                    but=(Button)rv.findViewById(R.id.login_attempt_login);
+                    but.setClickable(false);
+                    but=(Button)rv.findViewById(R.id.login_create_account);
+                    but.setClickable(false);
                     if(mainActivity.verifyLogon(username,((EditText)rv.findViewById(R.id.login_password)).getText().toString())){
                         mainActivity.searchTabClick();
                         epref=pref.edit();
@@ -118,11 +147,17 @@ public class InitialScreen extends Fragment {
                     }else{
                         ((TextView) rv.findViewById(R.id.welcometext)).setText(R.string.login_error_login);
                         editText=(EditText) rv.findViewById(R.id.login_username);
+                        but=(Button)rv.findViewById(R.id.login_attempt_login);
+                        but.setClickable(true);
+                        but=(Button)rv.findViewById(R.id.login_create_account);
+                        but.setClickable(true);
+                        /*
                         editText.setHint(R.string.login_username_prompt);
                         editText.setText(null);
                         editText=(EditText) rv.findViewById(R.id.login_password);
                         editText.setHint(R.string.login_password_prompt);
                         editText.setText(null);
+                        */
                     }
 
                 }
@@ -167,7 +202,10 @@ public class InitialScreen extends Fragment {
                         editText.setHint(R.string.login_email_problem_matching);
                         editText.setText(null);
                     }else{
-
+                    but=(Button)rv.findViewById(R.id.login_attempt_login);
+                    but.setClickable(false);
+                    but=(Button)rv.findViewById(R.id.login_create_account);
+                    but.setClickable(false);
                     if(mainActivity.verifyCreate(username,((EditText)rv.findViewById(R.id.login_password)).getText().toString(),email)){
                         hideSoftKeyboard();
                         mainActivity.searchTabClick();
@@ -180,7 +218,11 @@ public class InitialScreen extends Fragment {
                     }else{
                         hideSoftKeyboard();
                         ((TextView) rv.findViewById(R.id.welcometext)).setText(R.string.login_error_create);
-                        editText=(EditText) rv.findViewById(R.id.login_username);
+                        but=(Button)rv.findViewById(R.id.login_attempt_login);
+                        but.setClickable(true);
+                        but=(Button)rv.findViewById(R.id.login_create_account);
+                        but.setClickable(true);
+                        /*editText=(EditText) rv.findViewById(R.id.login_username);
                         editText.setHint(R.string.login_username_prompt);
                         editText.setText(null);
                         editText=(EditText) rv.findViewById(R.id.login_password);
@@ -195,6 +237,7 @@ public class InitialScreen extends Fragment {
                         editText=(EditText) rv.findViewById(R.id.login_email);
                         editText.setHint(R.string.login_email_confirm);
                         editText.setText(null);
+                        */
                     }
                     }
                 }

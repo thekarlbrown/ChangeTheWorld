@@ -56,7 +56,7 @@
     <string name="add_title">Idea Title: </string>
     <string name="add_edit_title">What will you call your idea?</string>
     <string name="add_description">Description: </string>
-    <string name="add_edit_description">-Write your idea\'s Title above\n\n-Choose a Category and Subcategory!\n\n-Describe what you are thinking as best you can.</string>
+    <string name="add_edit_description">-Write your idea\'s Title above\n-Choose a Category and Subcategory!\n-Describe what you are thinking as best you can.</string>
     <string name="add_draft">Save as Draft</string>
     <string name="add_submit">Submit your Idea</string>
     <string name="add_category_subcategory">Category: </string>
@@ -103,5 +103,5 @@
     <string name="login_email_problem_valid">Your Email is not valid</string>
     <string name="login_email_problem_matching">Your Email\'s don\'t match</string>
     <string name="login_error_login">Your login credentials were rejected! Is your internet connected?\nDoes your username exist? Was your password correct?</string>
-    <string name="login_error_create">Your account creation was rejected! Is your internet connected?\nIs this a newly registered email? Password recovery is available\nIf you have never used the email, the username already exists</string>
+    <string name="login_error_create">Your account creation was rejected! Is your internet connected?\nSuccessful Login automatically logs you in</string>
 </resources>

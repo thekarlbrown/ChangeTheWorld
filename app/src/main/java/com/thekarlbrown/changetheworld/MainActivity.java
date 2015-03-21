@@ -44,7 +44,7 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
             {"Abstract/Concepts/Processes", "Algorithms", "Computer Programs/Mobile Apps", "Economic/Governmental/Social Systems", "Philosophical", "Real World Services",
                     "Internet Services", "Cultural", "Events/Conventions/Meetups", "Party Concepts", "Processes", "Dance Moves", "Other"},
             {"The Suggestion Box", "Government", "Public School", "College", "Economics", "Rules,Regulations, and Laws", "Life Tips", "Other"},
-            {"Written/Visual Compositions", "TV Shows", "Movie Plots", "Book Ideas", "Theatre", "Fine Art", "Fashion", "Other"},
+            {"Written/Visual Compositions", "TV Shows", "Movie Plots", "Book Ideas", "Theatre", "Fine Art", "Fashion", "Music", "Other"},
             {"NSFW", "Sexual Maneuvers", "Combat Techniques", "Stealth", "Immoral", "Got It For \"Free\"", "Politically Incorrect", "Other"},
             {"Joke Ideas", "Bad", "Funny", "Inherently Flawed", "Sarcastic", "Absolutely Ridiculous", "What-Ifs", "Other"},
             {"Other", "Doesn't Fit Anywhere", "Suggestions for App", "New Category's/Subcategory", "Bugs Discovered", "Messages to the Creator", "Other"}
@@ -105,7 +105,7 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
     }
 
     public void openCategory() {
-        if (fm.findFragmentByTag("category") == null) {
+
             fm = getFragmentManager();
             ft = fm.beginTransaction();
             b = new Bundle();
@@ -117,9 +117,7 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
             categoryTab.setArguments(b);
             ft.replace(R.id.current_tab, categoryTab, "category");
             ft.commit();
-        } else {
-            categoryTab.mDrawerLayout.openDrawer(categoryTab.mDrawerList);
-        }
+
     }
 
     public void openSearch() {
