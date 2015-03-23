@@ -4,12 +4,14 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.List;
+
 /**
  * this is the primary data adapter extended for ideas that link to ideapage
  */
 public class IdeaDataAdapter extends DataAdapter{
 
-    public IdeaDataAdapter(IdeaBlock i, Context context) {
+    public IdeaDataAdapter(List<IdeaBlock> i, Context context) {
         super(i, context);
         try {
             // Instantiate the NoticeDialogListener so we can send events to the host

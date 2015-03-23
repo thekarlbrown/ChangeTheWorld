@@ -12,6 +12,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.List;
+
 /**
  * tab for searching through ideas
  *
@@ -24,7 +26,7 @@ public class SearchTab extends Fragment{
     TextView t;
     ListView l;
     DataAdapter dapt;
-    IdeaBlock ib;
+    List<IdeaBlock> ib;
     MainActivity mainActivity;
     String searchQuery;
     FragmentManager fm;

@@ -6,13 +6,15 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
 class to save drafts to downloads as drafts_USERNAME
  */
 public class LocalIdeas {
-    IdeaBlock ideaBlock;
-    private boolean saveIdeaBlock(File dst,IdeaBlock ib) {
+    List<IdeaBlock> ideaBlock;
+    private boolean saveIdeaBlock(File dst,List<IdeaBlock> ib) {
         boolean res = false;
         ObjectOutputStream output = null;
         try {
@@ -37,12 +39,12 @@ public class LocalIdeas {
     }
 
     @SuppressWarnings({ "unchecked" })
-    public IdeaBlock loadIdeaBlock(File src) {
+    public List<IdeaBlock> loadIdeaBlock(File src) {
         ObjectInputStream input = null;
-        IdeaBlock ideaBlock;
+        List<IdeaBlock> ideaBlock;
         try {
             input = new ObjectInputStream(new FileInputStream(src));
-            ideaBlock=(IdeaBlock) input.readObject();
+            ideaBlock=(List<IdeaBlock>) input.readObject();
         } catch (Exception e) {
             e.printStackTrace();
             ideaBlock=null;
@@ -62,9 +64,9 @@ public class LocalIdeas {
         ideaBlock =loadIdeaBlock(src);
        if(ideaBlock==null)
         {
-            ideaBlock=new IdeaBlock();
+            ideaBlock=new ArrayList<>();
        }
-        ideaBlock.add(title,idea,author,tup,tdown,number,category,subcategory);
+        ideaBlock.add(new IdeaBlock(title,idea,author,tup,tdown,number,category,subcategory));
         return saveIdeaBlock(src,ideaBlock);
     }
 }

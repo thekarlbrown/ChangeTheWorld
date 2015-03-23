@@ -5,12 +5,14 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.List;
+
 /**
  * this is for drafts and ties back to the mainactivity
  */
 public class DraftDataAdapter extends DataAdapter{
 
-    public DraftDataAdapter(IdeaBlock i, Context context) {
+    public DraftDataAdapter(List<IdeaBlock> i, Context context) {
             super(i, context);
         try {
             // Instantiate the NoticeDialogListener so we can send events to the host

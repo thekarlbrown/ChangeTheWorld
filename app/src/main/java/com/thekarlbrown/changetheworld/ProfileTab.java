@@ -19,6 +19,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -36,7 +37,7 @@ public class ProfileTab extends Fragment {
     ListView l;
     SharedPreferences pref;
     DataAdapter dapt;
-    IdeaBlock ib;
+    List<IdeaBlock> ib;
     MainActivity mainActivity;
     Context curcontext;
     Button button;

@@ -106,7 +106,7 @@ public class CategoryTab extends Fragment {
         private void selectItem(int position)
         {
             categorysecond=(position+1);
-            mainActivity.ib=new IdeaBlock();
+            mainActivity.ib.clear();
             mainActivity.getJSONtoIdeaBlock("http://www.thekarlbrown.com/ctwapp/ideas_byCatSubTimeJSON.php?cat=" + (categoryfirst+1) + "&sub=" + categorysecond +"&case=4");
             dapt = new IdeaDataAdapter(mainActivity.ib, mainActivity);
             l = (ListView) rv.findViewById(R.id.category_list);

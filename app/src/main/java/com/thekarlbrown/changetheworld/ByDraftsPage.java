@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 import java.io.File;
+import java.util.List;
 
 /**
  * page for viewing saved drafts
@@ -23,7 +24,7 @@ public class ByDraftsPage extends Fragment {
     ListView l;
     SharedPreferences pref;
     DataAdapter dapt;
-    IdeaBlock ib;
+    List<IdeaBlock> ib;
     MainActivity mainActivity;
     FragmentManager fm;
     FragmentTransaction ft;

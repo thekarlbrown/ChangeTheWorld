@@ -14,6 +14,8 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import java.util.List;
+
 /**
  * page for individual ideas
  *
@@ -25,7 +27,7 @@ public class IdeaPage extends Fragment {
     TextView t;
     ListView l;
     DataAdapter dapt;
-    IdeaBlock ib;
+    List<IdeaBlock> ib;
     ImageView iv;
     MainActivity mainActivity;
     String idea_title;
@@ -86,14 +88,14 @@ public class IdeaPage extends Fragment {
         }
         categoryArray = mainActivity.categories;
         ib=mainActivity.ib;
-        idea_title=ib.getTitle(ideaSelected);
-        idea_category=categoryArray[ib.getCategory(ideaSelected)-1][0];
-        idea_subcategory=categoryArray[ib.getCategory(ideaSelected)-1][ib.getSubcategory(ideaSelected)];
-        idea_description=ib.getIdea(ideaSelected);
-        idea_author=ib.getAuthor(ideaSelected);
-        idea_Tdown=ib.getTdown(ideaSelected);
-        idea_Tup=ib.getTup(ideaSelected);
-        idea_number=ib.getNumber(ideaSelected);
+        idea_title=ib.get(ideaSelected).getTitle();
+        idea_category=categoryArray[ib.get(ideaSelected).getCategory()-1][0];
+        idea_subcategory=categoryArray[ib.get(ideaSelected).getCategory()-1][ib.get(ideaSelected).getSubcategory()];
+        idea_description=ib.get(ideaSelected).getIdea();
+        idea_author=ib.get(ideaSelected).getAuthor();
+        idea_Tdown=ib.get(ideaSelected).getTdown();
+        idea_Tup=ib.get(ideaSelected).getTup();
+        idea_number=ib.get(ideaSelected).getNumber();
         t=(TextView)rv.findViewById(R.id.page_idea_title);
         t.setText("~ " + idea_title + " ~");
         t=(TextView)rv.findViewById(R.id.page_idea_author);

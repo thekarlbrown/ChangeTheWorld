@@ -7,12 +7,14 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
+import java.util.List;
+
 /*
 this is the base data adapter for ideas, implements a viewholder for performance
  */
 public class DataAdapter extends BaseAdapter{
     Context context;
-    IdeaBlock current;
+    List<IdeaBlock> current;
     LayoutInflater inflater;
     View row;
     TextView t;
@@ -21,7 +23,7 @@ public class DataAdapter extends BaseAdapter{
     int adjustable = 150;
 
 
-    public DataAdapter(IdeaBlock i, Context context) {
+    public DataAdapter(List<IdeaBlock> i, Context context) {
         current=i;
         this.context=context;
     }
@@ -34,7 +36,7 @@ public class DataAdapter extends BaseAdapter{
 
     public Object getItem(int arg0) {
         // TODO Auto-generated method stub
-        return current.atPosition(arg0);
+        return current.get(arg0);
     }
 
     public long getItemId(int position) {
@@ -59,15 +61,15 @@ public class DataAdapter extends BaseAdapter{
         }else{
             viewHolder=(ViewHolderData) convertView.getTag();
         }
-        viewHolder.ideatitle.setText( current.getTitle(position));
-        if( current.getIdea(position).length()>adjustable) {
+        viewHolder.ideatitle.setText( current.get(position).getTitle());
+        if( current.get(position).getIdea().length()>adjustable) {
 
-            viewHolder.ideatext.setText(current.getIdea(position).substring(0, adjustable) + ".....");
+            viewHolder.ideatext.setText(current.get(position).getIdea().substring(0, adjustable) + ".....");
         }else{
-            viewHolder.ideatext.setText(current.getIdea(position));
+            viewHolder.ideatext.setText(current.get(position).getIdea());
         }
-        viewHolder.upcount.setText(Integer.toString(current.getTup(position)));
-        viewHolder.downcount.setText(Integer.toString(current.getTdown(position)));
+        viewHolder.upcount.setText(Integer.toString(current.get(position).getTup()));
+        viewHolder.downcount.setText(Integer.toString(current.get(position).getTdown()));
         return convertView;
     }
     static class ViewHolderData

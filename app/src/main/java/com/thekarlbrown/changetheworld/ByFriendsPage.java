@@ -62,7 +62,7 @@ public class ByFriendsPage extends Fragment {
                              Bundle savedInstanceState) {
         mainActivity=(MainActivity)getActivity();
         rv = inflater.inflate(R.layout.fragment_by_friends_page, container, false);
-        mainActivity.ib=new IdeaBlock();
+        mainActivity.ib.clear();
         mainActivity.getJSONtoIdeaBlock("http://www.thekarlbrown.com/ctwapp/friends_getIdeaListJSON.php?username=" + username);
         dapt = new IdeaDataAdapter(mainActivity.ib,mainActivity);
         l = (ListView) rv.findViewById(R.id.by_friends_list);

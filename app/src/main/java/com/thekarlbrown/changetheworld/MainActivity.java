@@ -13,19 +13,16 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.ListView;
-
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
@@ -55,7 +52,7 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
     SharedPreferences sharedPref;
     SplitToolbar st;
     Bundle b;
-    IdeaBlock ib, drafts, ibtop, ibratio, ibthumbs;
+    List<IdeaBlock> ib, drafts, ibtop, ibratio, ibthumbs;
     LeaderBlock leaderBlock;
     SearchDialog searchDialog;
     int minratio;
@@ -88,8 +85,8 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
 
     public void openTrending() {
 
-            ib = new IdeaBlock();
-            getJSONtoIdeaBlock("http://www.thekarlbrown.com/ctwapp/ideas_byAreaJSON.php?lat="+latitude+"&long="+longitude+"&state=" + state + "&country=" + country + "&username=" + username + "&case=3");
+            ib.clear();
+            getJSONtoIdeaBlock("http://www.thekarlbrown.com/ctwapp/ideas_byAreaJSON.php?lat=" + latitude + "&long=" + longitude + "&state=" + state + "&country=" + country + "&username=" + username + "&case=3");
             fm = getFragmentManager();
             ft = fm.beginTransaction();
             b = new Bundle();
@@ -171,7 +168,7 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
     public void onSearchDialogPositiveClick(String r) {
         if (r != null) {
             //searchQuery = r;
-            ib = new IdeaBlock();
+            ib.clear();
             getJSONtoIdeaBlock("http://www.thekarlbrown.com/ctwapp/ideas_bySearchJSON.php?search=" + r);
             //should I process filters?
             fm = getFragmentManager();
@@ -199,7 +196,7 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
         sharedPref = getApplicationContext().getSharedPreferences(
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
 
-        ib = new IdeaBlock();
+        ib = new ArrayList<>();
         //leaderblock
         leaderBlock = new LeaderBlock(new String[]{"putin", "obama", "farage", "assad", "kadyrov"}, new String[]{"putin", "obama", "farage", "assad", "kadyrov"}, new String[]{"putin", "obama", "farage", "assad", "kadyrov"}, new String[]{"putin", "obama", "farage", "assad", "kadyrov"},
                 new double[]{59.523, 42.70, 9.11, 3.041, 99.99}, new int[]{999, 70, 911, 101, 1337}, new double[]{59.523, 42.69, 9.11, 3.041, 99.99}, new double[]{59.523, 42.70, 9.11, 3.041, 99.99});
@@ -400,8 +397,8 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
         //method with int area
         switch (tag) {
             case "trending":
-                ib=new IdeaBlock();
-                getJSONtoIdeaBlock("http://www.thekarlbrown.com/ctwapp/ideas_byAreaJSON.php?lat="+latitude+"&long="+longitude+"&state=" + state + "&country=" + country + "&username=" + username + "&case="+area);
+                ib.clear();
+                getJSONtoIdeaBlock("http://www.thekarlbrown.com/ctwapp/ideas_byAreaJSON.php?lat=" + latitude + "&long=" + longitude + "&state=" + state + "&country=" + country + "&username=" + username + "&case=" + area);
                 trendingTab.dapt = new IdeaDataAdapter(ib,this);
                 trendingTab.l.setAdapter(trendingTab.dapt);
                 break;
@@ -419,8 +416,8 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
         //method with int time
         switch (tag) {
             case "category":
-                ib=new IdeaBlock();
-                getJSONtoIdeaBlock("http://www.thekarlbrown.com/ctwapp/ideas_byCatSubTimeJSON.php?cat=" + (categoryTab.categoryfirst+1) + "&sub=" + categoryTab.categorysecond +"&case="+time);
+                ib.clear();
+                getJSONtoIdeaBlock("http://www.thekarlbrown.com/ctwapp/ideas_byCatSubTimeJSON.php?cat=" + (categoryTab.categoryfirst + 1) + "&sub=" + categoryTab.categorysecond + "&case=" + time);
                 categoryTab.dapt = new IdeaDataAdapter(ib,this);
                 categoryTab.l.setAdapter(categoryTab.dapt);
                 break;
@@ -432,7 +429,6 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
                 break;
         }
     }
-
     @Override
     public void onThumbDialogPositiveClick(int i, String tag) {
         minthumbs = i;
@@ -477,10 +473,10 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
         AddTab addT = new AddTab();
         b.putStringArray("category", createAddTitles());
         b.putBoolean("draftscoming", true);
-        b.putString("drafttitle", drafts.getTitle(position));
-        b.putString("draftdescription", drafts.getIdea(position));
-        b.putInt("draftcategory", drafts.getCategory(position));
-        b.putInt("draftsubcategory", drafts.getSubcategory(position));
+        b.putString("drafttitle", drafts.get(position).getTitle());
+        b.putString("draftdescription", drafts.get(position).getIdea());
+        b.putInt("draftcategory", drafts.get(position).getCategory());
+        b.putInt("draftsubcategory", drafts.get(position).getSubcategory());
         addT.setArguments(b);
         ft.replace(R.id.current_tab, addT, "add");
         ft.commit();
@@ -494,7 +490,7 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
         b = new Bundle();
         b.putInt("position", position);
         //bundle values assigned here after querying server
-        getFavRatD(username,ib.getNumber(position));
+        getFavRatD(username,ib.get(position).getNumber());
         ideaPage.setArguments(b);
         ft.replace(R.id.current_tab, ideaPage, "ideapage");
         ft.commit();
@@ -589,16 +585,16 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
         try {
             for (int i = 0; i < jsonArray.length(); i++) {
                 jsonObject = jsonArray.getJSONObject(i);
-                ib.add(jsonObject.getString("title"), jsonObject.getString("descrip"), jsonObject.getString("author"),
+                ib.add(new IdeaBlock(jsonObject.getString("title"), jsonObject.getString("descrip"), jsonObject.getString("author"),
                         Integer.parseInt(jsonObject.getString("thumbsup")), Integer.parseInt(jsonObject.getString("thumbsdown")), Integer.parseInt(jsonObject.getString("ididea")),
-                        Integer.parseInt(jsonObject.getString("cat")), Integer.parseInt(jsonObject.getString("sub")));
+                        Integer.parseInt(jsonObject.getString("cat")), Integer.parseInt(jsonObject.getString("sub"))));
             }
         } catch (JSONException e) {
             Log.println(0, "Error", e.getMessage());
         }
         if (ib.size() == 0) {
-            ib.add(":[", "There does not seem to be any ideas here yet! Too bad. Either you have internet connectivitivity issues, or you are in an empty category", "thekarlbrown",
-                    0, 999, 1, 8, 2);
+            ib.add(new IdeaBlock(":[", "There does not seem to be any ideas here yet! Too bad. Either you have internet connectivitivity issues, or you are in an empty category", "thekarlbrown",
+                    0, 999, 1, 8, 2));
         }
     }
 

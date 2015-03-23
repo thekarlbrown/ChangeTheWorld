@@ -54,7 +54,7 @@ public class ByFavoritePage extends Fragment {
                              Bundle savedInstanceState) {
         mainActivity=(MainActivity)getActivity();
         rv = inflater.inflate(R.layout.fragment_by_favorite_page, container, false);
-        mainActivity.ib=new IdeaBlock();
+        mainActivity.ib.clear();
         mainActivity.getJSONtoIdeaBlock("http://www.thekarlbrown.com/ctwapp/favorites_getListIdeasJSON.php?username=" + username);
         dapt = new IdeaDataAdapter(mainActivity.ib,mainActivity);
         l = (ListView) rv.findViewById(R.id.by_favorite_list);
