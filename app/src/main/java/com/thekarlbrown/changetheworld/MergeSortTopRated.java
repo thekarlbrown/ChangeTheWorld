@@ -69,10 +69,11 @@ public class MergeSortTopRated {
      * @return True if Thumbs Up/Down Ratio at first less than/equal to second Ratio, False if greater
      */
     public boolean mergeComparison(List<IdeaBlock> reference,int first,int second){
-        if(((double)reference.get(first).getTup()/(double)reference.get(first).getTdown())
-        <=((double)reference.get(second).getTup()/(double)reference.get(second).getTdown())){
-            return true;
+        if((((double)reference.get(first).getTup()/(double)reference.get(first).getTdown())
+        <=((double)reference.get(second).getTup()/(double)reference.get(second).getTdown()))
+                &&(reference.get(first).getTup()<=reference.get(second).getTup())){
+            return false;
         }
-        return false;
+        return true;
     }
 }

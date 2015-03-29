@@ -79,6 +79,8 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
     Geocoder geocoder;
     Location mLastLocation;
     Map<String,String> states;
+    //MergeSort implementation
+    MergeSortTopRated mergeSortTopRated;
     public SharedPreferences getPref() {
         return sharedPref;
     }
@@ -246,6 +248,7 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
     @Override
     public void onRatioDialogPositiveClick(int i, String tag) {
         minratio = i;
+
         //do sorting algo here
         bar_filter_status[0] = true;
         switch (tag) {
@@ -341,6 +344,7 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
     public void switchBarFilter(boolean which, String tag) {
         if (which) {
             //insert algorithm to sort by recent
+
             switch (tag) {
                 case "byfriends":
                     friendsPage.dapt.notifyDataSetChanged();
@@ -365,7 +369,8 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
                     break;
             }
         } else {
-            //insert algorithm to sort by top rated
+            mergeSortTopRated = new MergeSortTopRated();
+            mergeSortTopRated.sort(ib);
             switch (tag) {
                 case "byfriends":
                     friendsPage.dapt.notifyDataSetChanged();
