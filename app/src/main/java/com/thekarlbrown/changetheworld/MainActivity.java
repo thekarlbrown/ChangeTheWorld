@@ -87,13 +87,13 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
 
     public void openTrending() {
 
-            getJSONtoIdeaBlock("http://www.thekarlbrown.com/ctwapp/ideas_byAreaJSON.php?lat=" + latitude + "&long=" + longitude + "&state=" + state + "&country=" + country + "&username=" + username + "&case=3");
+            getJSONtoIdeaBlock("http://www.thekarlbrown.com/ctwapp/ideas_byAreaJSON.php?lat=" + latitude + "&long=" + longitude + "&state=" + state + "&country=" + country + "&username=" + username + "&case=2");
             fm = getFragmentManager();
             ft = fm.beginTransaction();
             b = new Bundle();
             b.putBooleanArray("selectedf", new boolean[]{false, false, true, false});
             bar_filter_status = new boolean[]{false, false, true};
-            b.putInt("selecteda", 0);
+            b.putInt("selecteda", 2);
             trendingTab = new TrendingTab();
             trendingTab.setArguments(b);
             ft.replace(R.id.current_tab, trendingTab, "trending");
@@ -218,7 +218,6 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
         buildGoogleApiClient();
         setStatesMap();
         getLocationDataFromGoogle();
-
 
 
         if (fm == null) {
