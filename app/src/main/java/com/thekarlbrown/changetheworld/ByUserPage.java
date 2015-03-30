@@ -57,7 +57,6 @@ public class ByUserPage extends Fragment {
                              Bundle savedInstanceState) {
         mainActivity=(MainActivity)getActivity();
         rv = inflater.inflate(R.layout.fragment_by_user_page, container, false);
-        mainActivity.ib.clear();
         mainActivity.getJSONtoIdeaBlock("http://www.thekarlbrown.com/ctwapp/ideas_byUserJSON.php?username=" + username);
         dapt = new IdeaDataAdapter(mainActivity.ib,mainActivity);
         l = (ListView) rv.findViewById(R.id.by_user_list);

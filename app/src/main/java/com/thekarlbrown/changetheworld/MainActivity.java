@@ -52,10 +52,10 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
     SharedPreferences sharedPref;
     SplitToolbar st;
     Bundle b;
-    List<IdeaBlock> ib, drafts, ibtop, ibratio, ibthumbs;
+    List<IdeaBlock> ib, drafts, ibrecent;
     LeaderBlock leaderBlock;
     SearchDialog searchDialog;
-    int minratio;
+    double minratio;
     int minthumbs;
     TrendingTab trendingTab;
     CategoryTab categoryTab;
@@ -66,7 +66,7 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
     ByFriendsPage friendsPage;
     ByFavoritePage favoritePage;
     ProfileTab profileTab;
-    boolean[] bar_filter_status = {false, false};
+    boolean[] bar_filter_status = {false, false, true};
     String username;
     //for asynctask
     ASyncParser aSyncParser;
@@ -87,13 +87,12 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
 
     public void openTrending() {
 
-            ib.clear();
             getJSONtoIdeaBlock("http://www.thekarlbrown.com/ctwapp/ideas_byAreaJSON.php?lat=" + latitude + "&long=" + longitude + "&state=" + state + "&country=" + country + "&username=" + username + "&case=3");
             fm = getFragmentManager();
             ft = fm.beginTransaction();
             b = new Bundle();
             b.putBooleanArray("selectedf", new boolean[]{false, false, true, false});
-            bar_filter_status = new boolean[]{false, false};
+            bar_filter_status = new boolean[]{false, false, true};
             b.putInt("selecteda", 0);
             trendingTab = new TrendingTab();
             trendingTab.setArguments(b);
@@ -111,7 +110,7 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
             categoryTab = new CategoryTab();
             b.putStringArray("titles", categorytitles);
             b.putBooleanArray("selectedf", new boolean[]{false, false, true, false});
-            bar_filter_status = new boolean[]{false, false};
+            bar_filter_status = new boolean[]{false, false,true};
             b.putInt("selectedt", 4);
             categoryTab.setArguments(b);
             ft.replace(R.id.current_tab, categoryTab, "category");
@@ -170,7 +169,6 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
     public void onSearchDialogPositiveClick(String r) {
         if (r != null) {
             //searchQuery = r;
-            ib.clear();
             getJSONtoIdeaBlock("http://www.thekarlbrown.com/ctwapp/ideas_bySearchJSON.php?search=" + r);
             //should I process filters?
             fm = getFragmentManager();
@@ -179,7 +177,7 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
             b = new Bundle();
             b.putString("query", r);
             b.putBooleanArray("selectedf", new boolean[]{false, false, true, false});
-            bar_filter_status = new boolean[]{false, false};
+            bar_filter_status = new boolean[]{false, false,true};
             searchTab.setArguments(b);
             ft.replace(R.id.current_tab, searchTab, "search");
             ft.commit();
@@ -191,6 +189,7 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mergeSortTopRated = new MergeSortTopRated();
         setContentView(R.layout.activity_main);
         st = (SplitToolbar) findViewById(R.id.toolbar_top);
 
@@ -199,6 +198,8 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
 
         ib = new ArrayList<>();
+        ibrecent=new ArrayList<>();
+
         //leaderblock
         leaderBlock = new LeaderBlock(new String[]{"putin", "obama", "farage", "assad", "kadyrov"}, new String[]{"putin", "obama", "farage", "assad", "kadyrov"}, new String[]{"putin", "obama", "farage", "assad", "kadyrov"}, new String[]{"putin", "obama", "farage", "assad", "kadyrov"},
                 new double[]{59.523, 42.70, 9.11, 3.041, 99.99}, new int[]{999, 70, 911, 101, 1337}, new double[]{59.523, 42.69, 9.11, 3.041, 99.99}, new double[]{59.523, 42.70, 9.11, 3.041, 99.99});
@@ -246,10 +247,17 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
     }
 
     @Override
-    public void onRatioDialogPositiveClick(int i, String tag) {
+    public void onRatioDialogPositiveClick(double i, String tag) {
         minratio = i;
-
-        //do sorting algo here
+        ib.clear();
+        ib.addAll(ibrecent);
+        ratioFilter(ib);
+        if(bar_filter_status[1]){
+            thumbFilter(ib);
+        }
+        if(!bar_filter_status[2]){
+            mergeSortTopRated.sort(ib);
+        }
         bar_filter_status[0] = true;
         switch (tag) {
             case "byfriends":
@@ -287,7 +295,14 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
         if (which_filter) {
             minratio = 0;
             bar_filter_status[0] = false;
-            //insert algorithm to revert data based on what is easiest
+            ib.clear();
+            ib.addAll(ibrecent);
+            if(bar_filter_status[1]){
+                thumbFilter(ib);
+            }
+            if(!bar_filter_status[2]){
+                mergeSortTopRated.sort(ib);
+            }
             switch (tag) {
                 case "byfriends":
                     friendsPage.dapt.notifyDataSetChanged();
@@ -314,7 +329,14 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
         } else {
             minthumbs = 0;
             bar_filter_status[1] = false;
-            //insert algorithm to revert data based on what is easiest
+            ib.clear();
+            ib.addAll(ibrecent);
+            if(bar_filter_status[0]){
+                ratioFilter(ib);
+            }
+            if(!bar_filter_status[2]){
+                mergeSortTopRated.sort(ib);
+            }
             switch (tag) {
                 case "byfriends":
                     friendsPage.dapt.notifyDataSetChanged();
@@ -342,9 +364,16 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
     }
 
     public void switchBarFilter(boolean which, String tag) {
+        bar_filter_status[2]=which;
         if (which) {
-            //insert algorithm to sort by recent
-
+            ib.clear();
+            ib.addAll(ibrecent);
+            if(bar_filter_status[0]){
+                ratioFilter(ib);
+            }
+            if(bar_filter_status[1]){
+                thumbFilter(ib);
+            }
             switch (tag) {
                 case "byfriends":
                     friendsPage.dapt.notifyDataSetChanged();
@@ -369,7 +398,14 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
                     break;
             }
         } else {
-            mergeSortTopRated = new MergeSortTopRated();
+            ib.clear();
+            ib.addAll(ibrecent);
+            if(bar_filter_status[0]){
+                ratioFilter(ib);
+            }
+            if(bar_filter_status[1]){
+                thumbFilter(ib);
+            }
             mergeSortTopRated.sort(ib);
             switch (tag) {
                 case "byfriends":
@@ -402,7 +438,6 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
         //method with int area
         switch (tag) {
             case "trending":
-                ib.clear();
                 getJSONtoIdeaBlock("http://www.thekarlbrown.com/ctwapp/ideas_byAreaJSON.php?lat=" + latitude + "&long=" + longitude + "&state=" + state + "&country=" + country + "&username=" + username + "&case=" + area);
                 trendingTab.dapt = new IdeaDataAdapter(ib,this);
                 trendingTab.l.setAdapter(trendingTab.dapt);
@@ -421,7 +456,6 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
         //method with int time
         switch (tag) {
             case "category":
-                ib.clear();
                 getJSONtoIdeaBlock("http://www.thekarlbrown.com/ctwapp/ideas_byCatSubTimeJSON.php?cat=" + (categoryTab.categoryfirst + 1) + "&sub=" + categoryTab.categorysecond + "&case=" + time);
                 categoryTab.dapt = new IdeaDataAdapter(ib,this);
                 categoryTab.l.setAdapter(categoryTab.dapt);
@@ -438,7 +472,15 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
     public void onThumbDialogPositiveClick(int i, String tag) {
         minthumbs = i;
         bar_filter_status[1] = true;
-        //do sorting algo here
+        ib.clear();
+        ib.addAll(ibrecent);
+        if(bar_filter_status[0]){
+            ratioFilter(ib);
+        }
+        thumbFilter(ib);
+        if(!bar_filter_status[2]){
+            mergeSortTopRated.sort(ib);
+        }
         switch (tag) {
             case "byfriends":
                 friendsPage.filterSelected(1);
@@ -580,6 +622,8 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
      * @param url - URL to connect to
      */
     public void getJSONtoIdeaBlock(String url) {
+        ibrecent.clear();
+        ib.clear();
         aSyncParser = new ASyncParser(url);
         try {
             aSyncParser.execute();
@@ -597,9 +641,15 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
         } catch (JSONException e) {
             Log.println(0, "Error", e.getMessage());
         }
+
+
         if (ib.size() == 0) {
+            ibrecent.add(new IdeaBlock(":[", "There does not seem to be any ideas here yet! Too bad. Either you have internet connectivitivity issues, or you are in an empty category", "thekarlbrown",
+                    0, 999, 1, 8, 2));
             ib.add(new IdeaBlock(":[", "There does not seem to be any ideas here yet! Too bad. Either you have internet connectivitivity issues, or you are in an empty category", "thekarlbrown",
                     0, 999, 1, 8, 2));
+        }else{
+            ibrecent.addAll(ib);
         }
     }
 
@@ -959,5 +1009,31 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
         states.put("Wisconsin","WI");
         states.put("Wyoming","WY");
         states.put("Yukon Territory","YT");
+    }
+
+    /**
+     * Set a ratio filter based on earlier input for display
+     * @param tofilter - List<IdeaBlock> to be filtered
+     */
+    public void ratioFilter(List<IdeaBlock> tofilter){
+        for(int position=0;position<tofilter.size();position++){
+            if(((double)tofilter.get(position).getTup()/(double)tofilter.get(position).getTdown())<minratio){
+                tofilter.remove(position);
+                position--;
+            }
+        }
+    }
+
+    /**
+     * Set a thumb filter based on earlier input for display
+     * @param tofilter - List<IdeaBlock> to be filtered
+     */
+    public void thumbFilter(List<IdeaBlock> tofilter){
+        for(int position=0;position<tofilter.size();position++){
+            if((tofilter.get(position).getTup()+tofilter.get(position).getTdown())<minthumbs){
+                tofilter.remove(position);
+                position--;
+            }
+        }
     }
 }

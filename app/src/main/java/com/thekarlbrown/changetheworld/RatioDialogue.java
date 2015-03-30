@@ -46,7 +46,7 @@ public class RatioDialogue extends DialogFragment {
                         try {
                             int i=Integer.parseInt(((EditText) view.findViewById(R.id.ratio_dialogue_entry)).getText().toString());
                             if ((i<100)&&(i>0)) {
-                                mListener.onRatioDialogPositiveClick(i,tag);
+                                mListener.onRatioDialogPositiveClick(((double)i/100.0),tag);
                             }else{
                                 mListener.onRatioDialogNegativeClick();
                             }
@@ -66,7 +66,7 @@ public class RatioDialogue extends DialogFragment {
     }
 
     public interface NoticeRatioDialogListener {
-        public void onRatioDialogPositiveClick(int i, String tag);
+        public void onRatioDialogPositiveClick(double i, String tag);
         public void onRatioDialogNegativeClick();
     }
 
