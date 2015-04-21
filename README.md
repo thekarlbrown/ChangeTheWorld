@@ -2,13 +2,14 @@
 
 I am developing an Android app that utilizes a MySQL database on this server to enable the sharing, group evaluation, improvement and implementation of new ideas and innovation.
 
-This undertaking is my first attempt at full stack development and it has been an incredible experience!
-
-This app will allow people with good concepts to get them to individuals who will be able to implement them who may never do anything with them otherwise
-
-This app will also allow group evaluation and improvement of said ideas plus casual areas for funny/humorous stuff (and to cut down on riff raff from the serious sections without moderation on my side)
+This android application was my first attempt at full stack development and it has been an incredible experience!
 
 This app is best for anyone who thinks of something brilliant, sees a problem in the world they want fixed, or is bored and wants to toss something out there and see what people think
+
+This app connects innovators with good concepts who may never do anything with them otherwise to individuals who will be able to implement them to better us all.
+
+This app allows group evaluation and improvement of ideas plus casual areas for funny/humorous ideas, which reduces riff raff from the serious sections without moderation by administrators.
+
 
 I am currently in the alpha stages of development. What does this entail?
 
