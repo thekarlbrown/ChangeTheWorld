@@ -64,9 +64,7 @@ todo: second version without error messages and push only (maybe not push only a
 
 improve how I change trending in relation to geocoding (the current band-aide due to desire to push to alpha stage is hilarious)
 
-figure out why appetize is crashing (likely because of location data issues) and figure out how to deal with that 
-
-move reverse geocoding to server size depending on performance difference, required if app goes international due to hashmap
+move reverse geocoding to server side depending on performance difference, required if app goes international due to hashmap
 
 improve incorrect queries/returns of how things failed then with new information give more detail client side about what was wrong about login
 
@@ -84,8 +82,6 @@ change php inserts so that auto_increment doesn't trigger after app is working a
 
 retrieve categories from server instead of setting them manually
 
-better implement text in initial screen
-
 should we optimize the boolean array that is being bundled to set the bar filter? will it be necessary once dust settles?
 
 how do I better handle resource allocation? when are objects destroyed? can I automate linking of data with frameworks?
@@ -96,14 +92,6 @@ determine if all bar methods necessary, determine if I should make leaderboard f
 
 use better directory for saving files
 
-pushing/pulling favourites upvote/downvote from server
-
-update selected on start so leaderboard doesn't start on null
-
-optimize sort algorithms change dataadapter containers new for minimum size and quickest content
-
-pull minimum amount required for adapter, and object number, 
-
 have "check for new" and "get more" buttons at top and bottom once pushing is implemented
 
 description of all functions on welcome screen, potentially on start
@@ -112,13 +100,9 @@ search queries optimal search algorithm, starting at beginning until end, saving
 
 need advisor help on leaderboard, maybe set rule for if active within. 30 days
 
-friends and idea lists are all optimized algorithm searches, decide how to determine if user has liked idea or not (will server return truth value, where will who has liked what be stored and how)
-
 decide if leaderboard is real-time or at end of each day and if it has time
 
 see what prof thinks of leaderboard pushing
-
-figure out how I am layering fragments improperly
 
 figure out why I cannot copy-paste
 
@@ -158,15 +142,11 @@ implement comments
 
 scaling based on content, device, and orientation
 
-import image for profile picture/make it social/all that jazz
-
 calculate your PERSONAL rank (not leaderboard) by area
 
-verifying/security user accounts
+verifying/securing user accounts
 
 implementing reporting ideas
-
-bug fixing
 
 view comments, notifications from comments
 
@@ -175,6 +155,10 @@ implement recently viewed ideas
 attempt to move code towards more modular design
 
 fix drawer expansion style to make it more smooth
+
+better comments for code
+
+better variable names
 
 --------------------------------------------
 
