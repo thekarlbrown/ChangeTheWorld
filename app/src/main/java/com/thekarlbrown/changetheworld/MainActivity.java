@@ -223,7 +223,6 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
             fm = getFragmentManager();
             ft = fm.beginTransaction();
             ft.add(R.id.current_tab, new InitialScreen(), "initial");
-            //}
             ft.commit();
         }
     }

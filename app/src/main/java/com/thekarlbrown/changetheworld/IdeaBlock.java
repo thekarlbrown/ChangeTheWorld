@@ -7,7 +7,7 @@ import java.io.Serializable;
  * By Karl Brown ( thekarlbrown )
  */
 public class IdeaBlock implements Serializable {
-    
+
     private String ideas,authors,titles;
     private int tups,tdowns,numbers,categorys,subcategorys;
 

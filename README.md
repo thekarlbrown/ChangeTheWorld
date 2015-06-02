@@ -1,6 +1,6 @@
 --- README ---
 
-I am developing an Android app that utilizes a MySQL database on this server to enable the sharing, group evaluation, improvement and implementation of new ideas and innovation.
+I developed an Android app that utilizes a MySQL database and PHP Web API to enable the sharing, group evaluation, improvement and implementation of new ideas and innovation.
 
 This android application was my first attempt at full stack development and it has been an incredible experience!
 
@@ -11,7 +11,7 @@ This app connects innovators with good concepts who may never do anything with t
 This app allows group evaluation and improvement of ideas plus casual areas for funny/humorous ideas, which reduces riff raff from the serious sections without moderation by administrators.
 
 
-I am currently in the alpha stages of development. What does this entail?
+I am currently in the beta stages of development. What does this entail?
 
 --------------------------------------------
 
@@ -25,14 +25,9 @@ I am currently in the alpha stages of development. What does this entail?
 
 1. Emulator here: You MUST use Nexus 7/9 - www.appetize.io/app/rtkyh4gvg02x56uzeffx1349k4 - You MUST use Nexus 7/9, and emulator connects to my server but cannot handle Google Apps so reverse geocoding/location services are emulated
 
-2. The app is in the earliest of alpha. Its performance is not optimized. In fact, I have a list of things I intend on doing, bugs that need to be fixed, and what I intend to do further on in a huge list
+2. I have a list of things I will do, bugs that need to be fixed, and what I may eventually implement underneath in lists
 
-3. I would love your feedback, and much later on in the process will need android devices to test on (in addition to whatever I will be testing)
-
-4. If you are interested in helping me setting up the category's and subcategory's/check out https://docs.google.com/a/cnu.edu/document/d/1GVSz_fBI7GjAc4JJta39_EX0B0SVpZ5PUdZyDpbF0Jw/edit
-
-5. The first public alpha is here! Please send feedback! I will be working on stability, performance, changing the "back" function, and adding comments.
-
+3. Get the APK Here and give me Feedback (Note: Large Displays/Resolutions Only, Tablets ideally, or Login may not be visisble) - www.thekarlbrown.com/ChangeTheWorld.apk
 
 
 --------------------------------------------
@@ -49,62 +44,48 @@ EDIT: Completely redid MySQL abstract 3/7 to meet changing demands/new knowledge
 
 --- PHP --- 
 
-currently: PHP complete for current needs, detailed for future goals
+Web API Fully Completed, Available Here at: www.github.com/thekarlbrown/ChangeTheWorld/blob/master/server-side%20php/PHP%20API.txt
 
-decided on simple username/phone number verification, and following of individuals not friending
-
-incorporated error messages and PDO to aide in prevention of MySQL injection
-
-todo: second version without error messages and push only (maybe not push only as no real security difference), get real UI input  from someone
+To-Do: Improve the PHP API for better verification, change from GET to POST
 
 --------------------------------------------
 
 
 --TO-DO/Tactics for Implementation --
 
-improve how I change trending in relation to geocoding (the current band-aide due to desire to push to alpha stage is hilarious)
-
 move reverse geocoding to server side depending on performance difference, required if app goes international due to hashmap
 
 improve incorrect queries/returns of how things failed then with new information give more detail client side about what was wrong about login
 
-set custom go/backs for sub-pages
+set custom go/backs for sub-pages, currently back button exits app
 
 hash password client side instead of post/get plaintext  (doubtful that risk of knowing hashing technique via reverse engineering of apk client side is worse than sending post/get that could be wiresharked but will verify before implementation)
 
 (for example, special characters in password fields vs weaker passwords for users vs certain characters not allowed. will PHP adequately protect Database with PDO?) 
 
-change friends to followers in followers ideas 
+change friends to favorites in favorite ideas
 
 php adds: deal with null inputs for insert/update calls
 
-change php inserts so that auto_increment doesn't trigger after app is working and diagnostics are complete IE add id=id+1 not autoincrements (what about holes)
+change php inserts so that auto_increment doesn't trigger after app is working and diagnostics are complete IE add id=id+1 not autoincrements (what about holes? should I do this?)
 
 retrieve categories from server instead of setting them manually
 
-should we optimize the boolean array that is being bundled to set the bar filter? will it be necessary once dust settles?
+optimize how bar array is set
 
 how do I better handle resource allocation? when are objects destroyed? can I automate linking of data with frameworks?
 
-fix serialization of drafts
-
 determine if all bar methods necessary, determine if I should make leaderboard filter/access separate object
 
-use better directory for saving files
+use better directories for saving serialized drafts
 
 have "check for new" and "get more" buttons at top and bottom once pushing is implemented
 
-description of all functions on welcome screen, potentially on start
-
 search queries optimal search algorithm, starting at beginning until end, saving when minimum obtained to continue where it left off when user goes down
-
-need advisor help on leaderboard, maybe set rule for if active within. 30 days
 
 decide if leaderboard is real-time or at end of each day and if it has time
 
-see what prof thinks of leaderboard pushing
-
-figure out why I cannot copy-paste
+check status of copy/paste
 
 add leaderboard onclicks to user profiles
 
@@ -116,47 +97,33 @@ get good UI input for re-design
 
 due to complexities of php, if ($case==0) will throw an error but stil evaluate as true then change the database in favratd.php. I need to check to see how this affects the program later, but assume we are not worrying about custom attacks atm and may be a non-issue
 
-prompt for deletion of old drafts
+add ability to delete old drafts, and save over existing draft
 
-view list of followers  onclick pulls you into list of followers not ideas, which then pulls into each individuals ideas (requires new data container)
+view list of followers onclick pulls you into list of followers not ideas, which then pulls into each individuals ideas (requires new data container)
 
 bring custom picture for each user (or do away with picture in profile)
 
 optimize views used (ie button instead of image instead of text or whatever)
 
-view other users profiles 
-
-add images for profiles to various displays, save profile picture to server
-
-groxxx directed spacing
+add images for profiles to various tabs, save profile picture to server
 
 make icons out of everything possible for aesthetics, sexy fonts, and round edges
 
-improve category spacing
+optimize communication of preferences/mainactivity between fragments, using methods,
 
-ability to back up profile over the internet and save preferences online, not connected to current username and saved in downloads
-
-optimize communication of preferences/mainactivity between fragments
-
-implement comments
+implement comments, add notifications from comments
 
 scaling based on content, device, and orientation
 
 calculate your PERSONAL rank (not leaderboard) by area
 
-verifying/securing user accounts
-
 implementing reporting ideas
-
-view comments, notifications from comments
 
 implement recently viewed ideas
 
 attempt to move code towards more modular design
 
 fix drawer expansion style to make it more smooth
-
-better comments for code
 
 better variable names
 
