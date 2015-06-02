@@ -17,7 +17,7 @@ I am currently in the beta stages of development. What does this entail?
 
 --- current state of the Project ----
 
-- Open testing, algorithmic additions required, working on stability, performance, changing the "back" function, and adding comments.
+- Open testing, working on stability, performance, changing the "back" function, and adding comments.
 
 - Fully network connected! Your accounts and data are now saved and persistent!
 
