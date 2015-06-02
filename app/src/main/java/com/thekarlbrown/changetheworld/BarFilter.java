@@ -8,7 +8,8 @@ import android.view.View;
 import android.widget.TextView;
 
 /**
- * class for the filter bar
+ * Class that serves to handle the Bar for different filter selections.
+ * By Karl Brown ( thekarlbrown )
  */
 public class BarFilter extends Fragment {
     FragmentManager fm;
@@ -17,6 +18,14 @@ public class BarFilter extends Fragment {
     boolean[]filter={false,false,false,false};
     TextView[] complete;
 
+    /**
+     * Setting the onClickListener's in the bar. This method is complex as it can launch Dialog Fragments from its own fragment
+     * @param in Current view
+     * @param fragmentManager Fragment manager to be passed in
+     * @param selected Item already selected
+     * @param tag Tag of current fragment
+     * @param mainActivity The base activity
+     */
     public void barFilterClick(View in, FragmentManager fragmentManager,boolean[]selected,final String tag,final MainActivity mainActivity) {
         fm = fragmentManager;
         complete= new TextView[]{(TextView) in.findViewById(R.id.filter_ratio),
@@ -27,7 +36,7 @@ public class BarFilter extends Fragment {
             @Override
             public void onClick(View v) {
                 if (!filter[0]) {
-                    //set ratio here with popup
+                    //set Ratio here with popup
                     ft = fm.beginTransaction();
                     RatioDialogue ratioDialogue=new RatioDialogue();
                     bundle=new Bundle();
@@ -35,7 +44,6 @@ public class BarFilter extends Fragment {
                     ratioDialogue.setArguments(bundle);
                     ft.add(ratioDialogue, "ratiodialogue");
                     ft.commit();
-                    //ft.addToBackStack(null);
                 } else {
                     filter[0] = false;
                     complete[0].setBackgroundColor(0xffffffff);
@@ -47,14 +55,13 @@ public class BarFilter extends Fragment {
             @Override
             public void onClick(View v) {
                 if (!filter[1]) {
-                    //set thumbs here with popup
+                    //set Thumb ratio here with popup
                     ft = fm.beginTransaction();
                     ThumbDialogue thumbDialogue=new ThumbDialogue();
                     bundle=new Bundle();
                     bundle.putString("tag",tag);
                     thumbDialogue.setArguments(bundle);
                     ft.add(thumbDialogue, "thumbdialogue");
-                    //ft.addToBackStack(null);
                     ft.commit();
 
                 } else {
@@ -94,8 +101,11 @@ public class BarFilter extends Fragment {
             }
         }
     }
-    public void setSelected(int i)
-    {
+    /**
+     * Set a item in the bar as selected
+     * @param i Which of the items in the bar to select
+     */
+    public void setSelected(int i) {
         complete[i].setBackgroundColor(0xff00AC00);
         filter[i]=true;
     }

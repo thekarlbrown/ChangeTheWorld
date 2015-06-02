@@ -9,11 +9,11 @@ When data is returned, it comes in as a JSON array. Get methods are used univers
 - title : Properly formatted string for idea title
 - username : username of idea creator
 - descrip : Properly formatted string description of the idea
-- cat : Category of the idea, starting at 0 
-- sub : Subcategory of the idea, starting at 0 
+- cat : Category of the idea, starting at 1 
+- sub : Subcategory of the idea, starting at 1 
 - lat : Latitude of the user's location at submission, determined automatically and sent as a 6 decimal place double
 - long : Longitude of the user's location at submission, determined automatically and sent as a 6 decimal place double
-- state : State of the User, sent as a 2 char String 
+- state : State of the User, sent as a 2 char String State Code
 - country : Country of the user, sent as a 2 char String country code
 
 Add your idea to database, including your location and all necessary information
@@ -67,8 +67,8 @@ Case 5: List all ideas by users you have favourite'd
 
 -- ideas_byCatSubTimeJSON.php --
 
-- cat : Idea category, as integer starting at 0
-- sub : Idea subcategory, as integer starting at 0
+- cat : Idea category, as integer starting at 1
+- sub : Idea subcategory, as integer starting at 1
 - case : The case to determine which time filter will be applied to the JSON data returned 
 
 Case 0: List all ideas from category/subcategory sorted by time filtering for added in last 24 hours

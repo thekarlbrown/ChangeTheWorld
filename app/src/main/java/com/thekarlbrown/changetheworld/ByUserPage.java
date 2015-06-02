@@ -1,6 +1,5 @@
 package com.thekarlbrown.changetheworld;
 
-
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
@@ -11,7 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 /**
- * page for viewing ideas by userid
+ * This is the tab that allows the viewing of ideas by specific user
+ * By Karl Brown ( thekarlbrown )
  */
 
 public class ByUserPage extends Fragment {
@@ -30,13 +30,8 @@ public class ByUserPage extends Fragment {
     public static ByUserPage newInstance() {
         ByUserPage fragment = new ByUserPage();
         Bundle args = new Bundle();
-
         fragment.setArguments(args);
         return fragment;
-    }
-
-    public ByUserPage() {
-
     }
 
     @Override
@@ -46,7 +41,6 @@ public class ByUserPage extends Fragment {
             username=getArguments().getString("username");
             selectedf=getArguments().getBooleanArray("selectedf");
         }
-
     }
 
     @Override
@@ -64,8 +58,12 @@ public class ByUserPage extends Fragment {
         t.setText(username.toUpperCase() + "'S IDEAS");
         return rv;
     }
-    public void filterSelected(int i)
-    {
+
+    /**
+     * Actions performed when item on Bar Filter is pressed
+     * @param i Item selected (starting at 0)
+     */
+    public void filterSelected(int i) {
         selectedf[i]=true;
         barFilter.setSelected(i);
         dapt.notifyDataSetChanged();

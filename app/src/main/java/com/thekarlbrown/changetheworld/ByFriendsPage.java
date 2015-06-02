@@ -12,8 +12,8 @@ import android.widget.TextView;
 
 
 /**
- * page for viewing friends (currently views ideas by friends)
- * will implement a friend data adapter later
+ * This is the tab that allows the viewing your current favourite user's ideas
+ * By Karl Brown ( thekarlbrown )
  */
 
 public class ByFriendsPage extends Fragment {
@@ -28,17 +28,15 @@ public class ByFriendsPage extends Fragment {
     String username;
     BarFilter barFilter=new BarFilter();
     boolean[]selectedf;
+
     public static ByFriendsPage newInstance() {
         ByFriendsPage fragment = new ByFriendsPage();
         Bundle args = new Bundle();
-
         fragment.setArguments(args);
         return fragment;
     }
 
-    public ByFriendsPage() {
 
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -47,7 +45,6 @@ public class ByFriendsPage extends Fragment {
             username=getArguments().getString("username");
             selectedf=getArguments().getBooleanArray("selectedf");
         }
-
     }
 
     @Override
@@ -63,8 +60,12 @@ public class ByFriendsPage extends Fragment {
         barFilter.barFilterClick(rv,fm,selectedf,getTag(),mainActivity);
         return rv;
     }
-    public void filterSelected(int i)
-    {
+
+    /**
+     * Actions performed when item on Bar Filter is pressed
+     * @param i Item selected (starting at 0)
+     */
+    public void filterSelected(int i) {
         selectedf[i]=true;
         barFilter.setSelected(i);
         dapt.notifyDataSetChanged();

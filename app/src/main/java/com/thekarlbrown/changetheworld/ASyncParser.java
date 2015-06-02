@@ -5,7 +5,10 @@ import android.util.Log;
 import org.json.JSONArray;
 import java.io.IOException;
 
-
+/**
+ * Class that serves to ASyncTask requests to obtain a JSON Array from my PHP Web API
+ * By Karl Brown ( thekarlbrown )
+ */
 public class ASyncParser extends AsyncTask<String, String, JSONArray>
 {
     JSONParser jsonParser=new JSONParser();

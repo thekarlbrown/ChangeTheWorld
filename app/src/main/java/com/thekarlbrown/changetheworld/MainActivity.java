@@ -454,7 +454,7 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
         //method with int time
         switch (tag) {
             case "category":
-                getJSONtoIdeaBlock("http://www.thekarlbrown.com/ctwapp/ideas_byCatSubTimeJSON.php?cat=" + (categoryTab.categoryfirst + 1) + "&sub=" + categoryTab.categorysecond + "&case=" + time);
+                getJSONtoIdeaBlock("http://www.thekarlbrown.com/ctwapp/ideas_byCatSubTimeJSON.php?cat=" + (categoryTab.firstCategorySelected + 1) + "&sub=" + categoryTab.subcategorySelected + "&case=" + time);
                 categoryTab.dapt = new IdeaDataAdapter(ib,this);
                 categoryTab.l.setAdapter(categoryTab.dapt);
                 break;

@@ -10,7 +10,8 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
 /**
- * page for viewing user favorites
+ * This is the tab that allows you to view your user favorites
+ * By Karl Brown ( thekarlbrown )
  */
 public class ByFavoritePage extends Fragment {
 
@@ -27,13 +28,8 @@ public class ByFavoritePage extends Fragment {
     public static ByFavoritePage newInstance() {
         ByFavoritePage fragment = new ByFavoritePage();
         Bundle args = new Bundle();
-
         fragment.setArguments(args);
         return fragment;
-    }
-
-    public ByFavoritePage() {
-
     }
 
     @Override
@@ -43,7 +39,6 @@ public class ByFavoritePage extends Fragment {
             username=getArguments().getString("username");
             selectedf=getArguments().getBooleanArray("selectedf");
         }
-
     }
 
     @Override
@@ -59,8 +54,12 @@ public class ByFavoritePage extends Fragment {
         barFilter.barFilterClick(rv,fm,selectedf,getTag(),mainActivity);
         return rv;
     }
-    public void filterSelected(int i)
-    {
+
+    /**
+     * Actions performed when item on Bar Filter is pressed
+     * @param i Item selected (starting at 0)
+     */
+    public void filterSelected(int i) {
         selectedf[i]=true;
         barFilter.setSelected(i);
         dapt.notifyDataSetChanged();

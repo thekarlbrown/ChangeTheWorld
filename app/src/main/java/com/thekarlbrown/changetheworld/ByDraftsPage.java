@@ -15,7 +15,8 @@ import java.io.File;
 import java.util.List;
 
 /**
- * page for viewing saved drafts
+ * This is the Tab that allows you to view your saved drafts.
+ * By Karl Brown ( thekarlbrown )
  */
 public class ByDraftsPage extends Fragment {
 
@@ -31,25 +32,17 @@ public class ByDraftsPage extends Fragment {
     LocalIdeas localIdeas=new LocalIdeas();
 
 
-
     public static ByDraftsPage newInstance() {
         ByDraftsPage fragment = new ByDraftsPage();
         Bundle args = new Bundle();
-
         fragment.setArguments(args);
         return fragment;
-    }
-
-    public ByDraftsPage() {
-
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-        }
-
+        if (getArguments() != null) {}
     }
 
     @Override
@@ -58,6 +51,7 @@ public class ByDraftsPage extends Fragment {
         mainActivity=(MainActivity)getActivity();
         rv = inflater.inflate(R.layout.fragment_by_drafts_page, container, false);
         pref=mainActivity.getPref();
+        //Set the ideablock in the main activity to the contents of the locally saved drafts
         ib=localIdeas.loadIdeaBlock(new File(Environment.getExternalStoragePublicDirectory(
                 Environment.DIRECTORY_DOWNLOADS), "drafts_" + pref.getString(getString(R.string.preference_username), "fuckedUp")));
         dapt = new DraftDataAdapter(ib,mainActivity);
@@ -65,6 +59,4 @@ public class ByDraftsPage extends Fragment {
         l.setAdapter(dapt);
         return rv;
     }
-
-
 }
