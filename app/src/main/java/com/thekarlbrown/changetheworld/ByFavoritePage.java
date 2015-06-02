@@ -24,9 +24,6 @@ public class ByFavoritePage extends Fragment {
     String username;
     BarFilter barFilter=new BarFilter();
     boolean[]selectedf;
-    int prefratio;
-    int prefminimum;
-
     public static ByFavoritePage newInstance() {
         ByFavoritePage fragment = new ByFavoritePage();
         Bundle args = new Bundle();

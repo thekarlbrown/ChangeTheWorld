@@ -32,8 +32,6 @@ public class CategoryTab extends Fragment {
     String[][]categoryarray;
     String[]categoryarraytitles;
     ListView mDrawerList;
-    int prefratio;
-    int prefminimum;
     int categoryfirst;
     int categorysecond;
     FragmentManager fm;
@@ -110,7 +108,6 @@ public class CategoryTab extends Fragment {
             dapt = new IdeaDataAdapter(mainActivity.ib, mainActivity);
             l = (ListView) rv.findViewById(R.id.category_list);
             l.setAdapter(dapt);
-            //mDrawerList.setItemChecked(position, true);
             mDrawerLayout.closeDrawer(mDrawerList);
             mDrawerList.setAdapter(new ArrayAdapter<>(mainActivity,R.layout.category_drawer_container,categoryarraytitles));
             mDrawerList.setOnItemClickListener(new DrawerItemClickListener());

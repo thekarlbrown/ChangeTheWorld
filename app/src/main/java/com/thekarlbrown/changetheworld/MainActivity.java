@@ -168,7 +168,6 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
     @Override
     public void onSearchDialogPositiveClick(String r) {
         if (r != null) {
-            //searchQuery = r;
             getJSONtoIdeaBlock("http://www.thekarlbrown.com/ctwapp/ideas_bySearchJSON.php?search=" + r);
             //should I process filters?
             fm = getFragmentManager();

@@ -1,12 +1,6 @@
 package com.thekarlbrown.changetheworld;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 /**
 this is a container for ideas

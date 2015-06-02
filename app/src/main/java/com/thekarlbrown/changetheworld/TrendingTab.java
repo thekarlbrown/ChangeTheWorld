@@ -26,8 +26,6 @@ public class TrendingTab extends Fragment {
     FragmentTransaction ft;
     BarFilter barFilter=new BarFilter();
     BarArea barArea=new BarArea();
-    int prefratio;
-    int prefminimum;
     boolean[]selectedf;
     int selecteda;
 

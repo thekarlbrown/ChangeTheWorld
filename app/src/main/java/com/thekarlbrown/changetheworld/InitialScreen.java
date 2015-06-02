@@ -6,9 +6,7 @@ import android.app.FragmentTransaction;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,23 +37,8 @@ public class InitialScreen extends Fragment {
     FragmentManager fm;
     boolean createbars=false;
     String username,email,emailcheck;
-    /*public void loginToAccount()
-    {
-        mainActivity.searchTabClick();
-        epref=pref.edit();
-        epref.putString(getString(R.string.preference_username), username);
-        epref.apply();
-        mainActivity.loginToAccount(username,password);
-    }
-    public void toChange(View v)
-    {
-        mainActivity.searchTabClick();
-        epref=pref.edit();
-        epref.putString(getString(R.string.preference_username), username);
-        epref.apply();
-        mainActivity.createAccount(username,password,email);
-    }
-    */
+
+
     public static InitialScreen newInstance() {
         InitialScreen fragment = new InitialScreen();
         Bundle args = new Bundle();
@@ -222,22 +205,7 @@ public class InitialScreen extends Fragment {
                         but.setClickable(true);
                         but=(Button)rv.findViewById(R.id.login_create_account);
                         but.setClickable(true);
-                        /*editText=(EditText) rv.findViewById(R.id.login_username);
-                        editText.setHint(R.string.login_username_prompt);
-                        editText.setText(null);
-                        editText=(EditText) rv.findViewById(R.id.login_password);
-                        editText.setHint(R.string.login_password_prompt);
-                        editText.setText(null);
-                        editText=(EditText) rv.findViewById(R.id.login_password_confirm);
-                        editText.setHint(R.string.login_password_prompt);
-                        editText.setText(null);
-                        editText=(EditText) rv.findViewById(R.id.login_email);
-                        editText.setHint(R.string.login_email_prompt);
-                        editText.setText(null);
-                        editText=(EditText) rv.findViewById(R.id.login_email);
-                        editText.setHint(R.string.login_email_confirm);
-                        editText.setText(null);
-                        */
+
                     }
                     }
                 }

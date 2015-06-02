@@ -66,8 +66,8 @@ public class RatioDialogue extends DialogFragment {
     }
 
     public interface NoticeRatioDialogListener {
-        public void onRatioDialogPositiveClick(double i, String tag);
-        public void onRatioDialogNegativeClick();
+        void onRatioDialogPositiveClick(double i, String tag);
+        void onRatioDialogNegativeClick();
     }
 
     NoticeRatioDialogListener mListener;

@@ -34,8 +34,6 @@ public class SearchTab extends Fragment{
     Activity activity;
     BarFilter barFilter=new BarFilter();
     boolean[] selectedf;
-    int prefratio;
-    int prefminimum;
 
     public static SearchTab newInstance() {
         SearchTab fragment = new SearchTab();

@@ -2,12 +2,9 @@ package com.thekarlbrown.changetheworld;
 
 import android.os.AsyncTask;
 import android.util.Log;
-
 import org.json.JSONArray;
-
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
+
 
 public class ASyncParser extends AsyncTask<String, String, JSONArray>
 {

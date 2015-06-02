@@ -3,7 +3,6 @@ package com.thekarlbrown.changetheworld;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -27,8 +26,6 @@ public class ByUserPage extends Fragment {
     String username;
     BarFilter barFilter=new BarFilter();
     boolean[]selectedf;
-    int prefratio;
-    int prefminimum;
 
     public static ByUserPage newInstance() {
         ByUserPage fragment = new ByUserPage();

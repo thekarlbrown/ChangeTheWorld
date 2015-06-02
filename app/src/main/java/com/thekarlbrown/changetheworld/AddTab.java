@@ -356,7 +356,6 @@
             return wegood;
         }
 
-
         @Override
         public void onDetach() {
             hideSoftKeyboard();

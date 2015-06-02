@@ -2,15 +2,11 @@ package com.thekarlbrown.changetheworld;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-
-import android.content.SharedPreferences;
-
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -32,9 +28,6 @@ public class ByFriendsPage extends Fragment {
     String username;
     BarFilter barFilter=new BarFilter();
     boolean[]selectedf;
-     int prefratio;
-    int prefminimum;
-
     public static ByFriendsPage newInstance() {
         ByFriendsPage fragment = new ByFriendsPage();
         Bundle args = new Bundle();

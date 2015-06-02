@@ -14,14 +14,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 
 /**
@@ -66,9 +59,9 @@ public class ProfileTab extends Fragment {
     }
     ProfileTabListener mListener;
     public interface ProfileTabListener{
-        public void toUserIdeaPage(String username);
-        public void toFavoriteIdeaPage(String username);
-        public void toFriendsIdeaPage(String username);
+       void toUserIdeaPage(String username);
+       void toFavoriteIdeaPage(String username);
+       void toFriendsIdeaPage(String username);
     }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
