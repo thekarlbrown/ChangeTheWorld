@@ -10,6 +10,10 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+/**
+ * JSONParser that turns HTTP GET request into JSON, accompanies ASyncParser
+ * By Karl Brown ( thekarlbrown ) 2nd June 2015
+ */
 public class JSONParser {
 
     static InputStream is = null;
@@ -18,29 +22,13 @@ public class JSONParser {
     URL url=null;
     HttpURLConnection connection;
 
-    // constructor
-    public JSONParser() {
-
-    }
-
-    // function get json from url
-// by making HTTP POST or GET method
-    public JSONArray makeHttpRequest(String urlstring, String method
-    ) throws IOException {
-        //List params;
-        // Making HTTP request
+    public JSONArray makeHttpRequest(String urlstring, String method) throws IOException {
         try {
-            // check for request method
+            //Check for request method
             if (method.equals("POST")) {
-                // request method is POST
-                // defaultHttpClient
-                //DefaultHttpClient httpClient = new DefaultHttpClient();
-                //HttpPost httpPost = new HttpPost(urlstring);
-                //httpPost.setEntity(new UrlEncodedFormEntity(params));
-                //HttpResponse httpResponse = httpClient.execute(httpPost);
-                //HttpEntity httpEntity = httpResponse.getEntity();
-                //is = httpEntity.getContent();
+                //Not currently implemented
             } else if (method.equals("GET")) {
+                //Open HTTP connection and obtain JSON data
                 try{
                     url=new URL(urlstring);
                     connection=(HttpURLConnection)url.openConnection();
@@ -67,20 +55,17 @@ public class JSONParser {
                 }catch(Exception e)
                 {
                     Log.e("Buffer error","Take a break" + e.toString());
-
                 }
             }
         } catch (Exception ex) {
-            //Log.d("Networking", ex.getLocalizedMessage());
-            throw new IOException("Error connecting");
+            Log.d("Networking", ex.getLocalizedMessage());
         }
-        // try parse the string to a JSON object
+        //Try parsing the string to a JSON object
         try{
             jObj = new JSONArray(json);
         } catch (JSONException e) {
             Log.e("JSON Parser", "Error parsing data " + e.toString());
         }
-        // return JSON String
         return jObj;
     }
 }

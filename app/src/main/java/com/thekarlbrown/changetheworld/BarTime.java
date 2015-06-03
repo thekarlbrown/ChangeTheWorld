@@ -6,7 +6,7 @@ import android.widget.TextView;
 
 /**
  * Class that serves to handle the Bar for different time periods.
- * By Karl Brown ( thekarlbrown )
+ * By Karl Brown ( thekarlbrown ) 2nd June 2015
  */
 public class BarTime extends Fragment {
     TextView[] complete;

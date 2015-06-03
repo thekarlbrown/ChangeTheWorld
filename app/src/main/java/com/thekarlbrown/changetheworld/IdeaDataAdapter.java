@@ -8,6 +8,7 @@ import java.util.List;
 
 /**
  * Extension of the DataAdapter for non-Draft ideas, has a MainActivity listener
+ * By Karl Brown ( thekarlbrown ) 2nd June 2015
  */
 public class IdeaDataAdapter extends DataAdapter{
     IdeaDataAdapterListener mListener;
@@ -24,13 +25,20 @@ public class IdeaDataAdapter extends DataAdapter{
             throw new ClassCastException(context.toString() + " must implement NoticeDialogListener");
         }
     }
-
+    /**
+     * In addition to the super (DataAdapter), sets an onClickListener for each Idea
+     * @param position Current position in the ListView
+     * @param convertView ViewHolder for optimization purposes
+     * @param parent Parent ViewGroup, required for inflation
+     * @return Each Idea with an additional onClickListener
+     */
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         View fromsuper = super.getView(position, convertView, parent);
         fromsuper.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Sends you to an Idea Tab for the Idea
                 mListener.onIdeaListClick(position);
             }
         });

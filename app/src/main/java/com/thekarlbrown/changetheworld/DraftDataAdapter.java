@@ -8,7 +8,7 @@ import java.util.List;
 
 /**
  * Extension of the DataAdapter for Drafts, has MainActivity listener
- * By Karl Brown ( thekarlbrown )
+ * By Karl Brown ( thekarlbrown ) 2nd June 2015
  */
 public class DraftDataAdapter extends DataAdapter{
     DraftDataAdapterListener mListener;
@@ -26,6 +26,13 @@ public class DraftDataAdapter extends DataAdapter{
         }
     }
 
+    /**
+     * In addition to the super (DataAdapter), sets an onClickListener for each Draft
+     * @param position Current position in the ListView
+     * @param convertView ViewHolder for optimization purposes
+     * @param parent Parent ViewGroup, required for inflation
+     * @return Each Draft with an additional onClickListener
+     */
     @Override
     public View getView(final int position, View convertView, ViewGroup parent)
     {
@@ -33,6 +40,7 @@ public class DraftDataAdapter extends DataAdapter{
         fromsuper.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                //Sends you to an Idea Tab for the Draft
                 mListener.onDraftListClick(position);
             }
         });

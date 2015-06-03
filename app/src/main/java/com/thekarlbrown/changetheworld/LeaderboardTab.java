@@ -12,12 +12,12 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 /**
- * tab for top users
- *
- stylize input
+ * Leaderboard Tab for the app
+ * TODO: Implement the Backend and PHP Web API
+ * TODO: Create classes for the Leaderboard implementation at the Bottom (potentially)
+ * By Karl Brown ( thekarlbrown ) 2nd June 2015
  */
 public class LeaderboardTab extends Fragment {
-
     View rv;
     TextView t;
     ListView l;
@@ -37,8 +37,7 @@ public class LeaderboardTab extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
-    public LeaderboardTab() {
-    }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,6 +46,7 @@ public class LeaderboardTab extends Fragment {
             selectedt=getArguments().getInt("selectedt");
         }
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -61,36 +61,26 @@ public class LeaderboardTab extends Fragment {
         return rv;
     }
 
-    public void hideSoftKeyboard() {
-        try {
-            InputMethodManager inputMethodManager = (InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE);
-            inputMethodManager.hideSoftInputFromWindow(getActivity().getCurrentFocus().getWindowToken(), 0);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+    /**
+     * Sets onClickListeners for each items on the Bar
+     */
     public void barRankClick() {
         final TextView[] complete={(TextView) rv.findViewById(R.id.leaderboard_accurate),
                 (TextView) rv.findViewById(R.id.leaderboard_added),
                 (TextView) rv.findViewById(R.id.leaderboard_quality),
                 (TextView) rv.findViewById(R.id.leaderboard_comments),
         };
-        for(int i=0;i<complete.length;i++)
-        {
+        for(int i=0;i<complete.length;i++) {
             final int x=i;
             complete[x].setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(!leaderselect[x])
-                    {
+                    if(!leaderselect[x]) {
                         leaderselect[x]=true;
                         complete[x].setBackgroundColor(0xff00AC00);
-                        for(int y=0;y<leaderselect.length;y++)
-                        {
-                            if(y!=x)
-                            {
-                                if(leaderselect[y])
-                                {
+                        for(int y=0;y<leaderselect.length;y++) {
+                            if(y!=x) {
+                                if(leaderselect[y]) {
                                     leaderselect[y]=false;
                                     complete[y].setBackgroundColor(0xffffffff);
                                     y=leaderselect.length;
@@ -103,18 +93,15 @@ public class LeaderboardTab extends Fragment {
                         ladpt.notifyDataSetChanged();
                         t=(TextView)rv.findViewById(R.id.leaderboard_selection);
                         t.setText(complete[x].getText());
-
                     }
                 }
             });
         }
     }
-    @Override
-    public void onDetach() {
-        hideSoftKeyboard();
-        super.onDetach();
-    }
-    //set selected bar on start
+
+    /**
+     * Sets the Selected Item for the Leaderboard. Will be turned into its own class upon implementation
+     */
     private void barRankSet(){
         final TextView[] complete={(TextView) rv.findViewById(R.id.leaderboard_accurate),
                 (TextView) rv.findViewById(R.id.leaderboard_added),

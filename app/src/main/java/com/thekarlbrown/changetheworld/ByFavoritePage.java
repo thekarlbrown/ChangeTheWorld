@@ -11,7 +11,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 /**
  * This is the tab that allows you to view your user favorites
- * By Karl Brown ( thekarlbrown )
+ * By Karl Brown ( thekarlbrown ) 2nd June 2015
  */
 public class ByFavoritePage extends Fragment {
 
@@ -25,6 +25,7 @@ public class ByFavoritePage extends Fragment {
     String username;
     BarFilter barFilter=new BarFilter();
     boolean[]selectedf;
+
     public static ByFavoritePage newInstance() {
         ByFavoritePage fragment = new ByFavoritePage();
         Bundle args = new Bundle();

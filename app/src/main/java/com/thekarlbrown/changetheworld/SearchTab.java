@@ -15,11 +15,8 @@ import android.widget.TextView;
 import java.util.List;
 
 /**
- * tab for searching through ideas
- *
- * figure out how total number of ideas will be calculated
- * is calling (MainActivity)getActivity bad?
- * get the horizontal/vertical change working
+ * Search Tab that displays results of String Queries to the MySQL Database
+ * By Karl Brown ( thekarlbrown ) 2nd June 2015
  */
 public class SearchTab extends Fragment{
     View rv;
@@ -40,9 +37,6 @@ public class SearchTab extends Fragment{
         Bundle args = new Bundle();
         fragment.setArguments(args);
         return fragment;
-    }
-
-    public SearchTab() {
     }
 
     @Override
@@ -69,20 +63,29 @@ public class SearchTab extends Fragment{
         barFilter.barFilterClick(rv, fm,selectedf,getTag(),mainActivity);
         return rv;
     }
-    public void filterSelected(int i)
-    {
+
+    /**
+     * Method used with MainActivity to change data based on user selection
+     * @param i Item on the Filter Bar that is selected
+     */
+    public void filterSelected(int i) {
         selectedf[i]=true;
         barFilter.setSelected(i);
         dapt.notifyDataSetChanged();
     }
 
-
-
+    /**
+     * Hide the keyboard when we leave the View
+     */
     @Override
-    public void onAttach(Activity activity) {
+    public void onDetach() {
         hideSoftKeyboard();
-        super.onAttach(activity);
+        super.onDetach();
     }
+
+    /**
+     * Oft-repeated method (should have extended a class) to hide the keyboard when it has been in use
+     */
     public void hideSoftKeyboard() {
         try {
             activity=getActivity();
@@ -92,6 +95,4 @@ public class SearchTab extends Fragment{
             e.printStackTrace();
         }
     }
-
-
 }

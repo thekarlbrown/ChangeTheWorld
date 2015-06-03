@@ -16,8 +16,8 @@ import java.util.Arrays;
 
 
 /**
- * This tab allows filtering of ideas by category
- * By Karl Brown ( thekarlbrown )
+ * Category Tab that allows filtering of ideas by category
+ * By Karl Brown ( thekarlbrown ) 2nd June 2015
  */
 public class CategoryTab extends Fragment {
 

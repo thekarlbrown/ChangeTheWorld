@@ -18,10 +18,9 @@ import java.util.List;
 
 
 /**
-profile page
-
- will later be adapted using bundles to allow references to ANY profile
- will later have profiles backed up online, not in downloads
+ * Profile Tab to allow one to access profile functions
+ * TODO: Will utilize ones own face instead of mine
+ * By Karl Brown ( thekarlbrown ) 2nd June 2015
  */
 public class ProfileTab extends Fragment {
 
@@ -43,13 +42,10 @@ public class ProfileTab extends Fragment {
     public static ProfileTab newInstance() {
         ProfileTab fragment = new ProfileTab();
         Bundle args = new Bundle();
-
         fragment.setArguments(args);
         return fragment;
     }
 
-    public ProfileTab() {
-    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,29 +53,29 @@ public class ProfileTab extends Fragment {
             username=getArguments().getString("username");
         }
     }
+
     ProfileTabListener mListener;
     public interface ProfileTabListener{
        void toUserIdeaPage(String username);
        void toFavoriteIdeaPage(String username);
        void toFriendsIdeaPage(String username);
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         mainActivity = (MainActivity) getActivity();
         rv = inflater.inflate(R.layout.fragment_profile_tab, container, false);
-
         curcontext=rv.getContext();
         try {
             mListener = (ProfileTabListener) curcontext;
         } catch (ClassCastException e) {
-            throw new ClassCastException(curcontext.toString()
-                    + " must implement NoticeDialogListener");
+            throw new ClassCastException(curcontext.toString() + " must implement NoticeDialogListener");
         }
-
         pref = mainActivity.getPref();
         t = (TextView) rv.findViewById(R.id.profile_welcome);
         t.setText("     Welcome " + username);
+        //Set each of the buttons that reference specific Tabs via MainActivity
         button = (Button) rv.findViewById(R.id.profile_your_ideas);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,6 +97,8 @@ public class ProfileTab extends Fragment {
                 mListener.toFriendsIdeaPage(username);
             }
         });
+
+        //Set the Draft and Profile Buttons
         button = (Button) rv.findViewById(R.id.profile_drafts);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -136,10 +134,6 @@ public class ProfileTab extends Fragment {
                 ft.commit();
             }
         });
-
-
         return rv;
     }
-
-
 }

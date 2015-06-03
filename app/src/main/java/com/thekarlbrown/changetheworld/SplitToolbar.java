@@ -1,6 +1,5 @@
 package com.thekarlbrown.changetheworld;
 
-
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.ActionMenuView;
@@ -10,8 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * this is an implementation for a toolbar that evenly allocates tabs at the top
- * this does not have a back button
+ * This is an implementation of a Toolbar that splits up items evenly at the top without traditional buttons
+ * Note: In the future, I will use traditional toolbars
  */
 public class SplitToolbar extends Toolbar {
 

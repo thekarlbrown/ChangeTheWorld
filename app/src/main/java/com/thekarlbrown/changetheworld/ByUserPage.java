@@ -11,7 +11,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 /**
  * This is the tab that allows the viewing of ideas by specific user
- * By Karl Brown ( thekarlbrown )
+ * By Karl Brown ( thekarlbrown ) 2nd June 2015
  */
 
 public class ByUserPage extends Fragment {

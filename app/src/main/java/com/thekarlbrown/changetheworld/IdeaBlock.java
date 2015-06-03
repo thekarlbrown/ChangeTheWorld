@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * Here is my custom Data Container for ideas, implementing Serializable so it can be saved locally
- * By Karl Brown ( thekarlbrown )
+ * By Karl Brown ( thekarlbrown ) 2nd June 2015
  */
 public class IdeaBlock implements Serializable {
 

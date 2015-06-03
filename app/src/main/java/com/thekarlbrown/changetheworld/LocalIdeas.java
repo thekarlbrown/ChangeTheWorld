@@ -10,10 +10,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
-class to save drafts to downloads as drafts_USERNAME
+ * Class that saves/loads List<IdeaBlock>'s to the Android filesystem
+ * By Karl Brown ( thekarlbrown ) 2nd June 2015
  */
 public class LocalIdeas {
-    List<IdeaBlock> ideaBlock;
+    private List<IdeaBlock> ideaBlock;
+
+    /**
+     * Method that writes an List<IdeaBlock> that is serializable to the Android file system
+     * @param dst File to be saving to
+     * @param ib List<IdeaBlock> to be writing to File
+     * @return boolean indicating the success or failure of writing to the system
+     */
     private boolean saveIdeaBlock(File dst,List<IdeaBlock> ib) {
         boolean res = false;
         ObjectOutputStream output = null;
@@ -38,6 +46,11 @@ public class LocalIdeas {
         return res;
     }
 
+    /**
+     * Loading list of IdeaBlock's from the Android filesystem
+     * @param src File that indicates the location of the drafts
+     * @return List<IdeaBlock> that contains all IdeaBlock drafts, or null
+     */
     @SuppressWarnings({ "unchecked" })
     public List<IdeaBlock> loadIdeaBlock(File src) {
         ObjectInputStream input = null;
@@ -59,6 +72,20 @@ public class LocalIdeas {
         }
         return ideaBlock;
     }
+
+    /**
+     * Adds on an item to the saved List<IdeaBlock> stored locally
+     * @param src File to save to
+     * @param title Title of the idea
+     * @param idea Description of the idea
+     * @param author username of individual who wrote draft
+     * @param tup Number of thumbs up (should be 0)
+     * @param tdown Number of thumbs down (should be 0)
+     * @param number Database number (default value only of 11, assigned dynamically when added)
+     * @param category Category chosen (starting at 0)
+     * @param subcategory Subcategory chosen (starting at 0)
+     * @return Boolean indicating if saving ideas to filesystem was successful
+     */
     public boolean saveDraft(File src, String title,String idea,String author, int tup, int tdown, int number, int category, int subcategory)
     {
         ideaBlock =loadIdeaBlock(src);

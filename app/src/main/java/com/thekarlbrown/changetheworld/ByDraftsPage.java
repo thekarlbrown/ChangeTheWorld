@@ -16,7 +16,7 @@ import java.util.List;
 
 /**
  * This is the Tab that allows you to view your saved drafts.
- * By Karl Brown ( thekarlbrown )
+ * By Karl Brown ( thekarlbrown ) 2nd June 2015
  */
 public class ByDraftsPage extends Fragment {
 
@@ -30,20 +30,6 @@ public class ByDraftsPage extends Fragment {
     FragmentManager fm;
     FragmentTransaction ft;
     LocalIdeas localIdeas=new LocalIdeas();
-
-
-    public static ByDraftsPage newInstance() {
-        ByDraftsPage fragment = new ByDraftsPage();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {}
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

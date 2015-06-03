@@ -21,7 +21,8 @@ import java.util.regex.Pattern;
 
 
 /**
- * Login Screen when app loads. Will be bypassed if saved username/password checks out
+ * Login Tab when app loads. Will be bypassed if saved username/password checks out
+ * By Karl Brown ( thekarlbrown ) 2nd June 2015
  */
 public class InitialScreen extends Fragment {
     Activity activity;
@@ -37,13 +38,6 @@ public class InitialScreen extends Fragment {
     FragmentManager fm;
     boolean createbars=false;
     String username,email,emailcheck;
-
-    public static InitialScreen newInstance() {
-        InitialScreen fragment = new InitialScreen();
-        Bundle args = new Bundle();
-        fragment.setArguments(args);
-        return fragment;
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

@@ -10,9 +10,9 @@ import android.widget.TextView;
 
 import java.text.DecimalFormat;
 
-/*
-    adapter for leaderboard
-    need to add links on onclick to user profiles
+/**
+ * This is the LeaderAdapter for the Leaderboard to be implemented, implementing a ViewHolder for performance
+ * By Karl Brown ( thekarlbrown ) 2nd June 2015
  */
 public class LeaderAdapter extends BaseAdapter{
     Context context;
@@ -21,31 +21,36 @@ public class LeaderAdapter extends BaseAdapter{
     TextView t;
     int curposition;
     int curleader;
+
     public LeaderAdapter(LeaderBlock l, Context context, int selection) {
         current=l;
         curleader=selection;
         this.context=context;
     }
-    public int getCount() {
-        // TODO Auto-generated method stub
-        //return current.Length(); should be fixed when container is properly dealt with
-        return current.size();
+
+    public int getCount() { return current.size(); }
+    public Object getItem(int arg0) {  return current.atPosition(arg0);}
+    public long getItemId(int position) { return curposition; }
+
+    //ViewHolder to optimize the speed of the ListView
+    static class ViewHolderLeader {
+        TextView leader_text;
+        ImageView leader_image;
+        TextView leader_rating;
     }
 
-    public Object getItem(int arg0) {
-        // TODO Auto-generated method stub
-        return current.atPosition(arg0);
-    }
-
-    public long getItemId(int position) {
-        // TODO Auto-generated method stub
-        return curposition;
-    }
-
+    /**
+     * Over-rides BaseAdapter to create a ListView for the Leaderboard with all necessary characteristics
+     * @param position Current position in the ListView
+     * @param convertView ViewHolder for optimization purposes
+     * @param parent Parent ViewGroup, required for inflation
+     * @return each  specific Leaderboard View item for the displayed ListView
+     */
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         curposition=position;
         ViewHolderLeader viewHolder;
+        //Create the ViewHolder if necessary
         if(convertView==null)
         {
             inflater = (LayoutInflater) this.context
@@ -59,7 +64,7 @@ public class LeaderAdapter extends BaseAdapter{
         }else{
             viewHolder=(ViewHolderLeader)convertView.getTag();
         }
-
+        //Based on the current selection of the Leaderboard tab, change how the View is displayed
         switch(curleader)
         {
             case 0:
@@ -89,12 +94,12 @@ public class LeaderAdapter extends BaseAdapter{
                 return  convertView;
         }
     }
-    static class ViewHolderLeader
-    {
-        TextView leader_text;
-        ImageView leader_image;
-        TextView leader_rating;
-    }
+
+    /**
+     * Converts a double to string including decimal places
+     * @param d Double to convert
+     * @return String that is the double in two decimal places
+     */
     public static String doubleToString(double d) {
         DecimalFormat fmt = new DecimalFormat("0.00");
         return fmt.format(d);

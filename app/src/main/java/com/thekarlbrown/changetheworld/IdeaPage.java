@@ -17,8 +17,8 @@ import android.widget.TextView;
 import java.util.List;
 
 /**
- * page for individual ideas
- *
+ * Idea Tab for the display of each individual Idea
+ * By Karl Brown ( thekarlbrown ) 2nd June 2015
  */
 public class IdeaPage extends Fragment {
 
@@ -54,9 +54,7 @@ public class IdeaPage extends Fragment {
     }
 
     IdeaPageListener mListener;
-    public interface IdeaPageListener{
-        void toUserIdeaPage(String username);
-    }
+    public interface IdeaPageListener{ void toUserIdeaPage(String username);   }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

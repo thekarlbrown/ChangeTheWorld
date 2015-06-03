@@ -7,7 +7,7 @@ import java.io.IOException;
 
 /**
  * Class that serves to ASyncTask requests to obtain a JSON Array from my PHP Web API
- * By Karl Brown ( thekarlbrown )
+ * By Karl Brown ( thekarlbrown ) 2nd June 2015
  */
 public class ASyncParser extends AsyncTask<String, String, JSONArray>
 {

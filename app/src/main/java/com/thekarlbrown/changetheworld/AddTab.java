@@ -22,8 +22,8 @@ import java.io.File;
 import java.util.regex.Pattern;
 
 /**
- * This is the Tab for the Adding of Ideas
- * By Karl Brown ( thekarlbrown )
+ * Add Tab for the adding of new Ideas
+ * By Karl Brown ( thekarlbrown ) 2nd June 2015
  */
 public class AddTab extends Fragment {
     LocalIdeas localIdeas=new LocalIdeas();

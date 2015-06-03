@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  * This is the base DataAdapter for ideas, implementing a ViewHolder for Performance
- * By Karl Brown ( thekarlbrown )
+ * By Karl Brown ( thekarlbrown ) 2nd June 2015
  */
 public class DataAdapter extends BaseAdapter{
     Context context;
@@ -36,6 +36,13 @@ public class DataAdapter extends BaseAdapter{
         TextView downcount;
     }
 
+    /**
+     * Over-rides BaseAdapter to create a ListView for the Leaderboard with all necessary characteristics
+     * @param position Current position in the ListView
+     * @param convertView ViewHolder for optimization purposes
+     * @param parent Parent ViewGroup, required for inflation
+     * @return each  specific Idea View item for the displayed ListView
+     */
     @Override
      public View getView(int position, View convertView, ViewGroup parent) {
         curposition=position;

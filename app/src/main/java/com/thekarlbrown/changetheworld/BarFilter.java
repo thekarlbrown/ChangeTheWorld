@@ -9,7 +9,7 @@ import android.widget.TextView;
 
 /**
  * Class that serves to handle the Bar for different filter selections.
- * By Karl Brown ( thekarlbrown )
+ * By Karl Brown ( thekarlbrown ) 2nd June 2015
  */
 public class BarFilter extends Fragment {
     FragmentManager fm;

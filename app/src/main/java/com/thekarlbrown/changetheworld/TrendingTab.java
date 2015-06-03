@@ -9,12 +9,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.TextView;
+
 /**
- * tab for all the trending ideas
- *
- * is calling (MainActivity)getActivity bad?
- * get the horizontal/vertical change working
+ * Trending Tab for recent ideas that also serves as the default Home screen
+ * By Karl Brown ( thekarlbrown ) 2nd June 2015
  */
+
 public class TrendingTab extends Fragment {
 
     View rv;
@@ -36,9 +36,6 @@ public class TrendingTab extends Fragment {
         return fragment;
     }
 
-    public TrendingTab() {
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,12 +43,6 @@ public class TrendingTab extends Fragment {
             selectedf=getArguments().getBooleanArray("selectedf");
             selecteda=getArguments().getInt("selecteda");
         }
-    }
-    public void filterSelected(int i)
-    {
-        selectedf[i]=true;
-        barFilter.setSelected(i);
-        dapt.notifyDataSetChanged();
     }
 
     @Override
@@ -67,4 +58,14 @@ public class TrendingTab extends Fragment {
         barArea.barAreaClick(rv,selecteda,getTag(),mainActivity);
         return rv;
     }
- }
+
+    /**
+     * Method used with MainActivity to change data based on user selection
+     * @param i Item on the Filter Bar that is selected
+     */
+    public void filterSelected(int i) {
+        selectedf[i]=true;
+        barFilter.setSelected(i);
+        dapt.notifyDataSetChanged();
+    }
+}
