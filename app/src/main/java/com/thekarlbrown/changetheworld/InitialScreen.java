@@ -21,7 +21,7 @@ import java.util.regex.Pattern;
 
 
 /**
- * screen when you first enter the app
+ * Login Screen when app loads. Will be bypassed if saved username/password checks out
  */
 public class InitialScreen extends Fragment {
     Activity activity;
@@ -38,23 +38,13 @@ public class InitialScreen extends Fragment {
     boolean createbars=false;
     String username,email,emailcheck;
 
-
     public static InitialScreen newInstance() {
         InitialScreen fragment = new InitialScreen();
         Bundle args = new Bundle();
-
         fragment.setArguments(args);
         return fragment;
     }
-    public InitialScreen()
-    {
-    }
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-        }
-    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -62,17 +52,19 @@ public class InitialScreen extends Fragment {
         mainActivity=((MainActivity)getActivity());
         pref = mainActivity.getPref();
         username=pref.getString(getString(R.string.preference_username), "defaultUSERcheck$3");
+        //If login is verified, initialize the Trending Tab
         if(mainActivity.verifyLogon(username,pref.getString(getString(R.string.preference_password),"defaultPASScheck$3"))){
             mainActivity.searchTabClick();
-
             mainActivity.openTrending();
-            //mainActivity.authenticated(username); if necessary?
-        }else{
+        }// Otherwise clear the login data
+        else {
             epref=pref.edit();
             epref.remove(getString(R.string.preference_password));
             epref.remove(getString(R.string.preference_username));
             epref.apply();
         }
+
+        //Set The Keyboard to Hide when touching non-text Areas
         t = (TextView) rv.findViewById(R.id.welcometext);
         t.setText(R.string.login_welcome);
         t.setOnTouchListener(new View.OnTouchListener() {
@@ -97,6 +89,8 @@ public class InitialScreen extends Fragment {
                 hideSoftKeyboard();
             }
         });
+
+        //Set an onClickListener for logging in that will verify each of the fields as legitimate and exit with error messages if not
         but = (Button)rv.findViewById(R.id.login_attempt_login);
         but.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -118,15 +112,14 @@ public class InitialScreen extends Fragment {
                     but.setClickable(false);
                     but=(Button)rv.findViewById(R.id.login_create_account);
                     but.setClickable(false);
+                    //If we have a legitimate logon, then save the logon credentials and initiate the Trending Tab
                     if(mainActivity.verifyLogon(username,((EditText)rv.findViewById(R.id.login_password)).getText().toString())){
                         mainActivity.searchTabClick();
                         epref=pref.edit();
                         epref.putString(getString(R.string.preference_username), username);
                         epref.putString(getString(R.string.preference_password),((EditText)rv.findViewById(R.id.login_password)).getText().toString());
                         epref.apply();
-
-                       mainActivity.openTrending();
-                        //mainActivity.authenticated(username); if necessary?
+                        mainActivity.openTrending();
                     }else{
                         ((TextView) rv.findViewById(R.id.welcometext)).setText(R.string.login_error_login);
                         editText=(EditText) rv.findViewById(R.id.login_username);
@@ -134,18 +127,13 @@ public class InitialScreen extends Fragment {
                         but.setClickable(true);
                         but=(Button)rv.findViewById(R.id.login_create_account);
                         but.setClickable(true);
-                        /*
-                        editText.setHint(R.string.login_username_prompt);
-                        editText.setText(null);
-                        editText=(EditText) rv.findViewById(R.id.login_password);
-                        editText.setHint(R.string.login_password_prompt);
-                        editText.setText(null);
-                        */
                     }
 
                 }
             }
         });
+
+        //Set an onClickListener for creating an account that will verify each of the fields as legitimate and exit with error messages if not
         but = (Button)rv.findViewById(R.id.login_create_account);
         but.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -185,28 +173,28 @@ public class InitialScreen extends Fragment {
                         editText.setHint(R.string.login_email_problem_matching);
                         editText.setText(null);
                     }else{
-                    but=(Button)rv.findViewById(R.id.login_attempt_login);
-                    but.setClickable(false);
-                    but=(Button)rv.findViewById(R.id.login_create_account);
-                    but.setClickable(false);
-                    if(mainActivity.verifyCreate(username,((EditText)rv.findViewById(R.id.login_password)).getText().toString(),email)){
-                        hideSoftKeyboard();
-                        mainActivity.searchTabClick();
-                        epref=pref.edit();
-                        epref.putString(getString(R.string.preference_username), username);
-                        epref.apply();
-
-                        mainActivity.openTrending();
-                        //mainActivity.authenticated(username); if necessary?
-                    }else{
-                        hideSoftKeyboard();
-                        ((TextView) rv.findViewById(R.id.welcometext)).setText(R.string.login_error_create);
                         but=(Button)rv.findViewById(R.id.login_attempt_login);
-                        but.setClickable(true);
+                        but.setClickable(false);
                         but=(Button)rv.findViewById(R.id.login_create_account);
-                        but.setClickable(true);
+                        but.setClickable(false);
+                        //If we have a legitimate account creation, then save the logon credentials and initiate the Trending Tab
+                        if(mainActivity.verifyCreate(username,((EditText)rv.findViewById(R.id.login_password)).getText().toString(),email)){
+                            hideSoftKeyboard();
+                            mainActivity.searchTabClick();
+                            epref=pref.edit();
+                            epref.putString(getString(R.string.preference_username), username);
+                            epref.putString(getString(R.string.preference_password),((EditText)rv.findViewById(R.id.login_password)).getText().toString());
+                            epref.apply();
+                            mainActivity.openTrending();
+                        }else{
+                            hideSoftKeyboard();
+                            ((TextView) rv.findViewById(R.id.welcometext)).setText(R.string.login_error_create);
+                            but=(Button)rv.findViewById(R.id.login_attempt_login);
+                            but.setClickable(true);
+                            but=(Button)rv.findViewById(R.id.login_create_account);
+                            but.setClickable(true);
 
-                    }
+                        }
                     }
                 }
             }
@@ -215,15 +203,9 @@ public class InitialScreen extends Fragment {
         return rv;
     }
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-
-    }
-
     /**
      * Check if email is valid
-     * @param email - email to check
+     * @param email - Email to check
      * @return True if valid, false if invalid
      */
     boolean isEmailValid(CharSequence email) {

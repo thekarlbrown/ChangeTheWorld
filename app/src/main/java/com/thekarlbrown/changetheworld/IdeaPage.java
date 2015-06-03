@@ -19,7 +19,6 @@ import java.util.List;
 /**
  * page for individual ideas
  *
-deal with thumbs up/down and favorites (sending when we leave, reflecting  choice when we enter, plus obv comments later
  */
 public class IdeaPage extends Fragment {
 
@@ -53,27 +52,23 @@ public class IdeaPage extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
-    public IdeaPage() {
+
+    IdeaPageListener mListener;
+    public interface IdeaPageListener{
+        void toUserIdeaPage(String username);
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            //int i=savedInstanceState.getStringArray("category").length;
-            // category=new String[i];
             ideaSelected=getArguments().getInt("position");
             favorite=getArguments().getBoolean("favorite");
             followed=getArguments().getBoolean("followed");
             thumbd=getArguments().getBooleanArray("thumbd");
         }
-
-
     }
-    IdeaPageListener mListener;
-    public interface IdeaPageListener{
-        public void toUserIdeaPage(String username);
-    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -83,10 +78,11 @@ public class IdeaPage extends Fragment {
         try {
             mListener = (IdeaPageListener) curcontext;
         } catch (ClassCastException e) {
-            throw new ClassCastException(curcontext.toString()
-                    + " must implement NoticeDialogListener");
+            throw new ClassCastException(curcontext.toString() + " must implement NoticeDialogListener");
         }
         categoryArray = mainActivity.categories;
+
+        //Set the contents by referencing the ideablock in MainActivity and the saved selection position
         ib=mainActivity.ib;
         idea_title=ib.get(ideaSelected).getTitle();
         idea_category=categoryArray[ib.get(ideaSelected).getCategory()-1][0];
@@ -111,6 +107,8 @@ public class IdeaPage extends Fragment {
         t.setText(Integer.toString(idea_Tup));
         t=(TextView)rv.findViewById(R.id.page_idea_tdown);
         t.setText(Integer.toString(idea_Tdown));
+
+        //Define the onClickListener's for each of the buttons on the IdeaPage
         button=(Button)rv.findViewById(R.id.page_idea_favorite);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -216,6 +214,8 @@ public class IdeaPage extends Fragment {
                 }
             }
         });
+
+        //Set the current state of Idea Page Visuals
         setVisuals();
         return rv;
     }
@@ -226,7 +226,10 @@ public class IdeaPage extends Fragment {
         hideSoftKeyboard();
         super.onDetach();
     }
-    //Hide that keyboard
+
+    /**
+     * Hide the keyboard if displayed
+     */
     public void hideSoftKeyboard() {
         try {
             activity=getActivity();
@@ -237,7 +240,9 @@ public class IdeaPage extends Fragment {
         }
     }
 
-    //how I set if items are liked/favorited in terms of visuals
+    /**
+     * Set Visuals to reflect if idea is favorited or idea creator is followed
+     */
     private void setVisuals(){
         iv=(ImageView)rv.findViewById(R.id.page_idea_favorite_image);
         button=(Button)rv.findViewById(R.id.page_idea_favorite);
@@ -252,5 +257,4 @@ public class IdeaPage extends Fragment {
             button.setText(R.string.page_idea_follow);
         }
     }
-
 }

@@ -13,6 +13,10 @@ import java.util.List;
 public class DraftDataAdapter extends DataAdapter{
     DraftDataAdapterListener mListener;
 
+    public interface DraftDataAdapterListener {
+        void onDraftListClick(int number);
+    }
+
     public DraftDataAdapter(List<IdeaBlock> i, Context context) {
         super(i, context);
         try{
@@ -34,9 +38,4 @@ public class DraftDataAdapter extends DataAdapter{
         });
         return fromsuper;
     }
-
-    public interface DraftDataAdapterListener {
-       void onDraftListClick(int number);
-    }
-
 }

@@ -21,9 +21,9 @@ Add your idea to database, including your location and all necessary information
 -- favratd_byUserJSON.php --
 
 - ideaid : Database ideaid of the Idea in Question
-- username : Username of the User who we are obtaining favourite/thumb status of
+- username : Username of the User who we are obtaining favorite/thumb status of
 
-Show current favourite and thumb status of ideaid for user
+Show current favorite and thumb status of ideaid for user
 
 -- user_verifyPHash.php  --
 
@@ -42,9 +42,9 @@ Adds a user account if possible to the database with username, email and passwor
 
 -- favorites_getListIdeasJSON.php --
 
-- username : Username who's favourites we are interested in
+- username : Username who's favorites we are interested in
 
-Get list of ideas that the user has favourite'd
+Get list of ideas that the user has favorite'd
  
 
 //CNU latitude and longitude: 37.063941, -76.493730
@@ -55,7 +55,7 @@ Get list of ideas that the user has favourite'd
 - long : Longitude (6 trailing digit decimal)
 - state : State Code (2 Char String)
 - country : Country Code (2 Char String)
-- username : Your username, if we are displaying based on favourite'd users list
+- username : Your username, if we are displaying based on favorite'd users list
 - case : Case to determine which location formula to use
 
 Case 0: List all ideas within 25 miles
@@ -63,7 +63,7 @@ Case 1: List all ideas within 100 miles
 Case 2: List all ideas within the state
 Case 3: List all ideas within the country
 Case 4: List all ideas globally
-Case 5: List all ideas by users you have favourite'd
+Case 5: List all ideas by users you have favorite'd
 
 -- ideas_byCatSubTimeJSON.php --
 
@@ -91,27 +91,27 @@ List ideas by username in JSON format
 
 -- favratdJSON.php --
 
-- username : User currently altering favourited/thumbed ideas
+- username : User currently altering favorited/thumbed ideas
 - ideaid : Specific idea in question
 - case : Case indicating the current operation
 
-Case 0: Remove user favouriting ideaid
-Case 1: Add user favouriting ideaid
+Case 0: Remove user favoriting ideaid
+Case 1: Add user favoriting ideaid
 Case 2: Remove user liking idea
 Case 3: Add user thumbs uping idea
 Case 4: Add user thumbs downing idea
 
 -- friends_getIdeaListJSON.php --
 
-- username : username that has favourite users ideas displayed
+- username : username which will have ideas of followed users displayed
 
-Get a JSON array of the ideas from each of the favourite users of any given user
+Get a JSON array of the ideas from each of the followed users of any given user
 
 -- follower_JSON.php --
 
-- username : Username in question who's favourite list we are examining
-- follower : User who is favourited or removed as a favourite
-- case : Are we adding or removing the favourite
+- username : Username in question who's follower list we are examining
+- follower : User who is followed or removed as a follower
+- case : Are we adding or removing the follower
 
-Case 0: Remove as a favourite (if possible)
-Case 1: Add as a favourite (if possible)
+Case 0: Remove as a follower (if possible)
+Case 1: Add as a follower (if possible)

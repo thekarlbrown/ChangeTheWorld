@@ -7,25 +7,27 @@ import android.view.ViewGroup;
 import java.util.List;
 
 /**
- * this is the primary data adapter extended for ideas that link to ideapage
+ * Extension of the DataAdapter for non-Draft ideas, has a MainActivity listener
  */
 public class IdeaDataAdapter extends DataAdapter{
+    IdeaDataAdapterListener mListener;
+
+    public interface IdeaDataAdapterListener {
+        void onIdeaListClick(int number);
+    }
 
     public IdeaDataAdapter(List<IdeaBlock> i, Context context) {
         super(i, context);
         try {
-            // Instantiate the NoticeDialogListener so we can send events to the host
             mListener = (IdeaDataAdapterListener) context;
-        } catch (ClassCastException e) {
-            // The activity doesn't implement the interface, throw exception
-            throw new ClassCastException(context.toString()
-                    + " must implement NoticeDialogListener");
+        }catch (ClassCastException e) {
+            throw new ClassCastException(context.toString() + " must implement NoticeDialogListener");
         }
     }
+
     @Override
-    public View getView(final int position, View convertView, ViewGroup parent)
-    {
-        View fromsuper = super.getView(position,convertView, parent);
+    public View getView(final int position, View convertView, ViewGroup parent) {
+        View fromsuper = super.getView(position, convertView, parent);
         fromsuper.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -34,8 +36,4 @@ public class IdeaDataAdapter extends DataAdapter{
         });
         return fromsuper;
     }
-    public interface IdeaDataAdapterListener {
-        public void onIdeaListClick(int number);
-    }
-    IdeaDataAdapterListener mListener;
 }
