@@ -4,19 +4,18 @@
     android:orientation="vertical"
     android:background="#668DE6"
     android:focusableInTouchMode="true"
-    android:clickable="true"
     tools:context="com.thekarlbrown.changetheworld.InitialScreen"
     android:id="@+id/login_background">
 
     <ImageView
         android:id="@+id/login_mainlogo"
+        android:paddingTop="10dp"
         android:src="@drawable/ic_mainlogo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:gravity="center_horizontal"
-        android:clickable="true"
-        android:focusableInTouchMode="true"
+
         />
     <TextView
         android:textColor="#FFFFFF"
@@ -24,7 +23,8 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:textSize="12sp"/>
+        android:textSize="20sp"
+        android:text="@string/login_welcome"/>
     <EditText android:id="@+id/login_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -114,7 +114,7 @@
             android:layout_marginRight="10dip"
             android:layout_marginBottom="10dip"
             android:text="@string/login_create_button"
-            />
-    </LinearLayout>
+                                        />
+        </LinearLayout>
 
 </LinearLayout>

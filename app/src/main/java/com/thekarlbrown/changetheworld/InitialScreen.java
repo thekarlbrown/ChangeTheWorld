@@ -6,6 +6,7 @@ import android.app.FragmentTransaction;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -60,7 +61,6 @@ public class InitialScreen extends Fragment {
 
         //Set The Keyboard to Hide when touching non-text Areas
         t = (TextView) rv.findViewById(R.id.welcometext);
-        t.setText(R.string.login_welcome);
         t.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
@@ -193,6 +193,13 @@ public class InitialScreen extends Fragment {
                 }
             }
 
+        });
+
+        ((EditText)rv.findViewById(R.id.login_username)).setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                return false;
+            }
         });
         return rv;
     }

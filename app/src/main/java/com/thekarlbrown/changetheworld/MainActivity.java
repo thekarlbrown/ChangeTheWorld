@@ -100,15 +100,18 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
         //Create category titles
         createTitles();
 
-        /*default tracking data for if we are not using google tracking
+        //default tracking data for if we are not using google tracking
+        /*
         state="VA";
         country="US";
         latitude=38.957657;
         longitude=-77.175932;
-        */
+        //*/
+        ///*
         //initiate google tracking
         buildGoogleApiClient();
         getLocationDataFromGoogle();
+        //*/
         //Set the initial screen
         if (fm == null) {
             fm = getFragmentManager();

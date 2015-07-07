@@ -33,4 +33,9 @@ public class SplitToolbar extends Toolbar {
         }
         super.addView(child, params);
     }
+    @Override
+    public void inflateMenu(int resid){
+        super.inflateMenu(resid);
+
+    }
 }
