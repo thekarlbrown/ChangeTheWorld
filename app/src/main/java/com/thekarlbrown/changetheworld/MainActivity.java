@@ -111,14 +111,14 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
         createTitles();
 
         //default tracking data for if we are not using google tracking
-        /*
+        ///*
         state="VA";
         country="US";
         latitude=38.957657;
         longitude=-77.175932;
         //*/
-        ///*
-        
+        /*
+
         //initiate google tracking
         buildGoogleApiClient();
         getLocationDataFromGoogle();

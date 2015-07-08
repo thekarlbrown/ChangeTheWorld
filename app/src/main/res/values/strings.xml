@@ -32,7 +32,7 @@
     <string name="menu_accurate">Accurate Thumbs</string>
     <string name="menu_added">Most Quality Ideas</string>
     <string name="menu_quality">Highest Rated Idea</string>
-    <string name="menu_comments">Best Suggestions</string>
+    <string name="menu_comments">Best Comments</string>
     <string name="menu_minimum_thumbs">Enter a minimum number of ratings (0-X)</string>
     <string name="menu_minimum_ratio">Enter a minimum ratio to filter for (1 to 99%)</string>
     <string name="preference_file_key">com.thekarlbrown.ChangeTheWorld.preference_file_key</string>
@@ -82,7 +82,7 @@
     <string name="profile_error_unknown">Something went wrong with your file</string>
     <string name="profile_error_access">We cannot read/write the SD/External</string>
     <string name="profile_no_drafts">You have not saved any drafts yet</string>
-    <string name="page_idea_other">More Ideas By User</string>
+    <string name="page_idea_other">User\'s Ideas</string>
     <string name="page_idea_comment">Add Improvement</string>
     <string name="page_idea_follow">Follow User</string>
     <string name="page_idea_upvote">Upvote</string>
