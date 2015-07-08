@@ -27,14 +27,16 @@ I am currently in the beta stages of development. What does this entail?
 
 2. I have a list of things I will do, bugs that need to be fixed, and what I may eventually implement underneath in lists
 
-3. Get the APK Here and give me Feedback (Note: Large Displays/Resolutions Only, Tablets ideally, or Login may not be visisble) - www.thekarlbrown.com/ChangeTheWorld.apk
+3. Get the APK Here and give me Feedback (Note: Outdated, I am currently modifying for smaller displays) - www.thekarlbrown.com/ChangeTheWorld.apk
+
+4. I am currently accommodating multiple display sizes in order to get the app on the Google Play store!
 
 
 --------------------------------------------
 
 -- MySQL Abstract (Done in MySQL Workbench) --
 
-http://thekarlbrown.com/mysqleerd.png 
+http://thekarlbrown.com/mysqleerd.png
 
 Entity Relationship Diagram I designed for the app
 
@@ -42,7 +44,7 @@ EDIT: Completely redid MySQL abstract 3/7 to meet changing demands/new knowledge
 
 --------------------------------------------
 
---- PHP --- 
+--- PHP ---
 
 Web API Fully Completed, Available Here at: www.github.com/thekarlbrown/ChangeTheWorld/blob/master/server-side%20php/PHP%20API.txt
 
@@ -61,7 +63,7 @@ set custom go/backs for sub-pages, currently back button exits app
 
 hash password client side instead of post/get plaintext  (doubtful that risk of knowing hashing technique via reverse engineering of apk client side is worse than sending post/get that could be wiresharked but will verify before implementation)
 
-(for example, special characters in password fields vs weaker passwords for users vs certain characters not allowed. will PHP adequately protect Database with PDO?) 
+(for example, special characters in password fields vs weaker passwords for users vs certain characters not allowed. will PHP adequately protect Database with PDO?)
 
 change friends to favorites in favorite ideas
 
@@ -93,8 +95,6 @@ add leaderboard onclicks to user profiles
 
 -- coming after initial setup --
 
-get good UI input for re-design
-
 due to complexities of php, if ($case==0) will throw an error but stil evaluate as true then change the database in favratd.php. I need to check to see how this affects the program later, but assume we are not worrying about custom attacks atm and may be a non-issue
 
 add ability to delete old drafts, and save over existing draft
@@ -109,11 +109,7 @@ add images for profiles to various tabs, save profile picture to server
 
 make icons out of everything possible for aesthetics, sexy fonts, and round edges
 
-optimize communication of preferences/mainactivity between fragments, using methods,
-
 implement comments, add notifications from comments
-
-scaling based on content, device, and orientation
 
 calculate your PERSONAL rank (not leaderboard) by area
 
