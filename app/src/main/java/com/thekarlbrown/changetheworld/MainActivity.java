@@ -10,7 +10,9 @@ import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.Display;
 import android.view.MenuItem;
 import android.view.View;
 import com.google.android.gms.common.ConnectionResult;
@@ -89,7 +91,15 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
         mergeSortTopRated = new MergeSortTopRated();
         setContentView(R.layout.activity_main);
         st = (SplitToolbar) findViewById(R.id.toolbar_top);
-        st.inflateMenu(R.menu.menu_navigation);
+        // Choose how we display Toolbar by Calculating DIP then checking to see if the display is a minimum of 450 dip
+        Display display = getWindowManager().getDefaultDisplay();
+        DisplayMetrics outMetrics = new DisplayMetrics();
+        display.getMetrics(outMetrics);
+        float dpWidth = outMetrics.widthPixels / getResources().getDisplayMetrics().density;
+        boolean wideDisplay = (dpWidth>450);
+        st.inflateMenu(R.menu.menu_navigation,wideDisplay);
+
+        // Set preferences
         sharedPref = getApplicationContext().getSharedPreferences(
                 getString(R.string.preference_file_key), Context.MODE_PRIVATE);
         ib = new ArrayList<>();
@@ -108,6 +118,7 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
         longitude=-77.175932;
         //*/
         ///*
+        
         //initiate google tracking
         buildGoogleApiClient();
         getLocationDataFromGoogle();

@@ -9,11 +9,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 /**
- * This is an implementation of a Toolbar that splits up items evenly at the top without traditional buttons
+ * This is an modified implementation of a Toolbar by dodgex on Github that splits up items evenly at the top without traditional buttons
  * Note: In the future, I will use traditional toolbars
  */
 public class SplitToolbar extends Toolbar {
-
+    private boolean isWideEnough;
     public SplitToolbar(Context context) {
         super(context);
     }
@@ -29,13 +29,14 @@ public class SplitToolbar extends Toolbar {
     @Override
     public void addView(@NonNull View child, ViewGroup.LayoutParams params) {
         if (child instanceof ActionMenuView) {
-            params.width = LayoutParams.MATCH_PARENT;
+            if (isWideEnough) {  params.width = LayoutParams.MATCH_PARENT;
+            } else { params.width = ViewGroup.LayoutParams.WRAP_CONTENT;  }
         }
         super.addView(child, params);
     }
-    @Override
-    public void inflateMenu(int resid){
-        super.inflateMenu(resid);
 
+    public void inflateMenu(int resID, boolean isWideEnough){
+        this.isWideEnough=isWideEnough;
+        super.inflateMenu(resID);
     }
 }
