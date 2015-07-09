@@ -5,12 +5,12 @@
     android:background="#3E70E3"
     >
     <TextView
-        android:paddingLeft="1dip"
+        android:paddingLeft="5dip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/container_leader_text"
         android:textColor="#FFFFFF"
-        android:textSize="13sp"
+        android:textSize="18sp"
         android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
         />
@@ -27,6 +27,6 @@
         android:id="@+id/container_leader_rating"
         android:textColor="#FFFFFF"
         android:layout_alignParentRight="true"
-        android:textSize="13sp"
+        android:textSize="18sp"
         android:layout_centerVertical="true"/>
 </RelativeLayout>

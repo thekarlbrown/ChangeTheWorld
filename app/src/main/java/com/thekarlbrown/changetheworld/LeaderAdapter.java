@@ -68,24 +68,24 @@ public class LeaderAdapter extends BaseAdapter{
         switch(curleader)
         {
             case 0:
-                viewHolder.leader_text.setText((curposition+1) + ".    " + current.getAccurName(position) + "    :");
+                viewHolder.leader_text.setText((curposition+1) + ".    " + current.getAccurName(position));
                 viewHolder.leader_image.setImageResource(R.drawable.ic_gold_thumb);
-                viewHolder.leader_rating.setText("    " + doubleToString(current.getAccurPer(position)) + "% accuracy when rating!");
+                viewHolder.leader_rating.setText("    " + doubleToString(current.getAccurPer(position)) + "% accurate ratings ");
                 return  convertView;
             case 1:
-                viewHolder.leader_text.setText((curposition+1) + ".    " + current.getAddedName(position)+ "    :");
+                viewHolder.leader_text.setText((curposition+1) + ".    " + current.getAddedName(position));
                 viewHolder.leader_image.setImageResource(R.drawable.ic_gold_star);
-                viewHolder.leader_rating.setText("    " + current.getAddedNum(position) + " quality ideas added!");
+                viewHolder.leader_rating.setText("    " + current.getAddedNum(position) + " quality ideas added ");
                 return  convertView;
             case 2:
-                viewHolder.leader_text.setText((curposition+1) + ".    " + current.getQualityName(position) + "    :");
+                viewHolder.leader_text.setText((curposition+1) + ".    " + current.getQualityName(position));
                 viewHolder.leader_image.setImageResource(R.drawable.ic_gold_bulb);
-                viewHolder.leader_rating.setText("    " +  doubleToString(current.getQualityPer(position)) + "% rated submission!");
+                viewHolder.leader_rating.setText("    " +  doubleToString(current.getQualityPer(position)) + "% rated submission ");
                 return  convertView;
             case 3:
-                viewHolder.leader_text.setText((curposition+1) + ".    " + current.getCommentName(position) + "    :");
+                viewHolder.leader_text.setText((curposition+1) + ".    " + current.getCommentName(position));
                 viewHolder.leader_image.setImageResource(R.drawable.ic_gold_speech);
-                viewHolder.leader_rating.setText("    " +  doubleToString(current.getCommentPer(position)) + "% rated improvement!");
+                viewHolder.leader_rating.setText("    " +  doubleToString(current.getCommentPer(position)) + "% rated comment ");
                 return  convertView;
             default:
                 viewHolder.leader_text.setText("Ya goofed");
