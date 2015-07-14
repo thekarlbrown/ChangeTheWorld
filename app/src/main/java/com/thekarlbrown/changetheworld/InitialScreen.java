@@ -102,11 +102,6 @@ public class InitialScreen extends Fragment {
                     editText.setHint(R.string.login_username_problem);
                     editText.setText(null);
                 } else {
-                    // Initial a loading Dialog
-                    mainActivity.loadingDialog = new ProgressDialog(mainActivity);
-                    mainActivity.loadingDialog.setTitle("Verifying Logon Information");
-                    mainActivity.loadingDialog.show();
-
                     hideSoftKeyboard();
                     but=(Button)rv.findViewById(R.id.login_attempt_login);
                     but.setClickable(false);
@@ -122,8 +117,6 @@ public class InitialScreen extends Fragment {
                         epref.apply();
                         mainActivity.openTrending();
 
-                        // Dismiss the loading Dialog
-                        mainActivity.loadingDialog.dismiss();
                     }else{
                         ((TextView) rv.findViewById(R.id.welcometext)).setText(R.string.login_error_login);
                         editText=(EditText) rv.findViewById(R.id.login_username);

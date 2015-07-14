@@ -104,4 +104,10 @@
     <string name="login_email_problem_matching">Your Email\'s don\'t match</string>
     <string name="login_error_login">Your login credentials were rejected! Is your internet connected?\nDoes your username exist? Was your password correct?</string>
     <string name="login_error_create">Your account creation was rejected! Is your internet connected?\nSuccessful Login automatically logs you in</string>
+    <string name="progress_dialog_login">Verifying Login</string>
+    <string name="progress_dialog_create">Verifying New Account</string>
+    <string name="progress_dialog_google">Querying Location API</string>
+    <string name="progress_dialog_loading">Loading Idea List</string>
+    <string name="progress_dialog_adding">Adding Idea to Database</string>
+    <string name="idea_list_empty">There does not seem to be any ideas here yet! Too bad. Either you have internet connectivity issues, or you are in an empty category</string>
 </resources>

@@ -83,19 +83,12 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
     Geocoder geocoder;
     Location mLastLocation;
     Map<String,String> states;
-    //MergeSort implementation
+    // MergeSort implementation
     MergeSortTopRated mergeSortTopRated;
-    //ProgressDialog for various loading activities
-    ProgressDialog loadingDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // Create a dialog for the initial google APIs
-        loadingDialog=new ProgressDialog(this);
-        loadingDialog.setTitle("Loading ChangeTheWorld");
-        loadingDialog.show();
 
         mergeSortTopRated = new MergeSortTopRated();
         setContentView(R.layout.activity_main);
@@ -120,13 +113,13 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
         createTitles();
 
         //default tracking data for if we are not using google tracking
-        /*
+        ///*
         state="VA";
         country="US";
         latitude=38.957657;
         longitude=-77.175932;
         //*/
-        ///*
+        /*
 
         //initiate google tracking
         buildGoogleApiClient();
@@ -157,7 +150,7 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
     public void onConnected(Bundle bundle) {
         obtainLocation();
         mGoogleApiClient.disconnect();
-        loadingDialog.dismiss();
+
         //This is a temporary bandaid
         if(st.getVisibility()==View.VISIBLE){  openTrending();    }
     }
@@ -515,7 +508,7 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
         userPage = new ByUserPage();
         b.putString("username", username);
         b.putBooleanArray("selectedf", new boolean[]{false, false, true, false});
-        bar_filter_status = new boolean[]{false, false};
+        bar_filter_status = new boolean[]{false, false,true};
         userPage.setArguments(b);
         ft.addToBackStack("fromUserIdeaList");
         ft.replace(R.id.current_tab, userPage, "byuser");
@@ -533,7 +526,7 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
         friendsPage = new ByFriendsPage();
         b.putString("username", username);
         b.putBooleanArray("selectedf", new boolean[]{false, false, true, false});
-        bar_filter_status = new boolean[]{false, false};
+        bar_filter_status = new boolean[]{false, false,true};
         friendsPage.setArguments(b);
         ft.addToBackStack("fromFollowerIdeaList");
         ft.replace(R.id.current_tab, friendsPage, "byfriends");
@@ -551,7 +544,7 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
         favoritePage = new ByFavoritePage();
         b.putString("username", username);
         b.putBooleanArray("selectedf", new boolean[]{false, false, true, false});
-        bar_filter_status = new boolean[]{false, false};
+        bar_filter_status = new boolean[]{false, false,true};
         favoritePage.setArguments(b);
         ft.addToBackStack("fromFavoriteIdeaList");
         ft.replace(R.id.current_tab, favoritePage, "byfavorite");
@@ -835,6 +828,7 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
     public void getJSONtoIdeaBlock(String url) {
         ibrecent.clear();
         ib.clear();
+        //aSyncParser = new ASyncParser(url,getString(R.string.progress_dialog_loading),this);
         aSyncParser = new ASyncParser(url);
         try {
             aSyncParser.execute();
@@ -853,9 +847,9 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
             Log.println(0, "Error", e.getMessage());
         }
         if (ib.size() == 0) {
-            ibrecent.add(new IdeaBlock(":[", "There does not seem to be any ideas here yet! Too bad. Either you have internet connectivitivity issues, or you are in an empty category", "thekarlbrown",
+            ibrecent.add(new IdeaBlock(":[", getString(R.string.idea_list_empty), "thekarlbrown",
                     0, 999, 1, 8, 2));
-            ib.add(new IdeaBlock(":[", "There does not seem to be any ideas here yet! Too bad. Either you have internet connectivitivity issues, or you are in an empty category", "thekarlbrown",
+            ib.add(new IdeaBlock(":[", getString(R.string.idea_list_empty), "thekarlbrown",
                     0, 999, 1, 8, 2));
         }else{
             ibrecent.addAll(ib);
@@ -919,6 +913,7 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
         }catch (UnsupportedEncodingException e){
             Log.println(0,"Error: ",e.toString());
         }
+        //aSyncParser = new ASyncParser("http://www.thekarlbrown.com/ctwapp/user_verifyPHash.php?username=" + username + "&password=" + password,getString(R.string.progress_dialog_login),this);
         aSyncParser = new ASyncParser("http://www.thekarlbrown.com/ctwapp/user_verifyPHash.php?username=" + username + "&password=" + password);
         try {
             aSyncParser.execute();
@@ -957,6 +952,7 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
         }catch (UnsupportedEncodingException e){
             Log.println(0,"Error: ",e.toString());
         }
+        //aSyncParser = new ASyncParser("http://www.thekarlbrown.com/ctwapp/user_addPHash.php?username=" + username + "&password=" + password + "&email=" + email,getString(R.string.progress_dialog_create),this);
         aSyncParser = new ASyncParser("http://www.thekarlbrown.com/ctwapp/user_addPHash.php?username=" + username + "&password=" + password + "&email=" + email);
         try {
             aSyncParser.execute();
@@ -996,6 +992,7 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
             Log.println(0,"Error: ",e.getMessage());
         }
         aSyncParser = new ASyncParser("http://www.thekarlbrown.com/ctwapp/idea_addJSON.php?title="+title+ "&username=" + username + "&descrip=" + description + "&cat=" + cat +"&sub="+sub+"&lat="+latitude+"&long="+longitude+"&state="+state+"&country="+country);
+        //aSyncParser = new ASyncParser("http://www.thekarlbrown.com/ctwapp/idea_addJSON.php?title="+title+ "&username=" + username + "&descrip=" + description + "&cat=" + cat +"&sub="+sub+"&lat="+latitude+"&long="+longitude+"&state="+state+"&country="+country,getString(R.string.progress_dialog_adding),this);
         try {
             aSyncParser.execute();
             jsonArray = aSyncParser.get();
