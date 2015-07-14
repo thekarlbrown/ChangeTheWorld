@@ -350,6 +350,13 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
     }
 
     /**
+     * Clear all Fragments from the BackStack
+     * @param fragmentManager Current FragmentManager to pop Fragments from
+     */
+    public static void clearFragmentsFromBackStack (FragmentManager fragmentManager) {
+        for (int i = 0; i < fragmentManager.getBackStackEntryCount(); i++) { fragmentManager.popBackStack();  }
+    };
+    /**
      * Start Fragment for Trending Tab (icon at top)
      */
     public void openTrending() {
@@ -362,6 +369,7 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
         b.putInt("selecteda", 2);
         trendingTab = new TrendingTab();
         trendingTab.setArguments(b);
+        clearFragmentsFromBackStack(fm);
         ft.replace(R.id.current_tab, trendingTab, "trending");
         ft.commit();
     }
@@ -379,6 +387,7 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
         bar_filter_status = new boolean[]{false, false,true};
         b.putInt("selectedt", 4);
         categoryTab.setArguments(b);
+        ft.addToBackStack("fromCategory");
         ft.replace(R.id.current_tab, categoryTab, "category");
         ft.commit();
     }
@@ -403,6 +412,7 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
             b.putStringArray("category", createAddTitles());
             b.putBoolean("draftscoming", false);
             addTab.setArguments(b);
+            ft.addToBackStack("fromAdd");
             ft.replace(R.id.current_tab, addTab, "add");
             ft.commit();
         }
@@ -420,6 +430,7 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
             b.putInt("selecteda", 0);
             b.putInt("selectedt", 4);
             leaderboardTab.setArguments(b);
+            ft.addToBackStack("fromTop");
             ft.replace(R.id.current_tab, leaderboardTab, "top");
             ft.commit();
         }
@@ -436,6 +447,7 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
             b=new Bundle();
             b.putString("username", username);
             profileTab.setArguments(b);
+            ft.addToBackStack("fromProfile");
             ft.replace(R.id.current_tab, profileTab , "profile");
             ft.commit();
         }
@@ -458,6 +470,7 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
         b.putInt("draftcategory", drafts.get(position).getCategory());
         b.putInt("draftsubcategory", drafts.get(position).getSubcategory());
         addT.setArguments(b);
+        ft.addToBackStack("fromDraftList");
         ft.replace(R.id.current_tab, addT, "add");
         ft.commit();
     }
@@ -476,6 +489,7 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
         //Bundle values assigned here after querying server with getFavRatD
         getFavRatD(username, ib.get(position).getNumber());
         ideaPage.setArguments(b);
+        ft.addToBackStack("fromIdeaList");
         ft.replace(R.id.current_tab, ideaPage, "ideapage");
         ft.commit();
     }
@@ -493,6 +507,7 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
         b.putBooleanArray("selectedf", new boolean[]{false, false, true, false});
         bar_filter_status = new boolean[]{false, false};
         userPage.setArguments(b);
+        ft.addToBackStack("fromUserIdeaList");
         ft.replace(R.id.current_tab, userPage, "byuser");
         ft.commit();
     }
@@ -510,6 +525,7 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
         b.putBooleanArray("selectedf", new boolean[]{false, false, true, false});
         bar_filter_status = new boolean[]{false, false};
         friendsPage.setArguments(b);
+        ft.addToBackStack("fromFollowerIdeaList");
         ft.replace(R.id.current_tab, friendsPage, "byfriends");
         ft.commit();
     }
@@ -527,6 +543,7 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
         b.putBooleanArray("selectedf", new boolean[]{false, false, true, false});
         bar_filter_status = new boolean[]{false, false};
         favoritePage.setArguments(b);
+        ft.addToBackStack("fromFavoriteIdeaList");
         ft.replace(R.id.current_tab, favoritePage, "byfavorite");
         ft.commit();
     }
@@ -547,6 +564,7 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
             b.putBooleanArray("selectedf", new boolean[]{false, false, true, false});
             bar_filter_status = new boolean[]{false, false,true};
             searchTab.setArguments(b);
+            clearFragmentsFromBackStack(fm);
             ft.replace(R.id.current_tab, searchTab, "search");
             ft.commit();
         } else {
