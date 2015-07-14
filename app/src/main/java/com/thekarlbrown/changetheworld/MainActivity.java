@@ -4,6 +4,7 @@ import android.app.Activity;
 
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.location.Address;
@@ -84,10 +85,18 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
     Map<String,String> states;
     //MergeSort implementation
     MergeSortTopRated mergeSortTopRated;
+    //ProgressDialog for various loading activities
+    ProgressDialog loadingDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Create a dialog for the initial google APIs
+        loadingDialog=new ProgressDialog(this);
+        loadingDialog.setTitle("Loading ChangeTheWorld");
+        loadingDialog.show();
+
         mergeSortTopRated = new MergeSortTopRated();
         setContentView(R.layout.activity_main);
         st = (SplitToolbar) findViewById(R.id.toolbar_top);
@@ -111,13 +120,13 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
         createTitles();
 
         //default tracking data for if we are not using google tracking
-        ///*
+        /*
         state="VA";
         country="US";
         latitude=38.957657;
         longitude=-77.175932;
         //*/
-        /*
+        ///*
 
         //initiate google tracking
         buildGoogleApiClient();
@@ -148,6 +157,7 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
     public void onConnected(Bundle bundle) {
         obtainLocation();
         mGoogleApiClient.disconnect();
+        loadingDialog.dismiss();
         //This is a temporary bandaid
         if(st.getVisibility()==View.VISIBLE){  openTrending();    }
     }
@@ -448,7 +458,7 @@ public class MainActivity extends Activity implements IdeaDataAdapter.IdeaDataAd
             b.putString("username", username);
             profileTab.setArguments(b);
             ft.addToBackStack("fromProfile");
-            ft.replace(R.id.current_tab, profileTab , "profile");
+            ft.replace(R.id.current_tab, profileTab, "profile");
             ft.commit();
         }
     }

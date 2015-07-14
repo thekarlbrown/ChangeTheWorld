@@ -3,6 +3,7 @@ package com.thekarlbrown.changetheworld;
 import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.app.ProgressDialog;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.app.Fragment;
@@ -101,11 +102,17 @@ public class InitialScreen extends Fragment {
                     editText.setHint(R.string.login_username_problem);
                     editText.setText(null);
                 } else {
+                    // Initial a loading Dialog
+                    mainActivity.loadingDialog = new ProgressDialog(mainActivity);
+                    mainActivity.loadingDialog.setTitle("Verifying Logon Information");
+                    mainActivity.loadingDialog.show();
+
                     hideSoftKeyboard();
                     but=(Button)rv.findViewById(R.id.login_attempt_login);
                     but.setClickable(false);
                     but=(Button)rv.findViewById(R.id.login_create_account);
                     but.setClickable(false);
+
                     //If we have a legitimate logon, then save the logon credentials and initiate the Trending Tab
                     if(mainActivity.verifyLogon(username,((EditText)rv.findViewById(R.id.login_password)).getText().toString())){
                         mainActivity.searchTabClick();
@@ -114,6 +121,9 @@ public class InitialScreen extends Fragment {
                         epref.putString(getString(R.string.preference_password),((EditText)rv.findViewById(R.id.login_password)).getText().toString());
                         epref.apply();
                         mainActivity.openTrending();
+
+                        // Dismiss the loading Dialog
+                        mainActivity.loadingDialog.dismiss();
                     }else{
                         ((TextView) rv.findViewById(R.id.welcometext)).setText(R.string.login_error_login);
                         editText=(EditText) rv.findViewById(R.id.login_username);
