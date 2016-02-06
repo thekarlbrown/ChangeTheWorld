@@ -14,7 +14,7 @@ $options = [
 $hash = password_hash($password,PASSWORD_BCRYPT,$options);
 $stmt=$conn->prepare("INSERT INTO user (author,hash,email) VALUES (:username,'$hash',:email)");
 $stmt->bindValue(':username',$username,PDO::PARAM_STR);
-$stmt->bindValue(':email',$username,PDO::PARAM_STR);
+$stmt->bindValue(':email',$email,PDO::PARAM_STR);
 if($stmt->execute()){
 	echo "[{\"created\":\"1\"}]";
 }else{
